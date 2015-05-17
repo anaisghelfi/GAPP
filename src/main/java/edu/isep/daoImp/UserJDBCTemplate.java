@@ -23,5 +23,10 @@ public class UserJDBCTemplate{
 		return;
 	}
 	
+	public void insertEleve(User user){
+		String sql = "INSERT INTO eleve(nom, prenom, promo, mail, groupe) VALUES(?,?,?,?,?)";
+		jdbcTemplateObject.update(sql,new Object[]{user.getUser(),user.getPassword(),user.getType()});
+		return;
+	}
 	
 }
