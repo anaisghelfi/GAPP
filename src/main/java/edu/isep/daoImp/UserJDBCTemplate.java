@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import edu.isep.beans.InsertEleve;
 import edu.isep.beans.User;
 import edu.isep.daoImp.UserJDBCTemplate;
 
@@ -23,9 +24,9 @@ public class UserJDBCTemplate{
 		return;
 	}
 	
-	public void insertEleve(User user){
+	public void insertEleve(InsertEleve eleve){
 		String sql = "INSERT INTO eleve(nom, prenom, promo, mail, groupe) VALUES(?,?,?,?,?)";
-		jdbcTemplateObject.update(sql,new Object[]{user.getUser(),user.getPassword(),user.getType()});
+		jdbcTemplateObject.update(sql,new Object[]{eleve.getNom(),eleve.getPrenom(),eleve.getPromo(), eleve.getMail(), eleve.getGroupe()});
 		return;
 	}
 	
