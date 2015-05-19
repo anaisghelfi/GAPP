@@ -19,13 +19,13 @@ import edu.isep.daoImp.UserJDBCTemplate;
 public class InsertEleveController {
 	
 	private UserJDBCTemplate dao;
-	private Map<Integer, User> u;
+	private Map<Integer, InsertEleve> u;
 	
 	
 	public InsertEleveController(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Victorien/git/GAPP2/src/main/java/edu/isep/gapp/Bean.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/Bean.xml");
 		dao = (UserJDBCTemplate) context.getBean("userDAO");
-		u = new HashMap<Integer, User>();
+		u = new HashMap<Integer, InsertEleve>();
 		
 	}
 	@RequestMapping(value="/ajout_eleve.jsp",method = RequestMethod.GET)
@@ -37,7 +37,7 @@ public class InsertEleveController {
 	@RequestMapping(value = "/add_user", method = RequestMethod.POST)
 	public String add(InsertEleve eleve, Model model)
 	{
-		eleve.setType(2);
+		eleve.setGroupe("2");
 		u.put(eleve.getId(), eleve);
 		dao.insertEleve(eleve);
 		model.addAttribute("eleve", u);
