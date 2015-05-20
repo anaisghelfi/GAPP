@@ -28,12 +28,15 @@ public class ExempleController {
 		
 	}
 	@RequestMapping(value="/exemple",method = RequestMethod.GET)
-	public String Exemple(){
+	public String Exemple(Model model){
+		User user = new User();
+		model.addAttribute("user",user);
 		return "exemple";
 	}
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(User user, Model model)
 	{
+		user.setType(2);
 		u.put(user.getId(), user);
 		dao.insertUser(user);
 		model.addAttribute("user", u);

@@ -5,7 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import edu.isep.beans.User;
-import edu.isep.daoImp.UserJDBCTemplate;
+
 
 public class UserJDBCTemplate{
 	
@@ -22,6 +22,8 @@ public class UserJDBCTemplate{
 		jdbcTemplateObject.update(sql,new Object[]{user.getUser(),user.getPassword(),user.getType()});
 		return;
 	}
+	
+	
 	
 	
 }
