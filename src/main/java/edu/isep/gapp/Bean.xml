@@ -9,9 +9,17 @@
  <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
  <property name="url" value="jdbc:mysql://localhost:3306/gapp"/>
  <property name="username" value="root"/>
- <property name="password" value="root"/>
+ <property name="password" value=""/>
 </bean>
 <bean id="userDAO" class="edu.isep.daoImp.UserJDBCTemplate">
+<property name="dataSource" ref="dataSource"/>
+</bean>
+
+<bean id="competencesDAO" class="edu.isep.daoImp.CompetencesJDBCTemplate">
+<property name="dataSource" ref="dataSource"/>
+</bean>
+
+<bean id="competencesMapperDAO" class="edu.isep.daoImp.CompetencesRowMapper">
 <property name="dataSource" ref="dataSource"/>
 </bean>
 </beans>
