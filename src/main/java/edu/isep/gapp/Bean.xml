@@ -19,7 +19,4 @@
 <property name="dataSource" ref="dataSource"/>
 </bean>
 
-<bean id="competencesMapperDAO" class="edu.isep.daoImp.CompetencesRowMapper">
-<property name="dataSource" ref="dataSource"/>
-</bean>
 </beans>

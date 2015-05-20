@@ -16,7 +16,7 @@
 		<input type="submit" name="valider"/>
 	</form>
 	 <c:forEach var="compete" items="competences"> 
-            <c:out value="${compete}"/> 
+            
         </c:forEach>>
 </body>
 </html>

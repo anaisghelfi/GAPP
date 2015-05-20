@@ -44,6 +44,7 @@ public class CompetencesController {
 	@RequestMapping(value = "/voircompetences", method = RequestMethod.GET)
 	public String add(Model model)
 	{
+		System.out.println(c);
 		model.addAttribute("competences", c);
 		return "competences";
 	}
