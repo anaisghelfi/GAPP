@@ -15,9 +15,11 @@
 		<input type="text" placeholder="Coefficient" name="coefficient"/>
 		<input type="submit" name="valider"/>
 	</form>
-	 <c:forEach var="compete" items="competences"> 
-            
-        </c:forEach>>
+	 
+	 <c:forEach var="co" items="${competences}"> 
+           <c:out value="${co.value.famille}"></c:out>
+           <c:out value="${co.value.coefficient}"></c:out>
+        </c:forEach>
 </body>
 </html>
 

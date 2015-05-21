@@ -25,7 +25,7 @@ public class CompetencesController {
 	
 	
 	public CompetencesController(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Anaïs/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Victorien/git/GAPP2/src/main/java/edu/isep/gapp/Bean.xml");
 		c = new HashMap<Integer, Competences>();
 		dao = (CompetencesJDBCTemplate) context.getBean("competencesDAO");
 		Collection<Competences> col = dao.getAllCompetences();
@@ -44,7 +44,6 @@ public class CompetencesController {
 	@RequestMapping(value = "/voircompetences", method = RequestMethod.GET)
 	public String add(Model model)
 	{
-		System.out.println(c);
 		model.addAttribute("competences", c);
 		return "competences";
 	}

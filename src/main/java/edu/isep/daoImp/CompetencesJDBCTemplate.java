@@ -1,16 +1,10 @@
 package edu.isep.daoImp;
 
-import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
 import javax.sql.DataSource;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -33,9 +27,6 @@ public class CompetencesJDBCTemplate {
 		return;
 	}
 	
-	public Collection<Competences> getAllCompetences() {
-		 return this.jdbcTemplateObject.query( "select * from competences", new CompetencesMapper());
-	}
 	
 	private static final class CompetencesMapper implements RowMapper {
 
@@ -47,6 +38,11 @@ public class CompetencesJDBCTemplate {
 		 return comp;
 		 }
 	}
+	
+	public Collection<Competences> getAllCompetences() {
+		 return this.jdbcTemplateObject.query( "select * from competences", new CompetencesMapper());
+	}
+	
 }
 
 
