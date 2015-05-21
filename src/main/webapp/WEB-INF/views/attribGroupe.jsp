@@ -37,9 +37,9 @@
 	attribuer un élève a un groupe
 	<form action="attribGroup" method="post" style="border: 1px solid black;">
 		<select name="nomGroupe" type="text">
-			<option>G1A</option>
-			<option>G1B</option>
-			<option>G1C</option>
+			<c:forEach var="groupe" items="${groupes}">
+				<option><c:out value="${groupe.nom}"/></option>
+			</c:forEach>
 		</select>
 		<input name="nomEleve" type="text">
 		<input name="attribuer" type="submit">

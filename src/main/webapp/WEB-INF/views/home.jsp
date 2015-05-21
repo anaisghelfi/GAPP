@@ -29,14 +29,14 @@
                 <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
             </p>
             <p>Identifiez-vous</p>
-            <form class="m-t" role="form" action="index.html">
+            <form method="POST" class="m-t" role="form" action="connexion">
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Username" required="">
+                    <input type="login" name="login" class="form-control" placeholder="Username" required="">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password" required="">
+                    <input type="password" name="password" class="form-control" placeholder="Password" required="">
                 </div>
-                <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+                <button type="submit" name="connect" class="btn btn-primary block full-width m-b">Login</button>
 
             </form>
             

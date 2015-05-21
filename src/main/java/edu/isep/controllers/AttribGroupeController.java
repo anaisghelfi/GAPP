@@ -32,6 +32,7 @@ public class AttribGroupeController {
 		daoGroupe = (groupeJDBCTemplate) context.getBean("groupeDAO");
 		g = new HashMap<Integer, Groupe>();
 		
+
 //		Declaration des variables
 	}
 	
@@ -50,10 +51,14 @@ public class AttribGroupeController {
 	public String add(Groupe groupe, Model model)
 	{
 //		VOIR COMMENT METTRE LE TUTEUR ID
+//		Pour insérer un groupe
 		groupe.setTuteur_id(1);
 		g.put(groupe.getId(), groupe);
 		daoGroupe.addGroup(groupe);
-//		model.addAttribute("user", u);
+		
+		List<Groupe> groupes = daoGroupe.allGroupes();
+		model.addAttribute("groupes", groupes);
+		
 		return "attribGroupe";
 	}
 }
