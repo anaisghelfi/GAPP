@@ -17,8 +17,8 @@
 	</form>
 	 
 	 <c:forEach var="co" items="${competences}"> 
-           <c:out value="${co.value.famille}"></c:out>
-           <c:out value="${co.value.coefficient}"></c:out>
+          ${co.value.famille}
+          ${co.value.coefficient}
         </c:forEach>
 </body>
 </html>

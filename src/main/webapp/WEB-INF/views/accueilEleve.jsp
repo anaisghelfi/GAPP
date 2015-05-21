@@ -10,5 +10,9 @@
 </head>
 <body>
 	<h1>Accueil eleves</h1>
+	Session bean login: ${login}
+	Session bean nom: ${nom}
+	Session bean nom: ${number}
+	Session bean nom: ${type}
 </body>
 </html>

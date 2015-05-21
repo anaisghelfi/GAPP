@@ -36,7 +36,7 @@ public class CompetencesController {
 		}
 		
 	}
-	@RequestMapping(value="/ajoutcompetences",method = RequestMethod.GET)
+	@RequestMapping(value="/ajoutcompetences",method = RequestMethod.POST)
 	public String Exemple(){
 		
 		return "competences";

@@ -12,13 +12,13 @@ public class Competences {
 		this.id = id;
 	}
 	public String getFamille() {
-		return famille;
+		return this.famille;
 	}
 	public void setFamille(String famille) {
 		this.famille = famille;
 	}
 	public double getCoefficient() {
-		return coefficient;
+		return this.coefficient;
 	}
 	public void setCoefficient(double coefficient) {
 		this.coefficient = coefficient;
