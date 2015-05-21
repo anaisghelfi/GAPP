@@ -10,37 +10,38 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import edu.isep.beans.InsertEleve;
+import edu.isep.beans.Deadline;
 import edu.isep.daoImp.UserJDBCTemplate;
 
 
 @Controller
-public class InsertEleveController {
+public class DeadlineController {
 	
 	private UserJDBCTemplate dao;
-	private Map<Integer, InsertEleve> u;
+	private Map<Integer, Deadline> u;
 	
 	
-	public InsertEleveController(){
+	public DeadlineController(){
 		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/Bean.xml");
 		dao = (UserJDBCTemplate) context.getBean("userDAO");
-		u = new HashMap<Integer, InsertEleve>();
+		u = new HashMap<Integer, Deadline>();
 		
 	}
-	@RequestMapping(value="/ajout_eleve.jsp",method = RequestMethod.GET)
+	@RequestMapping(value="/ajout_deadline.jsp",method = RequestMethod.GET)
 	public String Exemple(Model model){
-		InsertEleve eleve = new InsertEleve();
-		model.addAttribute("eleve",eleve);
-		return "ajout_eleve";
+		Deadline deadline = new Deadline();
+		model.addAttribute("deadline",deadline);
+		return "ajout_deadline";
 	}
-	@RequestMapping(value = "/add_user", method = RequestMethod.POST)
-	public String add(InsertEleve eleve, Model model)
+	@RequestMapping(value = "/add_deadline", method = RequestMethod.POST)
+	public String add(Deadline deadline, Model model)
 	{
 		
-		u.put(eleve.getId(), eleve);
-		dao.insertEleve(eleve);
-		model.addAttribute("eleve", u);
-		return "ajout_eleve";
+		u.put(deadline.getId(), deadline);
+		dao.ajout_deadline(deadline);
+		model.addAttribute("deadline", u);
+		return "ajout_deadline";
 	}
+	
 
 }

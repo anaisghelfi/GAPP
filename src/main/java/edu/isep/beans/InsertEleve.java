@@ -7,6 +7,7 @@ public class InsertEleve {
 	private int promo;
 	private String mail;
 	private String groupe;
+	
 	public int getId() {
 		return id;
 	}
