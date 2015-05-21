@@ -16,6 +16,7 @@
 	<property name="dataSource" ref="dataSource"/>
 </bean>
 
+
 <bean id="elevesDAO" class="edu.isep.daoImp.elevesJDBCTemplate">
 	<property name="dataSource" ref="dataSource"/>
 </bean>
@@ -24,4 +25,10 @@
 	<property name="dataSource" ref="dataSource"/>
 </bean>
 
+=======
+<bean id="competencesDAO" class="edu.isep.daoImp.CompetencesJDBCTemplate">
+<property name="dataSource" ref="dataSource"/>
+</bean>
+<bean id="sessionDAO" class="edu.isep.beans.SessionBean"/>
+<!-- >>>>>>> branch 'master' of git@github.com:anaisghelfi/GAPP.git -->
 </beans>
