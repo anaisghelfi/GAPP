@@ -25,7 +25,7 @@ public class AttribGroupeController {
 	private Map<Integer, Groupe> g;
 
 	public AttribGroupeController(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/brandonemartins/Documents/A2/Web_Techno/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Victorien/git/GAPP2/src/main/java/edu/isep/gapp/Bean.xml");
 //		Declaration des DAO et variables
 		daoEleve = (elevesJDBCTemplate) context.getBean("elevesDAO");
 		e = new HashMap<Integer, Eleve>();
@@ -51,7 +51,7 @@ public class AttribGroupeController {
 	public String add(Groupe groupe, Model model)
 	{
 //		VOIR COMMENT METTRE LE TUTEUR ID
-//		Pour insŽrer un groupe
+//		Pour insï¿½rer un groupe
 		groupe.setTuteur_id(1);
 		g.put(groupe.getId(), groupe);
 		daoGroupe.addGroup(groupe);

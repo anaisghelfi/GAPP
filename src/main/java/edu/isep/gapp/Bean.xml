@@ -7,7 +7,7 @@
  
  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
  <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
- <property name="url" value="jdbc:mysql://localhost:8889/GAPP"/>
+ <property name="url" value="jdbc:mysql://localhost:8889/gapp"/>
  <property name="username" value="root"/>
  <property name="password" value="root"/>
 </bean>
@@ -25,10 +25,10 @@
 	<property name="dataSource" ref="dataSource"/>
 </bean>
 
-=======
+
 <bean id="competencesDAO" class="edu.isep.daoImp.CompetencesJDBCTemplate">
 <property name="dataSource" ref="dataSource"/>
 </bean>
 <bean id="sessionDAO" class="edu.isep.beans.SessionBean"/>
-<!-- >>>>>>> branch 'master' of git@github.com:anaisghelfi/GAPP.git -->
+
 </beans>
