@@ -7,12 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+
 <body>
 	<form method="post" action="add">
-	<input name="user" type="text"/>
-	<input type="password" name="password"/>
-	<input type="submit" name="valider"/>
-	
+		<input type="text" name="user"/>
+		<input type="password" name="password"/>
+		<input type="submit" name="valider"/>
 	</form>
 </body>
 </html>

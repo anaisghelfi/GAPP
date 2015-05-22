@@ -11,12 +11,24 @@
  <property name="username" value="root"/>
  <property name="password" value=""/>
 </bean>
+
 <bean id="userDAO" class="edu.isep.daoImp.UserJDBCTemplate">
-<property name="dataSource" ref="dataSource"/>
+	<property name="dataSource" ref="dataSource"/>
 </bean>
+
+
+<bean id="elevesDAO" class="edu.isep.daoImp.elevesJDBCTemplate">
+	<property name="dataSource" ref="dataSource"/>
+</bean>
+
+<bean id="groupeDAO" class="edu.isep.daoImp.groupeJDBCTemplate">
+	<property name="dataSource" ref="dataSource"/>
+</bean>
+
 
 <bean id="competencesDAO" class="edu.isep.daoImp.CompetencesJDBCTemplate">
 <property name="dataSource" ref="dataSource"/>
 </bean>
+<bean id="sessionDAO" class="edu.isep.beans.SessionBean"/>
 
 </beans>

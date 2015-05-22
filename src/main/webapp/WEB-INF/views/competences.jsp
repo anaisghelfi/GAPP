@@ -16,10 +16,12 @@
 		<input type="submit" name="valider"/>
 	</form>
 	 
-	 <!-- <c:forEach var="co" items="${comp}"> 
-           <c:out value="${co.value.famille}"></c:out>
-           <c:out value="${co.value.coefficient}"></c:out>
-        </c:forEach> -->
+
+	 <c:forEach var="co" items="${competences}"> 
+          ${co.value.famille}
+          ${co.value.coefficient}
+        </c:forEach>
+
 </body>
 </html>
 

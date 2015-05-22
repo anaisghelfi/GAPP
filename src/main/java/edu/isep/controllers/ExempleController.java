@@ -33,6 +33,7 @@ public class ExempleController {
 		model.addAttribute("user",user);
 		return "exemple";
 	}
+	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(User user, Model model)
 	{
