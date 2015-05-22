@@ -10,16 +10,16 @@
 </head>
 <body>
 
-	<form method="post" action="voircompetences">
+	<form method="post" action="addcompetences">
 		<input name="famille" placeholder="Nom de la famille" type="text"/>
 		<input type="text" placeholder="Coefficient" name="coefficient"/>
 		<input type="submit" name="valider"/>
 	</form>
 	 
-	 <c:forEach var="co" items="${competences}"> 
+	 <!-- <c:forEach var="co" items="${comp}"> 
            <c:out value="${co.value.famille}"></c:out>
            <c:out value="${co.value.coefficient}"></c:out>
-        </c:forEach>
+        </c:forEach> -->
 </body>
 </html>
 

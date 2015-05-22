@@ -37,7 +37,7 @@ public class HomeController {
 				case "eleve":
 					System.out.println("eleve");
 					
-					return "accueilEleve";
+					return "AccueilRespo";
 				case "professeur":
 					System.out.println("prof");
 					break;
