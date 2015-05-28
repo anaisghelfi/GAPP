@@ -22,7 +22,7 @@ public class ExempleController {
 	
 	
 	public ExempleController(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Anaïs/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
 		dao = (UserJDBCTemplate) context.getBean("userDAO");
 		u = new HashMap<Integer, User>();
 		
