@@ -22,7 +22,7 @@ public class DeadlineJDBCTemplate {
 	}
 	
 	public void ajout_deadline(Deadline deadline){
-		String sql = "INSERT INTO deadlines(titre, description, date_limite, groupe) VALUES(?,?,?,?)";
+		String sql = "INSERT INTO deadlines(titre, description, date_limite, groupes_id) VALUES(?,?,?,?)";
 		jdbcTemplateObject.update(sql,new Object[]{deadline.getTitre(),deadline.getDecription(),deadline.getDate_limite() , deadline.getGroupes_id()});
 		return ;
 	}

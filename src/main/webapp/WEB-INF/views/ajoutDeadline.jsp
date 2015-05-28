@@ -17,15 +17,15 @@
 <body>
 	<form method="post" action="add_deadline">
 			<h1>Ajouter une deadline</h1>
-                      <input type="text" name="titre" ></br>
-                      <input type="text" name="description"></br>  
-                      <input type="date" name="date" ></br>
-                      <input type="text" name="groupe" value="groupe"></br>
+                      Titre<input type="text" name="titre" >
+                      Description<input type="text" name="description">  
+                      Date<input type="date" name="date" >
+                      Groupe<input type="text" name="groupe">
 	           <input type="submit" name="valider"/>
 	</form>
 	
 	<form action="delete_deadline" method="post">
-		<h1>Supprimer une deadline</h1>
+		<h1>Voir les deadlines</h1>
 		<select name="titre">
 			<c:forEach var="titre" items="${deadlines}">
 				<option value="${deadlines.titre}"><c:out value="${deadlines.titre}"/></option>

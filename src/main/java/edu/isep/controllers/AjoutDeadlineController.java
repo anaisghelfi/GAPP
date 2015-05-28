@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.isep.beans.Deadline;
-import edu.isep.beans.Groupe;
-import edu.isep.beans.SousGroupe;
 import edu.isep.daoImp.DeadlineJDBCTemplate;
 
 
