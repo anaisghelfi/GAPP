@@ -3,6 +3,7 @@ package edu.isep.controllers;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.context.ApplicationContext;
@@ -15,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.isep.beans.Competences;
+import edu.isep.beans.Eleve;
+import edu.isep.beans.Groupe;
 import edu.isep.beans.SousCompetences;
 import edu.isep.beans.User;
 import edu.isep.daoImp.CompetencesJDBCTemplate;
+import edu.isep.daoImp.elevesJDBCTemplate;
 
 
 @Controller
@@ -29,22 +33,13 @@ public class CompetencesController {
 	
 	public CompetencesController(){
 		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Anaïs/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
-		c = new HashMap<Integer, Competences>();
-		sc = new HashMap<Integer, SousCompetences>();
 		
 		dao = (CompetencesJDBCTemplate) context.getBean("competencesDAO");
-		
-		Collection<Competences> col = dao.getAllCompetences();
-		Iterator<Competences> i = col.iterator();
-		while(i.hasNext()){
-			Competences competences = i.next();
-			c.put(competences.getId(), competences);
-			System.out.println(c);
-		}
+		c = new HashMap<Integer, Competences>();
+		sc = new HashMap<Integer, SousCompetences>();	
 		
 	}
 
-	
 
 	@RequestMapping(value = "/addfamille", method = RequestMethod.GET)
 	public String viewfamille(Model model)
@@ -53,6 +48,13 @@ public class CompetencesController {
 		Competences comp = new Competences();
 		model.addAttribute("comp",comp);
 		model.addAttribute("allcompetences", c);
+		
+		List<Competences> competences = dao.allCompetences();
+		model.addAttribute("allcompetences", competences);
+		
+		List<SousCompetences> souscompetences = dao.allSousCompetences();
+		model.addAttribute("allsouscompetences", souscompetences);
+		
 		return "AccueilRespo";
 	}
 	
@@ -61,7 +63,11 @@ public class CompetencesController {
 		c.put(comp.getId(), comp);
 		dao.insertCompetences(comp);
 		
-		//model.addAttribute("comp", comp);
+		List<Competences> competences = dao.allCompetences();
+		model.addAttribute("allcompetences", competences);
+		
+		List<SousCompetences> souscompetences = dao.allSousCompetences();
+		model.addAttribute("allsouscompetences", souscompetences);
 		
 		return "AccueilRespo";
 	}
@@ -71,6 +77,13 @@ public class CompetencesController {
 	{
 		SousCompetences souscomp = new SousCompetences();
 		model.addAttribute("souscomp",souscomp);
+		
+		List<Competences> competences = dao.allCompetences();
+		model.addAttribute("allcompetences", competences);
+		
+		List<SousCompetences> souscompetences = dao.allSousCompetences();
+		model.addAttribute("allsouscompetences", souscompetences);
+		
 		return "AccueilRespo";
 	}
 	
@@ -79,6 +92,13 @@ public class CompetencesController {
 		sc.put(souscomp.getId(), souscomp);
 		dao.insertSousCompetences(souscomp);
 		model.addAttribute("souscomp", souscomp);
+		
+		List<Competences> competences = dao.allCompetences();
+		model.addAttribute("allcompetences", competences);
+		
+		List<SousCompetences> souscompetences = dao.allSousCompetences();
+		model.addAttribute("allsouscompetences", souscompetences);
+		
 		return "AccueilRespo";
 	}	
 	
