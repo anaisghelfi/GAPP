@@ -1,5 +1,7 @@
 package edu.isep.daoImp;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +9,7 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 import edu.isep.beans.Groupe;
 import edu.isep.beans.User;
@@ -22,12 +25,25 @@ public class groupeJDBCTemplate {
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 	
-	public void addGroup(Groupe groupe){
-		String sql = "INSERT INTO groupes(nom, tuteur_id) VALUES(?,?)";
-		jdbcTemplateObject.update(sql,new Object[]{groupe.getNom(), groupe.getTuteur_id()});
-		return;
+//	Récupérer un groupe grâce à son id
+	public Groupe getGroupe(int id){
+		
+		class GroupeMapper implements RowMapper<Groupe> {
+			   public Groupe mapRow(ResultSet rs, int rowNum) throws SQLException{
+				   
+				  Groupe groupe =  new Groupe();
+			      groupe.setId(rs.getInt("id"));
+			      groupe.setNom(rs.getString("nom"));
+			      return groupe;
+			}  
+		}
+		
+		String sql = "SELECT * FROM groupes where id = ?";
+		Groupe groupe = jdbcTemplateObject.queryForObject(sql, new Object[]{id}, new GroupeMapper());
+		return groupe;
 	}
 	
+//	Récupérer tous les groupes
 	public List<Groupe> allGroupes(){
 		String sql = "SELECT * FROM groupes";
 		
@@ -46,6 +62,20 @@ public class groupeJDBCTemplate {
 		}
 
 		return groupes;
+	}
+	
+//	Ajouter un groupe
+	public void addGroup(Groupe groupe){
+		String sql = "INSERT INTO groupes(nom, tuteur_id) VALUES(?,?)";
+		jdbcTemplateObject.update(sql,new Object[]{groupe.getNom(), groupe.getTuteur_id()});
+		return;
+	}
+
+//	Supprimer un groupe
+	public void deleteGroupe(Groupe groupe){
+		String sql = "DELETE FROM groupes WHERE nom = ?";
+		jdbcTemplateObject.update(sql,new Object[]{groupe.getNom()});
+		return;
 	}
 	
 }
