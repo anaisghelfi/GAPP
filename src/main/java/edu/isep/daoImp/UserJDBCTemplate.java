@@ -25,10 +25,6 @@ public class UserJDBCTemplate{
 	}
 	
 	
-	public void ajout_deadline(Deadline deadline){
-		String sql = "INSERT INTO deadlines(titre, description, date_limite, groupe) VALUES(?,?,?,?)";
-		jdbcTemplateObject.update(sql,new Object[]{deadline.getTitre(),deadline.getDecription(),deadline.getDate_limite() , deadline.getGroupe()});
-		return;
-	}
+	
 	
 }

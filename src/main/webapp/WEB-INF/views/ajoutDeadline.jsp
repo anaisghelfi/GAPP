@@ -16,50 +16,28 @@
 
 <body>
 	<form method="post" action="add_deadline">
-	                              <input type="text" name="titre" ></br>
-	                              <input type="text" name="description"></br>  
-	                              <input type="date" name="date" ></br>
-	                              <input type="text" name="groupe" value="groupe"></br>
-	                              <input type="submit" name="valider"/>
-								</form>
-								
-	<form action="deleteGroup" method="post" style="border: 1px solid black;">
-		Modifier une deadline <br>
-			<select name="nomGroupe" type="text">
-				<c:forEach var="groupe" items="${groupes}">
-					<option><c:out value="${groupe.nom}"/></option>
-				</c:forEach>
-			</select>
-			<input name="enlever" type="submit">
+			<h1>Ajouter une deadline</h1>
+                      <input type="text" name="titre" ></br>
+                      <input type="text" name="description"></br>  
+                      <input type="date" name="date" ></br>
+                      <input type="text" name="groupe" value="groupe"></br>
+	           <input type="submit" name="valider"/>
 	</form>
 	
-	<form action="addGroupe" method="post" style="border: 1px solid black;">
-	ajouter un groupe<br>
-		nom du groupe <input name="nom" type="text">
-<!-- 		nom du tuteur <input name="tuteur_id" type="text"> -->
-		<input name="ajouter" type="submit">
-	</form>
-	
-	<form action="deleteGroup" method="post" style="border: 1px solid black;">
-	enlever un groupe <br>
-		<select name="nomGroupe" type="text">
-			<c:forEach var="groupe" items="${groupes}">
-				<option><c:out value="${groupe.nom}"/></option>
+	<form action="delete_deadline" method="post">
+		<h1>Supprimer une deadline</h1>
+		<select name="titre">
+			<c:forEach var="titre" items="${deadlines}">
+				<option value="${deadlines.titre}"><c:out value="${deadlines.titre}"/></option>
 			</c:forEach>
 		</select>
 		<input name="enlever" type="submit">
 	</form>
 	
-	attribuer un élève a un groupe
-	<form action="attribGroup" method="post" style="border: 1px solid black;">
-		<select name="nomGroupe" type="text">
-			<c:forEach var="groupe" items="${groupes}">
-				<option><c:out value="${groupe.nom}"/></option>
-			</c:forEach>
-		</select>
-		<input name="nomEleve" type="text">
-		<input name="attribuer" type="submit">
-	</form>
-
+	
+								
+	
+	
+	
 </body>
 </html>
