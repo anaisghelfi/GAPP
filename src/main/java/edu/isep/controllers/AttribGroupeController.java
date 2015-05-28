@@ -29,9 +29,11 @@ public class AttribGroupeController {
 	private Map<Integer, SousGroupe> sg;
 
 	public AttribGroupeController(){
+
 		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/brandonemartins/Documents/A2/Web_Techno/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
 
 //		Declaration des DAO et variables
+
 		daoEleve = (elevesJDBCTemplate) context.getBean("elevesDAO");
 		daoGroupe = (groupeJDBCTemplate) context.getBean("groupeDAO");
 		daoSousGroupe = (SousGroupesJDBCTemplate) context.getBean("sousGroupeDAO");

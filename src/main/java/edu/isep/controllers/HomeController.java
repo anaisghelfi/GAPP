@@ -42,11 +42,12 @@ public class HomeController {
 			
 				case "eleve":
 					System.out.println("eleve");
+					
 					 modelAndView.addObject("SessionBean", login);
 					 modelAndView.addObject("nom",newUser.getNomFamille());
 					 modelAndView.addObject("number",newUser.getNumber());
 					 modelAndView.addObject("type",newUser.getType());
-					 modelAndView.setViewName("accueilEleve");
+					 modelAndView.setViewName("AccueilRespo");
 					 return modelAndView;
 				case "professeur":
 					System.out.println("prof");
