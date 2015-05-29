@@ -30,8 +30,8 @@ public class AjoutDeadlineController {
 	
 	@RequestMapping(value="/ajoutDeadline",method = RequestMethod.GET)
 	public String Exemple(Model model){
-		List<Deadline> deadline = daoDeadline.allDeadline();
-		model.addAttribute("deadline",deadline);
+		List<Deadline> deadlines = daoDeadline.allDeadline();
+		model.addAttribute("deadlines",deadlines);
 		return "ajoutDeadline";
 	}
 	

@@ -36,7 +36,7 @@ public class CompetencesController {
 		
 		dao = (CompetencesJDBCTemplate) context.getBean("competencesDAO");
 		
-		Collection<Competences> col = dao.getAllCompetences();
+		Collection<Competences> col = dao.allCompetences();
 		Iterator<Competences> i = col.iterator();
 		while(i.hasNext()){
 			Competences competences = i.next();
