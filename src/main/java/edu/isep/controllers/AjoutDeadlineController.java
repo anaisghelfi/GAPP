@@ -1,6 +1,7 @@
 package edu.isep.controllers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.context.ApplicationContext;
@@ -11,37 +12,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.isep.beans.Deadline;
-import edu.isep.daoImp.UserJDBCTemplate;
+import edu.isep.daoImp.DeadlineJDBCTemplate;
 
 
 @Controller
 public class AjoutDeadlineController {
 	
-	private UserJDBCTemplate dao;
+	private DeadlineJDBCTemplate daoDeadline;
 	private Map<Integer, Deadline> u;
 	
 	
 	public AjoutDeadlineController(){
 		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
-		dao = (UserJDBCTemplate) context.getBean("userDAO");
-		u = new HashMap<Integer, Deadline>();
-		
+		daoDeadline = (DeadlineJDBCTemplate) context.getBean("deadlineDAO");
+		u = new HashMap<Integer, Deadline>();	
 	}
-	@RequestMapping(value="/ajout_deadline.jsp",method = RequestMethod.GET)
+	
+	@RequestMapping(value="/ajoutDeadline",method = RequestMethod.GET)
 	public String Exemple(Model model){
-		Deadline deadline = new Deadline();
-		model.addAttribute("deadline",deadline);
-		return "ajout_deadline";
+		List<Deadline> deadlines = daoDeadline.allDeadline();
+		model.addAttribute("deadlines",deadlines);
+		return "ajoutDeadline";
 	}
+	
+	
 	@RequestMapping(value = "/add_deadline", method = RequestMethod.POST)
-	public String add(Deadline deadline, Model model)
+	public String ajout_deadline(Deadline deadline, Model model)
 	{
 		
 		u.put(deadline.getId(), deadline);
-		dao.ajout_deadline(deadline);
+		daoDeadline.ajout_deadline(deadline);
 		model.addAttribute("deadline", u);
-		return "ajout_deadline";
+		return "ajoutDeadline";
 	}
-	
 
 }
