@@ -22,6 +22,9 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="edu.isep.controllers" />
+	<context:component-scan base-package="edu.isep.daoImp" />
+
+	
 	
 	
 	
