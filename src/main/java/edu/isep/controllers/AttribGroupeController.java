@@ -30,7 +30,13 @@ public class AttribGroupeController {
 
 	public AttribGroupeController(){
 
-		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/brandonemartins/Documents/A2/Web_Techno/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
+		//		Declaration des DAO et variables
+		daoEleve = (elevesJDBCTemplate) context.getBean("elevesDAO");
+		e = new HashMap<Integer, Eleve>();
+		daoGroupe = (groupeJDBCTemplate) context.getBean("groupeDAO");
+		g = new HashMap<Integer, Groupe>();
+		
 
 //		Declaration des DAO et variables
 

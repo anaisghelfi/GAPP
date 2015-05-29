@@ -40,36 +40,47 @@ public class CompetencesJDBCTemplate {
 	}
 	
 	
-	private static final class CompetencesMapper implements RowMapper {
+	public List<Competences> allCompetences(){
+		String sql = "SELECT * FROM competences";
+		
+		ArrayList<Competences> competences =  new ArrayList<Competences>();
+		
+		List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql);
+		
+		for (Map row : rows) {
+			Competences competence =  new Competences();
+			
+			competence.setId(Integer.parseInt(String.valueOf(row.get("id"))));
+			competence.setFamille((String)row.get("famille"));
+			competence.setCoefficient(Double.parseDouble(String.valueOf(row.get("coefficient"))));
+			
+			competences.add(competence);
+		}
 
-		 public Competences mapRow(ResultSet rs, int rowNum) throws SQLException {
-		 Competences comp = new Competences();
-		 
-		 comp.setFamille(rs.getString("famille"));
-		 comp.setCoefficient(rs.getDouble("coefficient"));
-		 return comp;
-		 }
+		return competences;
 	}
 	
-	public Collection<Competences> getAllCompetences() {
-		 return this.jdbcTemplateObject.query( "select * from competences", new CompetencesMapper());
-	}
-	
-	private static final class SousCompetencesMapper implements RowMapper {
+	public List<SousCompetences> allSousCompetences(){
+		String sql = "SELECT * FROM sous_competences";
+		
+		ArrayList<SousCompetences> souscompetences =  new ArrayList<SousCompetences>();
+		
+		List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql);
+		
+		for (Map row : rows) {
+			SousCompetences souscompetence =  new SousCompetences();
+			
+			souscompetence.setId(Integer.parseInt(String.valueOf(row.get("id"))));
+			souscompetence.setSous_competences((String)row.get("sous_competences"));
+			souscompetence.setCompetences_id(Integer.parseInt(String.valueOf(row.get("coefficient"))));
+			
+			souscompetences.add(souscompetence);
+		}
 
-		 public SousCompetences mapRow(ResultSet rs, int rowNum) throws SQLException {
-		 SousCompetences souscomp = new SousCompetences();
-		 
-		 souscomp.setSous_competences(rs.getString("sous_competences"));
-		 souscomp.setCompetences_id(rs.getInt("competences_id"));
-		 return souscomp;
-		 }
+		return souscompetences;
 	}
 	
-	public Collection<SousCompetences> getAllSousCompetences() {
-		 return this.jdbcTemplateObject.query( "select * from sous_competences", new SousCompetencesMapper());
-	}	
-	
+
 
 	
 	

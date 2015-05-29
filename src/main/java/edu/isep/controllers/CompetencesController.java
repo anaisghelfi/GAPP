@@ -29,14 +29,14 @@ public class CompetencesController {
 	
 	public CompetencesController(){
 
-		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/brandonemartins/Documents/A2/Web_Techno/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
 
 		c = new HashMap<Integer, Competences>();
 		sc = new HashMap<Integer, SousCompetences>();
 		
 		dao = (CompetencesJDBCTemplate) context.getBean("competencesDAO");
 		
-		Collection<Competences> col = dao.getAllCompetences();
+		Collection<Competences> col = dao.allCompetences();
 		Iterator<Competences> i = col.iterator();
 		while(i.hasNext()){
 			Competences competences = i.next();
@@ -84,9 +84,4 @@ public class CompetencesController {
 		return "AccueilRespo";
 	}	
 	
-	
-	
-	
-
-
 }
