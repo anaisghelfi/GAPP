@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import edu.isep.beans.Deadline;
+import edu.isep.beans.Groupe;
 
 public class DeadlineJDBCTemplate {
 	
@@ -21,11 +22,20 @@ public class DeadlineJDBCTemplate {
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 	
+	//Ajouter une deadline
 	public void ajout_deadline(Deadline deadline){
 		String sql = "INSERT INTO deadlines(titre, description, date_limite, groupes_id) VALUES(?,?,?,?)";
 		jdbcTemplateObject.update(sql,new Object[]{deadline.getTitre(),deadline.getDescription(),deadline.getDate_limite() , deadline.getGroupes_id()});
 		return ;
 	}
+	
+	//Supprimer une deadline
+	public void delete_deadline(Deadline deadline){
+		String sql = "DELETE FROM deadlines WHERE titre = ?";
+		jdbcTemplateObject.update(sql,new Object[]{deadline.getTitre()});
+		return;
+	}
+	
 	
 	
 //	Récupérer tous les groupes

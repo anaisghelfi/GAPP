@@ -20,12 +20,15 @@ public class AjoutDeadlineController {
 	
 	private DeadlineJDBCTemplate daoDeadline;
 	private Map<Integer, Deadline> u;
+	private Map<String,Deadline> d;
 	
 	
 	public AjoutDeadlineController(){
 		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
 		daoDeadline = (DeadlineJDBCTemplate) context.getBean("deadlineDAO");
 		u = new HashMap<Integer, Deadline>();	
+		d = new HashMap<String, Deadline>();	
+
 	}
 	
 	@RequestMapping(value="/ajoutDeadline",method = RequestMethod.GET)
@@ -43,6 +46,16 @@ public class AjoutDeadlineController {
 		u.put(deadline.getId(), deadline);
 		daoDeadline.ajout_deadline(deadline);
 		model.addAttribute("deadline", u);
+		return "ajoutDeadline";
+	}
+	
+	@RequestMapping(value = "/delete_deadline", method = RequestMethod.POST)
+	public String delete_deadline(Deadline deadline, Model model)
+	{
+		
+		d.put(deadline.getTitre(), deadline);
+		daoDeadline.delete_deadline(deadline);
+		model.addAttribute("deadline", d);
 		return "ajoutDeadline";
 	}
 
