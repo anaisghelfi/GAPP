@@ -16,7 +16,6 @@
 	<property name="dataSource" ref="dataSource"/>
 </bean>
 
-
 <bean id="elevesDAO" class="edu.isep.daoImp.elevesJDBCTemplate">
 	<property name="dataSource" ref="dataSource"/>
 </bean>
@@ -26,11 +25,22 @@
 </bean>
 
 
-<bean id="competencesDAO" class="edu.isep.daoImp.CompetencesJDBCTemplate">
-<property name="dataSource" ref="dataSource"/>
+<bean id="sousGroupeDAO" class="edu.isep.daoImp.SousGroupesJDBCTemplate">
+	<property name="dataSource" ref="dataSource"/>
 </bean>
+
 <bean id="sessionDAO" class="edu.isep.daoImp.HomeJDBCTemplate">
 <property name="dataSource" ref="dataSource"/>
 </bean>
 
+<bean id="competencesDAO" class="edu.isep.daoImp.CompetencesJDBCTemplate">
+	<property name="dataSource" ref="dataSource"/>
+</bean>
+
+<bean id="deadlineDAO" class="edu.isep.daoImp.DeadlineJDBCTemplate">
+	<property name="dataSource" ref="dataSource"/>
+</bean>
+
 </beans>
+
+

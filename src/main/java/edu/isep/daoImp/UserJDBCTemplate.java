@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import edu.isep.beans.Deadline;
 import edu.isep.beans.User;
 
 

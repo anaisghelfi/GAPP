@@ -44,6 +44,7 @@ public class HomeController {
 			
 				case "eleve":
 					System.out.println("eleve");
+
 					 session = request.getSession();
 					 session.setAttribute("login", login);
 					 session.setAttribute("number", newUser.getNumber());
@@ -53,6 +54,7 @@ public class HomeController {
 					 session.setAttribute("type", newUser.getType());
 
 					 return "accueilEleve";
+					 
 				case "professeur":
 					System.out.println("prof");
 					break;

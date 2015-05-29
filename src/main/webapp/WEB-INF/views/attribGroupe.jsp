@@ -16,27 +16,62 @@
 
 <body>
 	
-	
 	<form action="addGroupe" method="post" style="border: 1px solid black;">
-	ajouter un groupe<br>
-		nom du groupe <input name="nom" type="text">
+		<h1>ajouter un groupe (ok)</h1>
+			nom du groupe <input name="nom" type="text">
 <!-- 		nom du tuteur <input name="tuteur_id" type="text"> -->
 		<input name="ajouter" type="submit">
 	</form>
 	
-	<form action="deleteGroup" method="post" style="border: 1px solid black;">
-	enlever un groupe <br>
-		<select name="nomGroupe" type="text">
+	<br>
+	
+	<form action="deleteGroupe" method="post" style="border: 1px solid black;">
+		<h1>enlever un groupe (ok)</h1>
+		<select name="nom">
 			<c:forEach var="groupe" items="${groupes}">
-				<option><c:out value="${groupe.nom}"/></option>
+				<option value="${groupe.nom}"><c:out value="${groupe.nom}"/></option>
 			</c:forEach>
 		</select>
 		<input name="enlever" type="submit">
 	</form>
 	
-	attribuer un élève a un groupe
+	<br>
+	
+	<form action="addSousGroupe" method="post" style="border: 1px solid black;">
+		<h1>Ajouter un sous-groupe (ok)</h1>
+		nom du groupe <input name="nom" type="text"><br>
+		groupe parent : 
+		<select name="groupes_id">
+			<c:forEach var="groupe" items="${groupes}">
+				<option value="${groupe.id}"><c:out value="${groupe.nom}"/></option>
+			</c:forEach>
+		</select>
+		<input name="Ajouter" type="submit">
+	</form>
+
+	<br>
+	
+	<form action="deleteSousGroupe" method="post" style="border: 1px solid black;">
+		<h1>enlever un sous-groupe</h1>
+		<select name="id">
+		<c:forEach var="groupe" items="${groupes}">
+			<optgroup label="${groupe.nom}">
+				<c:forEach var="sousGroupe" items="${sousGroupes}">
+					<c:if test="${sousGroupe.groupes_id == groupe.id}">
+						<option value="${sousGroupe.id}"><c:out value="${sousGroupe.nom}"/></option>
+					</c:if>
+				</c:forEach>	
+			</optgroup>
+		</c:forEach>
+		</select>
+		<input name="enlever" type="submit">
+	</form>
+	
+	<br>
+	
 	<form action="attribGroup" method="post" style="border: 1px solid black;">
-		<select name="nomGroupe" type="text">
+		<h1>attribuer un élève a un groupe ()ok)</h1>
+		<select name="nom">
 			<c:forEach var="groupe" items="${groupes}">
 				<option><c:out value="${groupe.nom}"/></option>
 			</c:forEach>
@@ -44,6 +79,5 @@
 		<input name="nomEleve" type="text">
 		<input name="attribuer" type="submit">
 	</form>
-
 </body>
 </html>
