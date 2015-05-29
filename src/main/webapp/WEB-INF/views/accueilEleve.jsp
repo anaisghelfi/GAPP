@@ -9,10 +9,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Accueil eleves</h1>
-	Session bean login: ${login}
-	Session bean nom: ${nom}
-	Session bean nom: ${number}
-	Session bean nom: ${type}
+	 <p>
+    Login : ${ sessionScope.login }
+    Number : ${sessionScope.number}
+    Type : ${ sessionScope.type}
+</body>
+    </p>
+	 <a href="deconnexion">Déconnexion</a>
 </body>
 </html>
