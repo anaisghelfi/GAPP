@@ -84,9 +84,4 @@ public class CompetencesController {
 		return "AccueilRespo";
 	}	
 	
-	
-	
-	
-
-
 }

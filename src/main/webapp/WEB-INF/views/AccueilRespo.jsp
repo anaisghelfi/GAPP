@@ -164,8 +164,9 @@
                                                 <label>Famille</label>
                                                 <select name="competences_id" class='form-control' >
                                                     <optgroup label='Familles'>
-                                                        <option value='1'>Compétence 1</option>
-                                                        <option value='2'>Compétence 2</option>
+											 			<c:forEach var="allcompetences" items="${allcompetences}">
+															<option value="<c:out value="${allcompetences.id}"/>"><c:out value="${allcompetences.famille}"/></option>
+														</c:forEach>
                                                     </optgroup>
                                                 </select>
                                             </div>
@@ -192,56 +193,30 @@
 
                             <div class="panel-body">
                                 <div class="panel-group" id="accordion">
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading">
-                                            <h5 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Travail en groupe <i style='float:right; margin:5px' class="fa fa-trash"></i><i style='float:right;margin:5px' class="fa fa-pencil"></i></a>
-                                            </h5>
-                                        </div>
-                                        <c:forEach var="co" items="${allcompetences}"> 
-								           <c:out value="${co.value.famille}"></c:out>
-								           <c:out value="${co.value.coefficient}"></c:out>
-								        </c:forEach>
-                                        <div id="collapseOne" class="panel-collapse collapse in">
+                                
+                                   
+                                    <c:forEach var="allcompetences" items="${allcompetences}">
+										<div style="margin-bottom:6px" class="panel panel-primary">
+											<div class="panel-heading">
+	                                            <h5 class="panel-title">
+	                                                <a data-toggle="collapse" data-parent="#accordion" href="#<c:out value="${allcompetences.id}"/>"><c:out value="${allcompetences.famille}"/><i style='float:right; margin:5px' class="fa fa-trash"></i><i style='float:right;margin:5px' class="fa fa-pencil"></i></a>
+	                                            </h5>
+	                                        </div>
+										</div>
+										
+										<div id="<c:out value="${allcompetences.id}"/>" class="panel-collapse collapse in">
                                             <div class="panel-body">
-                                                <li>Travailler en équipe</li>
-                                                <li>Animer une équipe, la motiver et la faire évoluer</li>
-                                                <li>Gérer les conflits, la diversité et les différences</li>
-                                                <li>Être force de proposition</li>
+                                                <c:forEach var="allsouscompetences" items="${allsouscompetences}">
+                                                <!--  	<li><c:out value="${allsouscompetences.sous_competences}"/>"></li>
+                                                </c:forEach> -->
+                                       
+
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="panel panel-info">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Communication<i style='float:right; margin:5px' class="fa fa-trash"></i><i style='float:right;margin:5px' class="fa fa-pencil"></i></a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseTwo" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <li>Écouter et se faire écouter</li>
-                                                <li>Mener un dialogue, argumenter et convaincre</li>
-                                                <li>Documentation efficace (esprit de synthèse) des activités ou produits réalisés</li>
-                                                <li>Avoir une approche communicative adaptée aux situations envisagées</li>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-success">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Conduite de projet<i style='float:right; margin:5px' class="fa fa-trash"></i><i style='float:right;margin:5px' class="fa fa-pencil"></i></a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseThree" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <li>Méthodologie (méthode de conduite)</li>
-                                                <li>Planifier un projet</li>
-                                                <li>Suivre un projet</li>
-                                                <li>Utiliser des outils de suivi de projets</li>
-                                                <li>Répondre aux attentes du client</li>
-                                            </div>
-                                        </div>
-                                    </div>
+									</c:forEach>
+                                                                        
+
+
                                 </div>
                             </div>
 
