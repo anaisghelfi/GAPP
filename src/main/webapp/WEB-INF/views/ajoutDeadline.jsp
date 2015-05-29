@@ -24,18 +24,15 @@
 	           <input type="submit" name="valider"/>
 	</form>
 	
-	<form action="delete_deadline" method="post">
-		<h1>Voir les deadlines</h1>
-		<select name="titre">
+	<h2>Voir les Deadlines</h2> 
+	
 			<c:forEach var="titre" items="${deadlines}">
-				<option value="${deadlines.titre}"><c:out value="${deadlines.titre}"/></option>
+				<c:out value="${deadlines.titre}"/>
 			</c:forEach>
-		</select>
-		<input name="enlever" type="submit">
-	</form>
+		
 	
 	
-								
+							
 	
 	
 	
