@@ -6,7 +6,7 @@ public class Deadline {
 	
 	private int id;
 	private String titre;
-	private String decription;	
+	private String description;	
 	private Date date_limite;
 	private int groupes_id;
 
@@ -24,11 +24,11 @@ public class Deadline {
 	public void setTitre(String titre) {
 		this.titre = titre;
 	}
-	public String getDecription() {
-		return decription;
+	public String getDescription() {
+		return description;
 	}
-	public void setDecription(String decription) {
-		this.decription = decription;
+	public void setDescription(String decription) {
+		this.description = decription;
 	}
 	public Date getDate_limite() {
 		return date_limite;

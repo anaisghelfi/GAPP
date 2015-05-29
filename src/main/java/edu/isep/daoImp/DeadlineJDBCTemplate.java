@@ -23,7 +23,7 @@ public class DeadlineJDBCTemplate {
 	
 	public void ajout_deadline(Deadline deadline){
 		String sql = "INSERT INTO deadlines(titre, description, date_limite, groupes_id) VALUES(?,?,?,?)";
-		jdbcTemplateObject.update(sql,new Object[]{deadline.getTitre(),deadline.getDecription(),deadline.getDate_limite() , deadline.getGroupes_id()});
+		jdbcTemplateObject.update(sql,new Object[]{deadline.getTitre(),deadline.getDescription(),deadline.getDate_limite() , deadline.getGroupes_id()});
 		return ;
 	}
 	
@@ -41,7 +41,7 @@ public class DeadlineJDBCTemplate {
 			
 			deadline.setId(Integer.parseInt(String.valueOf(row.get("id"))));
 			deadline.setTitre((String)row.get("titre"));
-			deadline.setDecription((String)row.get("description"));
+			deadline.setDescription((String)row.get("description"));
 			deadline.setDate_limite((Date)row.get("date_limite"));
 			deadline.setGroupes_id(Integer.parseInt(String.valueOf(row.get("groupes_id"))));
 			
