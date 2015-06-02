@@ -40,7 +40,7 @@ public class CompetencesJDBCTemplate {
 	}
 	
 	
-	public List<Competences> allCompetences(){
+	public List<Competences> allCompetences() {
 		String sql = "SELECT * FROM competences";
 		
 		ArrayList<Competences> competences =  new ArrayList<Competences>();
@@ -72,7 +72,7 @@ public class CompetencesJDBCTemplate {
 			
 			souscompetence.setId(Integer.parseInt(String.valueOf(row.get("id"))));
 			souscompetence.setSous_competences((String)row.get("sous_competences"));
-			souscompetence.setCompetences_id(Integer.parseInt(String.valueOf(row.get("coefficient"))));
+			souscompetence.setCompetences_id((int) row.get("competences_id"));
 			
 			souscompetences.add(souscompetence);
 		}

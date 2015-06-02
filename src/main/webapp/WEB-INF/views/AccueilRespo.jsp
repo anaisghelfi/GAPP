@@ -162,13 +162,13 @@
                                             </div>
                                             <div class='form-group'>
                                                 <label>Famille</label>
-                                                <select name="competences_id" class='form-control' >
+                                                 <select name="competences_id" class='form-control' >
                                                     <optgroup label='Familles'>
 											 			<c:forEach var="allcompetences" items="${allcompetences}">
 															<option value="<c:out value="${allcompetences.id}"/>"><c:out value="${allcompetences.famille}"/></option>
-														</c:forEach>
+														</c:forEach> 
                                                     </optgroup>
-                                                </select>
+                                                </select> 
                                             </div>
                
 											                                            
@@ -194,28 +194,29 @@
                             <div class="panel-body">
                                 <div class="panel-group" id="accordion">
                                 
-                                   
+                                    <form method="POST" action="addfamille">
                                     <c:forEach var="allcompetences" items="${allcompetences}">
 										<div style="margin-bottom:6px" class="panel panel-primary">
 											<div class="panel-heading">
 	                                            <h5 class="panel-title">
-	                                                <a data-toggle="collapse" data-parent="#accordion" href="#<c:out value="${allcompetences.id}"/>"><c:out value="${allcompetences.famille}"/><i style='float:right; margin:5px' class="fa fa-trash"></i><i style='float:right;margin:5px' class="fa fa-pencil"></i></a>
+	                                                <a data-toggle="collapse" data-parent="#accordion" href="#<c:out value="${allcompetences.id}"/>"><c:out value="${allcompetences.famille}"/><i style='float:right; margin:5px' <c:out value="${allcompetences.id}"/>  type="submit" class="fa fa-trash"></i><i style='float:right;margin:5px' class="fa fa-pencil"></i></a>
 	                                            </h5>
 	                                        </div>
 										</div>
 										
 										<div id="<c:out value="${allcompetences.id}"/>" class="panel-collapse collapse in">
                                             <div class="panel-body">
-                                                <c:forEach var="allsouscompetences" items="${allsouscompetences}">
-                                                <!--  	<li><c:out value="${allsouscompetences.sous_competences}"/>"></li>
-                                                </c:forEach> -->
-                                       
-
+			                                   	<c:forEach var="allsouscompetences" items="${allsouscompetences}">
+													<c:if test="${allsouscompetences.competences_id == allcompetences.id}">
+														<li><c:out value="${allsouscompetences.sous_competences}"/></li>
+													</c:if>
+												</c:forEach> 
+							
                                             </div>
                                         </div>
-									</c:forEach>
-                                                                        
-
+									</c:forEach> 
+                                    </form>                              
+									
 
                                 </div>
                             </div>
@@ -230,9 +231,9 @@
                         </div>
                         <div class="ibox-content">
                             <h4>
-                                <span class='label label-primary'>Travail en groupe</span>
-                                <span class='label label-info'>Communication</span>
-                                <span class='label label-success'>Conduite de projet</span>
+                            	<c:forEach var="allcompetences" items="${allcompetences}">
+                                	<span class='label label-primary'><c:out value="${allcompetences.famille}"/></span>
+                            	</c:forEach>
                             </h4>
 
                             <table class='table table-bordered'>
