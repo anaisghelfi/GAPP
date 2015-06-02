@@ -46,6 +46,10 @@ public class AjoutDeadlineController {
 		u.put(deadline.getId(), deadline);
 		daoDeadline.ajout_deadline(deadline);
 		model.addAttribute("deadline", u);
+		
+		List<Deadline> deadlines = daoDeadline.allDeadline();
+		model.addAttribute("deadlines",deadlines);
+		
 		return "ajoutDeadline";
 	}
 	
@@ -56,6 +60,10 @@ public class AjoutDeadlineController {
 		d.put(deadline.getTitre(), deadline);
 		daoDeadline.delete_deadline(deadline);
 		model.addAttribute("deadline", d);
+		
+		List<Deadline> deadlines = daoDeadline.allDeadline();
+		model.addAttribute("deadlines",deadlines);
+		
 		return "ajoutDeadline";
 	}
 

@@ -27,10 +27,10 @@
 	                        <div class="ibox-content">
 							
 							<c:forEach var="deadline" items="${deadlines}">
-								<strong>Titre :</strong> <c:out value="${deadline.titre}"/> 
+								<div class="form-group"><strong>Titre :</strong> <c:out value="${deadline.titre}"/> 
 								<strong>Description :</strong> <c:out value="${deadline.description}"/>
 								<strong>Date limite :</strong> <c:out value="${deadline.date_limite}"/>
-								<strong>Groupe concerné :</strong> <c:out value="${deadline.groupes_id}"/> </br></br>
+								<strong>Groupe concerné :</strong> <c:out value="${deadline.groupes_id}"/></div> </br>
 							</c:forEach>
 							
 	                        </div>
@@ -38,7 +38,7 @@
                 </div>
 			
 			
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <div class="ibox">
                         <div class="ibox-title">
                             <h5>Ajouter une nouvelle deadline</h5>
@@ -46,18 +46,18 @@
                         	<div class="ibox-content">
                             
                             	<form method="post" action="add_deadline">
-								  <strong>Titre :</strong> <input type="text" name="titre" >
-								  <strong>Description :</strong> <input type="text" name="description">  
-								  <strong>Date :</strong> <input type="date" name="date_limite" >
-								  <strong>Groupe :</strong> <input type="text" name="groupes_id">
-										<input type="submit" name="valider"/>
+								  <div class="form-group"><label>Titre :</label> <input type="text" name="titre" class="form-control" ></div>
+								  <div class="form-group"><label>Description :</label> <input type="text" name="description" class="form-control"></div>
+								  <div class="form-group"><label>Date :</label> <input type="date" name="date_limite" class="form-control"></div>
+								  <div class="form-group"><label>Groupe :</label> <input type="text" name="groupes_id" class="form-control"></div>
+										<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" name="valider"><strong>Valider</strong></button>
 								</form>
                             
                        	 </div>
                     </div>
                 </div>
                 
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <div class="ibox">
                         <div class="ibox-title">
                             <h5>Supprimer une deadline</h5>
@@ -65,9 +65,9 @@
                         	<div class="ibox-content">
                             
                             	<form method="post" action="delete_deadline">
-								  <strong>Titre :</strong> <input type="text" name="titre" >
+								  <div class="form-group"><label>Titre :</label> <input type="text" name="titre" class="form-control"></div>
 								  
-										<input type="submit" name="supprimer"/>
+										<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" name="valider"><strong>Supprimer</strong></button>
 								</form>
                             
                        	 </div>
