@@ -2,7 +2,6 @@ package edu.isep.beans;
 
 public class Eleve {
 	private int id;
-	private int users_id;
 	private String nom;
 	private String prenom;
 	private String promo;
@@ -15,12 +14,6 @@ public class Eleve {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public int getUsers_id() {
-		return users_id;
-	}
-	public void setUsers_id(int users_id) {
-		this.users_id = users_id;
 	}
 	public String getNom() {
 		return nom;
