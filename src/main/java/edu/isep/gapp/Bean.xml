@@ -7,7 +7,7 @@
  
  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
  <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
- <property name="url" value="jdbc:mysql://localhost:8889/gapp"/>
+ <property name="url" value="jdbc:mysql://localhost:8889/gapp"/> 
  <property name="username" value="root"/>
  <property name="password" value="root"/>
 </bean>
@@ -40,6 +40,10 @@
 <bean id="deadlineDAO" class="edu.isep.daoImp.DeadlineJDBCTemplate">
 	<property name="dataSource" ref="dataSource"/>
 </bean>
+
+<!-- <bean id="eleveDAO" class="edu.isep.daoImp.RechercherJDBCTemplate"> -->
+<!-- 	<property name="dataSource" ref="dataSource"/> -->
+<!-- </bean> -->
 
 </beans>
 

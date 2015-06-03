@@ -6,7 +6,7 @@
 <head>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Recherche</title>
+	<title>GAPP</title>
 
 	<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet" type="text/css" media="screen" />
 	<link href="<c:url value="/resources/fonts/css/font-awesome.css" />" rel="stylesheet" type="text/css" media="screen" />
