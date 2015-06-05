@@ -100,34 +100,13 @@ public class AttribGroupeController {
 		return "attribGroupe";
 	}
 	
-////	Chemin pour traiter la suppression d'un groupe
-//	@RequestMapping(value = "/deleteGroupe", method = RequestMethod.POST)
-//	public String delete(Groupe groupe, Model model)
-//	{
-//		
-////		g.put(groupe.getId(), groupe);
-//		daoGroupe.deleteGroupe(groupe);
-//		
-//		List<Groupe> groupes = daoGroupe.allGroupes();
-//		model.addAttribute("groupes", groupes);
-//		
-////		Pour récupérer tous les sous groupes
-//		List<SousGroupe> sousGroupes = daoSousGroupe.allSousGroupes();
-//		for( SousGroupe sg : sousGroupes){
-//			sg.setGroupe(daoGroupe.getGroupe(sg.getGroupes_id()));
-//		}
-//		model.addAttribute("sousGroupes", sousGroupes);
-//		
-//		return "attribGroupe";
-//	}
-	
 //	Chemin pour traiter la suppression d'un groupe
-	@RequestMapping(value = "/deleteGroupe", method = RequestMethod.GET)
-	public String delete(/*Groupe groupe,*/ Model model, HttpServletRequest request, @RequestParam("NomGroupe") String NomGroupe)
+	@RequestMapping(value = "/deleteGroupe", method = RequestMethod.POST)
+	public String delete(Groupe groupe, Model model)
 	{
 		
 //		g.put(groupe.getId(), groupe);
-		daoGroupe.deleteGroupe(NomGroupe);
+		daoGroupe.deleteGroupe(groupe.getNom());
 		
 		List<Groupe> groupes = daoGroupe.allGroupes();
 		model.addAttribute("groupes", groupes);
@@ -141,6 +120,27 @@ public class AttribGroupeController {
 		
 		return "attribGroupe";
 	}
+	
+////	Chemin pour traiter la suppression d'un groupe
+//	@RequestMapping(value = "/deleteGroupe", method = RequestMethod.GET)
+//	public String delete(/*Groupe groupe,*/ Model model, HttpServletRequest request, @RequestParam("NomGroupe") String NomGroupe)
+//	{
+//		
+////		g.put(groupe.getId(), groupe);
+//		daoGroupe.deleteGroupe(NomGroupe);
+//		
+//		List<Groupe> groupes = daoGroupe.allGroupes();
+//		model.addAttribute("groupes", groupes);
+//		
+////		Pour récupérer tous les sous groupes
+//		List<SousGroupe> sousGroupes = daoSousGroupe.allSousGroupes();
+//		for( SousGroupe sg : sousGroupes){
+//			sg.setGroupe(daoGroupe.getGroupe(sg.getGroupes_id()));
+//		}
+//		model.addAttribute("sousGroupes", sousGroupes);
+//		
+//		return "attribGroupe";
+//	}
 	
 //	Chemin pour traiter l'ajout d'un sous-groupe
 	@RequestMapping(value = "/addSousGroupe", method = RequestMethod.POST)

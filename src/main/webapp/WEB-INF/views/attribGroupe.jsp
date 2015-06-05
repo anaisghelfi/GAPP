@@ -23,120 +23,50 @@
 	
 	<div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
-                <div class="col-lg-6"><!-- Mettre dans cette col les boutons vers formulaire ajouts groupes, attribution des élèves, et liste des groupes, sous-groupes avec bouton pour supprimer -->
-                
-                
-                
-<!--                     <div class="ibox"> -->
-<!--                         <div class="ibox-title"> -->
-<!--                             <h5>Ajouter un groupe</h5> -->
-<!--                         </div> -->
-<!--                         <div class="ibox-content"> -->
-<!-- 							<form action="addGroupe" method="post"> -->
-<!-- 								 <div class='form-group'> -->
-<!--                                     <label>Nom du groupe</label> -->
-<!-- 									<input name="nom" type="text" class='form-control'>                                             -->
-<!-- 								</div> -->
-<!-- 								<div class='form-group'> -->
-<!--                                     <label>Nom du Tuteur</label> -->
-<!-- 									<input name="tuteur_id" type="text" class='form-control'>                                             -->
-<!-- 								</div> -->
-<!--                                 <div class="modal-footer"> -->
-<!--                                     <button type="submit" class="btn btn-primary">Ajouter</button> -->
-<!--                                 </div> -->
-<!-- 							</form> -->
-<!--                   </div> -->
-
-
-
-
-
-
-
-    	
-    
-               
-                
-                
-                
-                
-                
+                <div class="col-lg-6"><!-- Mettre dans cette col les boutons vers formulaire ajouts groupes, attribution des élèves, et liste des groupes, sous-groupes avec bouton pour supprimer -->                
                 <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Gérer les groupes d'APP</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                	<div class="ibox-title">
+                    	<h5>Gérer les groupes d'APP</h5>
+                    </div>
+                    <div class="ibox-content">
+                    	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                                 Ajouter un groupe d'APP
-                            </button><br/><br/>
-
-                            <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog">
-                                <div class="modal-content animated bounceInRight">
-                                	<form method="POST" action="addGroupe">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                            <i class="fa fa-laptop modal-icon"></i>
-                                            <h4 class="modal-title">Ajouter un groupe d'APP</h4>
-                                            	<div class='form-group'>
-                                                	<label>Nom du groupe</label>
-                                                	<input type='text' name="nom" class='form-control' placeholder='Nom du groupe' />
-                                            	</div>
-                                            	<div class='form-group'>
-                                             	   <label>Nom du tuteur</label>
-                                             	   <input type='text' name="tuteur_id" class='form-control' placeholder='Tuteur' />
-                                            	</div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-white" data-dismiss="modal">Fermer</button>
-                                            <button type="submit" class="btn btn-primary">Sauvegarder</button>
-                                        </div>
-                                     </form>
-                                </div>
-                                </div>
-                            </div>
-                 		
-                 	
-                 	
-                 	
-<!--                  	<div class="ibox"> -->
-<!--                         <div class="ibox-title"> -->
-<!--                             <h5>Ajouter un sous-groupe</h5> -->
-<!--                         </div> -->
-<!--                         <div class="ibox-content"> -->
-<!-- 	                        <form action="addSousGroupe" method="post"> -->
-<!-- 	                        	 <div class='form-group'> -->
-<!--                                     <label>Nom du groupe</label> -->
-<!-- 									<input name="nom" type="text" class='form-control'>                                             -->
-<!-- 								</div> -->
-<!-- 								 <div class='form-group'> -->
-<!--                                     <label>Groupe Parent</label> -->
-<!-- 									<select name="groupes_id" class="form-control"> -->
-<%-- 										<c:forEach var="groupe" items="${groupes}"> --%>
-<%-- 											<option value="${groupe.id}"><c:out value="${groupe.nom}"/></option> --%>
-<%-- 										</c:forEach> --%>
-<!-- 									</select>								 -->
-<!-- 								</div> -->
-	                        		
-<!-- 								<div class="modal-footer"> -->
-<!--                                     <button type="submit" class="btn btn-primary">Ajouter</button> -->
-<!--                                 </div>							 -->
-<!--                              </form>                         -->
-<!-- 						</div> -->
-<!--                     </div> -->
-                 	
-                 	
+                        </button><br/><br/>
+	                    <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+	                    	<div class="modal-dialog">
+	                        	<div class="modal-content animated bounceInRight">
+	                            	<form method="POST" action="addGroupe">
+	                                	<div class="modal-header">
+	                                    	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	                                        <i class="fa fa-laptop modal-icon"></i>
+	                                        <h4 class="modal-title">Ajouter un groupe d'APP</h4>
+	                                        <div class='form-group'>
+	                                        	<label>Nom du groupe</label>
+	                                            <input type='text' name="nom" class='form-control' placeholder='Nom du groupe' />
+	                                        </div>
+	                                        <div class='form-group'>
+	                                        	<label>Nom du tuteur</label>
+	                                            <input type='text' name="tuteur_id" class='form-control' placeholder='Tuteur' />
+	                                        </div>
+	                                    </div>
+	                                    <div class="modal-footer">
+	                                    	<button type="submit" class="btn btn-white" data-dismiss="modal">Fermer</button>
+	                                        <button type="submit" class="btn btn-primary">Sauvegarder</button>
+	                                    </div>
+	                                </form>
+	                            </div>
+	                        </div>
+	                   </div>
                       
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalAddSousGroupe">
-                                Ajouter un sous-groupe d'APP
-                            </button></br></br>
-
-                            <div class="modal inmodal" id="myModalAddSousGroupe" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog">
-                                <div class="modal-content animated bounceInRight">
+                       	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalAddSousGroupe">
+                            Ajouter un sous-groupe d'APP
+                       	</button></br></br>
+                       	<div class="modal inmodal" id="myModalAddSousGroupe" tabindex="-1" role="dialog" aria-hidden="true">
+                       		<div class="modal-dialog">
+                            	<div class="modal-content animated bounceInRight">
                                 	<form method="POST" action="addSousGroupe">
                                         <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                             <i class="fa fa-laptop modal-icon"></i>
                                             <h4 class="modal-title">Ajouter un sous-groupe d'APP</h4>
                                             <div class='form-group'>
@@ -158,8 +88,8 @@
                                         </div>
                                      </form>
                                 </div>
-                                </div>
                             </div>
+                         </div>
                  		
                  	
                  		
