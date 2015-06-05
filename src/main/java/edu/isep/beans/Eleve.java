@@ -4,6 +4,7 @@ public class Eleve {
 	private int id;
 	private String nom;
 	private String prenom;
+	private int code_eleve;
 	private String promo;
 	private String mail;
 	private String groupe;
@@ -26,6 +27,12 @@ public class Eleve {
 	}
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
+	}
+	public int getCode_eleve() {
+		return code_eleve;
+	}
+	public void setCode_eleve(int code_eleve) {
+		this.code_eleve = code_eleve;
 	}
 	public String getPromo() {
 		return promo;
