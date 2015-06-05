@@ -61,7 +61,7 @@ public class HomeController {
 			}
 			
 		} catch(Exception e) {
-			System.out.println("utilisateur non trouvÃ© !");
+			System.out.println("utilisateur non trouvé !");
 			return "home";
 		}
 		return "home";
