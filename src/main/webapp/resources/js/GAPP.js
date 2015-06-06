@@ -269,3 +269,104 @@ function WinMove() {
         .disableSelection();
 }
 
+function dramModalConfirm(id,type,name,action) {
+	if(type == 'supprimerFamille') {
+		var title = 'Etes-vous sûr de vouloir supprimer cette famille : "'+name+'" ?';
+	}
+	else if (type == 'supprimerCompetence') {
+		var title = 'Etes-vous sûr de vouloir supprimer cette compétence : "'+name+'" ?';
+	}
+
+	var modal = '<div style="display:none" class="modal inmodal" id="modalConfirm" tabindex="-1" role="dialog" aria-hidden="false">'+
+	    '<div class="modal-dialog">'+
+	    '<div class="modal-content animated bounceInRight">'+
+	    	'<form method="POST" action="'+action+'">'+
+	            '<div class="modal-header">'+
+	                '<button type="button" class="close" onclick="destroyConfirmModal()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>'+
+	                '<h4 class="modal-title">'+title+'</h4>'+
+	                    '<input type="hidden" name="id" value="'+id+'" class="form-control" />'+
+	            '</div>'+
+	            '<div class="modal-footer">'+
+	                '<button class="btn btn-white" onclick="destroyConfirmModal()" data-dismiss="modal">Annuler</button>'+
+	                '<button type="submit" class="btn btn-danger">Confirmer la suppression</button>'+
+	            '</div>'+
+	            '</form>'+
+	        '</div>'+
+	    '</div>'+
+	'</div>';
+	
+$('#wrapper').append(modal);
+$('body').append('<div class="modal-backdrop in"></div>');
+$("#modalConfirm").fadeIn(500);
+	
+console.log(id);
+console.log(type);
+console.log(action);
+	
+	
+}
+
+function destroyConfirmModal() {
+	$("#modalConfirm").remove();
+	$(".modal-backdrop").remove();
+	
+}
+
+function update(type,param1,param2,param3) {
+	if (type=="famille") {
+		$("#idfamille").val(param1);
+		$("#famillename").val(param2);
+		$("#coefficientfamille").val(param3);
+	}
+	console.log("click");
+}
+
+//VERIFIER REMPLISSAGE DES CHAMPS
+function ajouterfamille() {
+	var nameBool = verfiBool("#addfamille");
+	var coeffBool = verifCoeff("#addcoefficient");
+	if ((nameBool && coeffBool) === true) {
+		return true;
+	}
+	else {
+		return false;
+	}
+
+}
+
+function ajouterCompetence() {
+	var nameBool = verfiBool("#addsouscompetence");
+	if (nameBool === true) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+//Verification champs vide 
+function verfiBool(id) {
+	var value = $(id).val();
+	$(id).css('border-color','#e5e6e7');
+	if (value !== '') {
+		return true;
+	}
+	else {
+		$(id).css('border-color','#ed5565');
+		return false;
+	}
+}
+
+//verification coefficient 
+function verifCoeff(id) {
+	var value = $(id).val();
+	var nAn = isNaN(value);
+	$(id).css('border-color','#e5e6e7');
+	if (value !== '' && nAn === false) {
+		return true;
+	}
+	else {
+		$(id).css('border-color','#ed5565');
+		return false;
+	}
+}

@@ -32,10 +32,34 @@ public class CompetencesJDBCTemplate {
 		jdbcTemplateObject.update(sql,new Object[]{competences.getFamille(),competences.getCoefficient()});
 		return;
 	}
+
+//	Supprimer une famille
+	public void deleteCompetence(Integer id){
+		String sql = "DELETE FROM competences WHERE id = ?";
+		jdbcTemplateObject.update(sql,new Object[]{id});
+		return;
+	}	
+	
+//	Supprimer une souscompétence
+	public void deleteSousCompetence(Integer id){
+		String sql = "DELETE FROM sous_competences WHERE id = ?";
+		jdbcTemplateObject.update(sql,new Object[]{id});
+		return;
+	}	
+		
+	
+//	Update une famille
+	public void updateCompetence(Competences competences){
+		String sql = "UPDATE competences SET famille = ?, coefficient = ? WHERE id = ?";
+		jdbcTemplateObject.update(sql,new Object[]{competences.getFamille(),competences.getCoefficient(),competences.getId()});
+		return;
+	}
+	
+	
 	
 	public void insertSousCompetences(SousCompetences souscompetences){
-		String sql = "INSERT INTO sous_competences(sous_competences,competences_id) VALUES(?,?)";
-		jdbcTemplateObject.update(sql,new Object[]{souscompetences.getSous_competences(),souscompetences.getCompetences_id()});
+		String sql = "INSERT INTO sous_competences(sous_competences,competences_id,B,I,M,E) VALUES(?,?,?,?,?,?)";
+		jdbcTemplateObject.update(sql,new Object[]{souscompetences.getSous_competences(),souscompetences.getCompetences_id(),souscompetences.getB(),souscompetences.getI(),souscompetences.getM(),souscompetences.getE()});
 		return;
 	}
 	
@@ -73,6 +97,10 @@ public class CompetencesJDBCTemplate {
 			souscompetence.setId(Integer.parseInt(String.valueOf(row.get("id"))));
 			souscompetence.setSous_competences((String)row.get("sous_competences"));
 			souscompetence.setCompetences_id((int) row.get("competences_id"));
+			souscompetence.setSous_competences((String)row.get("B"));
+			souscompetence.setSous_competences((String)row.get("I"));
+			souscompetence.setSous_competences((String)row.get("M"));
+			souscompetence.setSous_competences((String)row.get("E"));
 			
 			souscompetences.add(souscompetence);
 		}
