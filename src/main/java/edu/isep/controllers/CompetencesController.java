@@ -35,6 +35,7 @@ public class CompetencesController {
 
 		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Victorien/git/GAPP2/src/main/java/edu/isep/gapp/Bean.xml");
 
+
 		c = new HashMap<Integer, Competences>();
 		sc = new HashMap<Integer, SousCompetences>();
 		
@@ -62,6 +63,42 @@ public class CompetencesController {
 		return "AccueilRespo";
 	}
 	
+	@RequestMapping(value = "/deletefamille", method = RequestMethod.POST)
+	public String deletefamille(Competences comp,Model model)
+	{
+		c.put(comp.getId(),comp);
+		dao.deleteCompetence(comp.getId());
+		
+		List<Competences> allcompetences = dao.allCompetences();
+		model.addAttribute("allcompetences", allcompetences);
+		
+		List<SousCompetences> allsouscompetences = dao.allSousCompetences();
+		model.addAttribute("allsouscompetences", allsouscompetences);
+		
+		
+		return "AccueilRespo";
+	}	
+	
+	
+	@RequestMapping(value = "/deletecompetence", method = RequestMethod.POST)
+	public String deletecompetence(SousCompetences souscomp,Model model){
+		sc.put(souscomp.getId(), souscomp);
+		dao.deleteSousCompetence(souscomp.getId());
+		model.addAttribute("souscomp", souscomp);
+
+		List<Competences> allcompetences = dao.allCompetences();
+		model.addAttribute("allcompetences", allcompetences);
+		
+		List<SousCompetences> allsouscompetences = dao.allSousCompetences();
+		model.addAttribute("allsouscompetences", allsouscompetences);
+		
+		
+		
+		return "AccueilRespo";
+	}	
+	
+		
+	
 	@RequestMapping(value="/addfamille",method = RequestMethod.POST)
 	public String addfamille(Competences comp,Model model){
 		c.put(comp.getId(), comp);
@@ -75,6 +112,19 @@ public class CompetencesController {
 		
 		return "AccueilRespo";
 	}
+
+	@RequestMapping(value="/updatefamille",method = RequestMethod.POST)
+	public String updateFamille(Competences comp,Model model){
+		dao.updateCompetence(comp);
+		
+		List<Competences> allcompetences = dao.allCompetences();
+		model.addAttribute("allcompetences", allcompetences);
+		
+		List<SousCompetences> allsouscompetences = dao.allSousCompetences();
+		model.addAttribute("allsouscompetences", allsouscompetences);
+		
+		return "AccueilRespo";
+	}	
 	
 	@RequestMapping(value = "/addcompetence", method = RequestMethod.GET)
 	public String viewcompetences(Model model)

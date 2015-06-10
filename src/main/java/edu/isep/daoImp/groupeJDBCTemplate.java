@@ -72,9 +72,9 @@ public class groupeJDBCTemplate {
 	}
 
 //	Supprimer un groupe
-	public void deleteGroupe(Groupe groupe){
+	public void deleteGroupe(String NomGroupe){
 		String sql = "DELETE FROM groupes WHERE nom = ?";
-		jdbcTemplateObject.update(sql,new Object[]{groupe.getNom()});
+		jdbcTemplateObject.update(sql,new Object[]{NomGroupe});
 		return;
 	}
 	
