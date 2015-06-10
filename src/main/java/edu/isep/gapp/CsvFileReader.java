@@ -1,34 +1,26 @@
-package edu.isep.daoImp;
+package edu.isep.gapp;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import javax.sql.DataSource;
-import org.springframework.jdbc.core.JdbcTemplate;
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.isep.beans.User;
 
-public class UserJDBCTemplate{
+public class CsvFileReader {
 	
-	private DataSource datasource;
-	private JdbcTemplate jdbcTemplateObject;
+	
 	private static final String COMMA_DELIMITER = ";";
 	private static final int STUDENT_LNAME_IDX = 0;
 	private static final int STUDENT_FNAME_IDX = 1;
 	
-	public void setDataSource(DataSource dataSource){
-		this.datasource = dataSource;
-		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
-	}
 	
-	public void insertUser(User user){
-		String sql = "INSERT INTO users(lastname,firstname) VALUES(?,?)";
-		jdbcTemplateObject.update(sql,new Object[]{user.getLastname(),user.getFirstname()});
-		return;
-	}
-	public void readCsvFile(String fileName) {
+	public List<User> readCsvFile(String fileName) {
 
 		BufferedReader fileReader = null;
-		
+		List users = new ArrayList();
 
         try {
         	
@@ -40,11 +32,11 @@ public class UserJDBCTemplate{
             while ((line = fileReader.readLine()) != null) {
                
                 String[] tokens = line.split(COMMA_DELIMITER);
-                if(tokens.length > 0) {
+                if (tokens.length > 0) {
                 	User user = new User();
                 	user.setLastname(tokens[STUDENT_LNAME_IDX]);
                 	user.setFirstname(tokens[STUDENT_FNAME_IDX]);
-                	insertUser(user);
+                	users.add(user);
 				}
             }
             
@@ -60,10 +52,9 @@ public class UserJDBCTemplate{
                 e.printStackTrace();
             }
         }
+		return users;
 
 	}
 	
-	
-	
-	
+
 }
