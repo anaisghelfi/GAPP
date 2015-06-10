@@ -45,6 +45,33 @@ public class elevesJDBCTemplate {
 		return eleves;
 	}
 	
+//	fonction qui retourne une liste d'eleve avec nom en parametre
+	public List<Eleve> elevesParNom(String nom){
+		String sql = "SELECT * FROM eleves where nom LIKE ?";
+		
+		ArrayList<Eleve> eleves =  new ArrayList<Eleve>();
+		
+		List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql, new Object[]{nom});
+		
+		for (Map row : rows) {
+			Eleve eleve =  new Eleve();
+			
+			eleve.setId(Integer.parseInt(String.valueOf(row.get("id"))));
+			eleve.setNom((String)row.get("nom"));
+			eleve.setPrenom((String)row.get("prenom"));
+			eleve.setMail((String)row.get("mail"));
+			eleve.setPromo((String)row.get("promo"));
+			eleve.setGroupe((String)row.get("groupe"));
+			eleve.setNote(Integer.parseInt(String.valueOf(row.get("note"))));
+			
+			eleves.add(eleve);
+		}
+
+		return eleves;
+	}
+	
+	
+	
 //	fonction pour selectionner les élèves qui n'ont pas de groupe
 	
 //	fonction pour selectionner les élèves qui ont un groupe

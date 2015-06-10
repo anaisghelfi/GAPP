@@ -6422,3 +6422,11 @@ body.skin-3 {
     display: none;
   }
 }
+.blueCompetence {
+	background-color: rgba(52, 152, 219, 0.77);
+	padding-left: 7px;
+	color: white;
+	border-radius: 4px;
+	margin-left: 14px;
+	margin-bottom:5px;
+}

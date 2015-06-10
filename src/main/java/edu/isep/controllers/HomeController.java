@@ -27,7 +27,9 @@ public class HomeController {
 		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/brandonemartins/Documents/A2/Web_Techno/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
 //		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Ana�s/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
 
-		
+
+//		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Victorien/git/GAPP2/src/main/java/edu/isep/gapp/Bean.xml");
+
 	}
 	
 	@RequestMapping(value = "/")
@@ -63,7 +65,9 @@ public class HomeController {
 			}
 			
 		} catch(Exception e) {
-			System.out.println("utilisateur non trouv� !");
+
+			System.out.println("utilisateur non trouvé !");
+
 			return "home";
 		}
 		return "home";

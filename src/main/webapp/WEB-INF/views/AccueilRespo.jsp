@@ -113,6 +113,8 @@
                                 Ajouter une famille de compétences
                             </button></br></br>
 
+<!-- Pop up pour ajouter une nouvelle famille -->
+
                             <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog">
                                 <div class="modal-content animated bounceInRight">
@@ -123,19 +125,43 @@
                                            <form method="POST" action="addfamille">
                                              <div class='form-group'>
                                                 <label>Nom</label>
-                                                <input type='text' name="famille" class='form-control' placeholder='Nom de la famille' />
+                                                <input type='text' name="famille" id="addfamille" class='form-control' placeholder='Nom de la famille' />
                                             </div>
                                             <div class='form-group'>
                                                 <label>Coefficient</label>
-                                                <input type='text' name="coefficient" class='form-control' placeholder='Coefficient' />
+                                                <input type='text'id="addcoefficient" name="coefficient" class='form-control' placeholder='Coefficient' />
                                             </div>
                                         </div>
-                                        <div class="modal-body">
+
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-white" data-dismiss="modal">Fermer</button>
+                                            <button type="submit" onclick="return ajouterfamille()" class="btn btn-primary">Sauvegarder</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            
+<!-- Pop up pour la MAJ d'une famille de compétence -->
+                            <div class="modal inmodal" id="myModalUpdateFamille" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content animated bounceInRight">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <i class="fa fa-laptop modal-icon"></i>
+                                            <h4 class="modal-title">Editer une famille de compétences</h4>
+                                           <form method="POST" action="updatefamille">
+                                             <div class='form-group'>
+                                                <input type='hidden' name="id" id='idfamille' class='form-control' />
+                                                <label>Nom</label>
+                                                <input type='text' name="famille" id='famillename' class='form-control' placeholder='Nom de la famille' />
+                                            </div>
                                             <div class='form-group'>
-                                                <label>Définition</label>
-                                                <textarea class='form-control' placeholder='Définition'></textarea>
+                                                <label>Coefficient</label>
+                                                <input type='text' name="coefficient" id='coefficientfamille' class='form-control' placeholder='Coefficient' />
                                             </div>
                                         </div>
+
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-white" data-dismiss="modal">Fermer</button>
                                             <button type="submit" class="btn btn-primary">Sauvegarder</button>
@@ -143,7 +169,7 @@
                                         </form>
                                     </div>
                                 </div>
-                            </div>
+                            </div>                            
                             
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">
                                 Ajouter une compétences
@@ -158,7 +184,7 @@
                                              <form method="POST" action="addcompetence">
                                              <div class='form-group'>
                                                 <label>Nom</label>
-                                                <input name="sous_competences" type='text' class='form-control' placeholder='Nom de la famille' />
+                                                <input name="sous_competences" type='text' id="addsouscompetence" class='form-control' placeholder='Nom de la compétence' />
                                             </div>
                                             <div class='form-group'>
                                                 <label>Famille</label>
@@ -174,14 +200,23 @@
 											                                            
                                         </div>
                                         <div class="modal-body">
+                                        	<h3 style='text-align:center'>Niveaux associés</h4>
                                             <div class='form-group'>
-                                                <label>Définition</label>
-                                                <textarea class='form-control' placeholder='Définition'></textarea>
+                                                <input class='form-control' name="B" placeholder='B'></input>
                                             </div>
+                                            <div class='form-group'>
+                                                <input class='form-control' name="I" placeholder='I'></input>
+                                            </div>
+                                            <div class='form-group'>
+                                                <input class='form-control' name="M" placeholder='M'></input>
+                                            </div>
+                                            <div class='form-group'>
+                                                <input class='form-control' name="E" placeholder='E'></input>
+                                            </div>                                                                                                                                    
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-white" data-dismiss="modal">Fermer</button>
-                                            <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                                            <button type="submit" onclick="return ajouterCompetence()" class="btn btn-primary">Sauvegarder</button>
                                         </div>
                                         </form>
                                     </div>
@@ -199,20 +234,17 @@
 										<div style="margin-bottom:6px" class="panel panel-primary">
 											<div class="panel-heading">
 	                                            <h5 class="panel-title">
-	                                                <a data-toggle="collapse" data-parent="#accordion" href="#<c:out value="${allcompetences.id}"/>"><c:out value="${allcompetences.famille}"/><i style='float:right; margin:5px' <c:out value="${allcompetences.id}"/>  type="submit" class="fa fa-trash"></i><i style='float:right;margin:5px' class="fa fa-pencil"></i></a>
+	                                                <a data-toggle="collapse" data-parent="#accordion" href="#<c:out value="${allcompetences.id}"/>"><c:out value="${allcompetences.famille}"/> (<c:out value="${allcompetences.coefficient}"/>)<i onclick="dramModalConfirm('<c:out value="${allcompetences.id}"/>','supprimerFamille','<c:out value="${allcompetences.famille}"/>','deletefamille')" style='float:right; margin:5px' <c:out value="${allcompetences.id}"/>  type="submit" class="fa fa-trash"></i><i style='float:right;margin:5px' onclick="update('famille','<c:out value="${allcompetences.id}"/>','<c:out value="${allcompetences.famille}"/>','<c:out value="${allcompetences.coefficient}"/>')" data-toggle="modal" data-target="#myModalUpdateFamille" class="fa fa-pencil"></i></a>
 	                                            </h5>
 	                                        </div>
 										</div>
 										
 										<div id="<c:out value="${allcompetences.id}"/>" class="panel-collapse collapse in">
-                                            <div class="panel-body">
 			                                   	<c:forEach var="allsouscompetences" items="${allsouscompetences}">
 													<c:if test="${allsouscompetences.competences_id == allcompetences.id}">
-														<li><c:out value="${allsouscompetences.sous_competences}"/></li>
+														<div class='blueCompetence' style="height:25px"><c:out value="${allsouscompetences.sous_competences}"/><i onclick="dramModalConfirm('<c:out value="${allsouscompetences.id}"/>','supprimerCompetence','<c:out value="${allsouscompetences.sous_competences}"/>','deletecompetence')" style='float:right;cursor:pointer; margin:5px' <c:out value="${allsouscompetences.id}"/>  type="submit" class="fa fa-trash"></i><i style='float:right;margin:5px;cursor:pointer' class="fa fa-pencil"></i></div>
 													</c:if>
-												</c:forEach> 
-							
-                                            </div>
+												</c:forEach> 							
                                         </div>
 									</c:forEach> 
                                     </form>                              

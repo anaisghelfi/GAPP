@@ -38,7 +38,6 @@ public class DeadlineJDBCTemplate {
 	
 	
 	
-//	Récupérer tous les groupes
 	public List<Deadline> allDeadline(){
 		String sql = "SELECT * FROM deadlines";
 		
