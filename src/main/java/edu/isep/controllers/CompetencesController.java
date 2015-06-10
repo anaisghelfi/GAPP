@@ -33,7 +33,7 @@ public class CompetencesController {
 	
 	public CompetencesController(){
 
-		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Victorien/git/GAPP2/src/main/java/edu/isep/gapp/Bean.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
 
 
 		c = new HashMap<Integer, Competences>();
