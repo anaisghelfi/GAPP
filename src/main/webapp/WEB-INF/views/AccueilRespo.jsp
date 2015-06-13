@@ -164,16 +164,17 @@
 
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-white" data-dismiss="modal">Fermer</button>
-                                            <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                                            <button type="submit" onclick="return updatefamille()" class="btn btn-primary">Sauvegarder</button>
                                         </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>                            
                             
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">
+                            <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#myModal2">
                                 Ajouter une compétences
                             </button>
+                            
                             <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog">
                                 <div class="modal-content animated bounceInRight">
@@ -216,12 +217,65 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-white" data-dismiss="modal">Fermer</button>
-                                            <button type="submit" onclick="return ajouterCompetence()" class="btn btn-primary">Sauvegarder</button>
+                                            <button type="submit" onclick="return ajoutercompetence()" class="btn btn-primary">Sauvegarder</button>
                                         </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
+                            
+        
+<!-- MODAL UPDATE COMPETENCES -->
+                            <div class="modal inmodal" id="myModalUpdateCompetences" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content animated bounceInRight">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <i class="fa fa-laptop modal-icon"></i>
+                                            <h4 class="modal-title">Editer une compétence</h4>
+                                             <form method="POST" action="updatecompetence">
+                                             <div class='form-group'>
+                                                <label>Nom</label>
+                                                <input name="sous_competences" type='text' id="updatesouscompetence" class='form-control' placeholder='Nom de la compétence' />
+                                            </div>
+                                            <input type='hidden' name="id" id='idsouscomp' class='form-control' />
+                                            <div class='form-group'>
+                                                <label>Famille</label>
+                                                 <select name="competences_id" id="updatecompfamille" class='form-control' >
+                                                    <optgroup label='Familles'>
+											 			<c:forEach var="allcompetences" items="${allcompetences}">
+															<option value="<c:out value="${allcompetences.id}"/>"><c:out value="${allcompetences.famille}"/></option>
+														</c:forEach> 
+                                                    </optgroup>
+                                                </select> 
+                                            </div>
+               
+											                                            
+                                        </div>
+                                        <div class="modal-body">
+                                        	<h3 style='text-align:center'>Niveaux associés</h4>
+                                            <div class='form-group'>
+                                                <input class='form-control' id="updateB" name="B" placeholder='B'></input>
+                                            </div>
+                                            <div class='form-group'>
+                                                <input class='form-control' id="updateI" name="I" placeholder='I'></input>
+                                            </div>
+                                            <div class='form-group'>
+                                                <input class='form-control' id="updateM" name="M" placeholder='M'></input>
+                                            </div>
+                                            <div class='form-group'>
+                                                <input class='form-control' id="updateE" name="E" placeholder='E'></input>
+                                            </div>                                                                                                                                    
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-white" data-dismiss="modal">Fermer</button>
+                                            <button type="submit" onclick="return ajoutersousCompetence()" class="btn btn-primary">Sauvegarder</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>        
+                            
                             </br>
 
                             
@@ -242,7 +296,11 @@
 										<div id="<c:out value="${allcompetences.id}"/>" class="panel-collapse collapse in">
 			                                   	<c:forEach var="allsouscompetences" items="${allsouscompetences}">
 													<c:if test="${allsouscompetences.competences_id == allcompetences.id}">
-														<div class='blueCompetence' style="height:25px"><c:out value="${allsouscompetences.sous_competences}"/><i onclick="dramModalConfirm('<c:out value="${allsouscompetences.id}"/>','supprimerCompetence','<c:out value="${allsouscompetences.sous_competences}"/>','deletecompetence')" style='float:right;cursor:pointer; margin:5px' <c:out value="${allsouscompetences.id}"/>  type="submit" class="fa fa-trash"></i><i style='float:right;margin:5px;cursor:pointer' class="fa fa-pencil"></i></div>
+														<div class='blueCompetence' style="height:25px"><c:out value="${allsouscompetences.sous_competences}"/><i onclick="dramModalConfirm('<c:out value="${allsouscompetences.id}"/>','supprimerCompetence','<c:out value="${allsouscompetences.sous_competences}"/>','deletecompetence')" style='float:right;cursor:pointer; margin:5px' type="submit" class="fa fa-trash"></i><i style='float:right;margin:5px;cursor:pointer' onclick="update('competence','<c:out value="${allsouscompetences.sous_competences}"/>','<c:out value="${allsouscompetences.competences_id}"/>','<c:out value="${allsouscompetences.getB()}"/>','<c:out value="${allsouscompetences.getI()}"/>','<c:out value="${allsouscompetences.getM()}"/>','<c:out value="${allsouscompetences.getE()}"/>','<c:out value="${allsouscompetences.id}"/>')" data-toggle="modal" data-target="#myModalUpdateCompetences"  class="fa fa-pencil"></i></div>
+														<li style="list-style-type:none;margin-left:30px">B : <c:out value="${allsouscompetences.getB()}"/></li>
+														<li style="list-style-type:none;margin-left:30px">I : <c:out value="${allsouscompetences.getI()}"/></li>
+														<li style="list-style-type:none;margin-left:30px">M : <c:out value="${allsouscompetences.getM()}"/></li>
+														<li style="list-style-type:none;margin-left:30px">E : <c:out value="${allsouscompetences.getE()}"/></li>
 													</c:if>
 												</c:forEach> 							
                                         </div>
@@ -264,47 +322,52 @@
                         <div class="ibox-content">
                             <h4>
                             	<c:forEach var="allcompetences" items="${allcompetences}">
-                                	<span class='label label-primary'><c:out value="${allcompetences.famille}"/></span>
+                                	<span style="cursor:pointer" name="showGrille-<c:out value="${allcompetences.id}"/>" class='label label-primary'><c:out value="${allcompetences.famille}"/></span>
                             	</c:forEach>
                             </h4>
-
-                            <table class='table table-bordered'>
+	
+							<c:forEach var="allcompetences" items="${allcompetences}">
+                            <table  name="grille-<c:out value="${allcompetences.id}"/>" class='table table-bordered'>
                                 <thead>
-                                    <caption style="background-color: #1AB394;color: #fff;text-align: center;">Travail en groupe</caption>
+                                    <caption style="background-color: #1AB394;color: #fff;text-align: center;"><c:out value="${allcompetences.famille}"/></caption>
                                     <tr>
                                         <td>Compétence</td>
                                         <td>Niveau</td>
-                                        <td>Observation
-                                        </td>
+
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Travailler en équipe</td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>B : animer en maintenant la cohésion de l'équipe et un minimum d'intérêt</td>
-                                        <td></td>
+                                <c:forEach var="allsouscompetences" items="${allsouscompetences}">
+									<c:if test="${allsouscompetences.competences_id == allcompetences.id}">
+                                   
+                                    <tr name="affichersouscomp-<c:out value="${allsouscompetences.competences_id}"/>-<c:out value="${allsouscompetences.id}"/>" style="cursor:pointer" class="active">
+                                        <td><c:out value="${allsouscompetences.sous_competences}"/></td>
                                         <td></td>
                                     </tr>
-                                    <tr>
-                                        <td>I : et motiver </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>M : et faire évoluer </td>
-                                        <td></td>
+                                    
+                                    
+                                    <tr name="souscompgrille-<c:out value="${allsouscompetences.competences_id}"/>-<c:out value="${allsouscompetences.id}"/>">
+                                        <td>B : <c:out value="${allsouscompetences.getB()}"/></td>
                                         <td></td>
                                     </tr>
-                                        <td>E : et jouer le rôle de leader</td>
-                                        <td></td>
+                                    <tr name="souscompgrille-<c:out value="${allsouscompetences.competences_id}"/>-<c:out value="${allsouscompetences.id}"/>">
+                                        <td>I : <c:out value="${allsouscompetences.getI()}"/> </td>
                                         <td></td>
                                     </tr>
+                                    <tr name="souscompgrille-<c:out value="${allsouscompetences.competences_id}"/>-<c:out value="${allsouscompetences.id}"/>">
+                                        <td>M : <c:out value="${allsouscompetences.getM()}"/> </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr name="souscompgrille-<c:out value="${allsouscompetences.competences_id}"/>-<c:out value="${allsouscompetences.id}"/>">
+                                        <td>E : <c:out value="${allsouscompetences.getE()}"/></td>
+                                        <td></td>
+                                    </tr>
+                                    
+                                    </c:if>
+								</c:forEach> 
                                 </tbody>
                             </table>
+                            </c:forEach>
 
                         </div>
                     </div>
@@ -328,6 +391,7 @@
 
 
 
+
     <!-- Mainly scripts -->
     <script src="<c:url value="/resources/js/jquery-2.1.1.js" />"></script>
    <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
@@ -338,8 +402,21 @@
     <script src="<c:url value="/resources/js/GAPP.js" />"></script>
    <script src="<c:url value="/resources/js/plugins/pace/pace.min.js" />"></script>
 
-
-
+<script>
+//Afficher que la grille N°1
+ $(document).ready(function(){
+	 var span  = $("table[name^='grille-']");
+	 for(var i =1; i<span.length;i++) {
+		 $(span[i]).hide();
+	 }
+	 
+	$("[name^='souscompgrille-']").hide();
+	 
+   });
+  
+   
+ 
+</script>
 
 
 </body>
