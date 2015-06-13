@@ -2,9 +2,8 @@ package edu.isep.beans;
 
 public class User {
 	private int id;
-	private String user;
-	private String password;
-	private int type;
+	private String lastname;
+	private String firstname;
 	
 	public int getId() {
 		return id;
@@ -12,23 +11,18 @@ public class User {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getUser() {
-		return user;
+	public String getLastname() {
+		return lastname;
 	}
-	public void setUser(String user) {
-		this.user = user;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
-	public String getPassword() {
-		return password;
+	public String getFirstname() {
+		return firstname;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
-	public int getType() {
-		return type;
-	}
-	public void setType(int type) {
-		this.type = type;
-	}
+	
 	
 }

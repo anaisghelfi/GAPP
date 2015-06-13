@@ -24,8 +24,10 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	public HomeController(){
-
-		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
+//		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/brandonemartins/Documents/A2/Web_Techno/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
+//		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Anaï¿½s/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
+//		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Victorien/git/GAPP2/src/main/java/edu/isep/gapp/Bean.xml");
+	ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
 
 		
 	}
@@ -35,8 +37,9 @@ public class HomeController {
 		logger.info("Page d'accueil");
 		return "home";
 	}
+	
 	@RequestMapping(value = "/connexion",method = RequestMethod.POST)
-	public String connexion(HttpServletRequest request,HttpSession session,@RequestParam("login") String login,@RequestParam("password") String password){
+	public String connexion(HttpServletRequest request ,HttpSession session, @RequestParam("login") String login,@RequestParam("password") String password){
 		
 		
 		try {
@@ -54,6 +57,7 @@ public class HomeController {
 					 session.setAttribute("nom", newUser.getNomFamille());
 					 session.setAttribute("prenom", newUser.getPrenom());
 					 session.setAttribute("type", newUser.getType());
+					 
 
 					 return "accueilEleve";
 					 
@@ -63,7 +67,9 @@ public class HomeController {
 			}
 			
 		} catch(Exception e) {
-			System.out.println("utilisateur non trouvé !");
+
+			System.out.println("utilisateur non trouvÃ© !");
+
 			return "home";
 		}
 		return "home";

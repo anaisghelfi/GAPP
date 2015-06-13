@@ -37,8 +37,16 @@ public class AttribGroupeController {
 	public AttribGroupeController(){
 
 
+
 		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
 
+		//ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/brandonemartins/Documents/A2/Web_Techno/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
+
+		//		Declaration des DAO et variables
+		daoEleve = (elevesJDBCTemplate) context.getBean("elevesDAO");
+		e = new HashMap<Integer, Eleve>();
+		daoGroupe = (groupeJDBCTemplate) context.getBean("groupeDAO");
+		g = new HashMap<Integer, Groupe>();
 
 		
 //		Declaration des DAO et variables
@@ -85,7 +93,7 @@ public class AttribGroupeController {
 	{
 //		VOIR COMMENT METTRE LE TUTEUR ID
 //		Pour ins�rer un groupe
-		groupe.setTuteur_id(1);
+//		groupe.setTuteur_id(1);
 		g.put(groupe.getId(), groupe);
 		daoGroupe.addGroup(groupe);
 		
@@ -102,34 +110,12 @@ public class AttribGroupeController {
 		return "attribGroupe";
 	}
 	
-////	Chemin pour traiter la suppression d'un groupe
-//	@RequestMapping(value = "/deleteGroupe", method = RequestMethod.POST)
-//	public String delete(Groupe groupe, Model model)
-//	{
-//		
-////		g.put(groupe.getId(), groupe);
-//		daoGroupe.deleteGroupe(groupe);
-//		
-//		List<Groupe> groupes = daoGroupe.allGroupes();
-//		model.addAttribute("groupes", groupes);
-//		
-////		Pour récupérer tous les sous groupes
-//		List<SousGroupe> sousGroupes = daoSousGroupe.allSousGroupes();
-//		for( SousGroupe sg : sousGroupes){
-//			sg.setGroupe(daoGroupe.getGroupe(sg.getGroupes_id()));
-//		}
-//		model.addAttribute("sousGroupes", sousGroupes);
-//		
-//		return "attribGroupe";
-//	}
-	
 //	Chemin pour traiter la suppression d'un groupe
-	@RequestMapping(value = "/deleteGroupe", method = RequestMethod.GET)
-	public String delete(/*Groupe groupe,*/ Model model, HttpServletRequest request, @RequestParam("NomGroupe") String NomGroupe)
-	{
-		
-//		g.put(groupe.getId(), groupe);
-		daoGroupe.deleteGroupe(NomGroupe);
+	@RequestMapping(value = "/deleteGroupe", method = RequestMethod.POST)
+	public String delete(Groupe groupe, Model model)
+	{		
+		g.put(groupe.getId(), groupe);
+		daoGroupe.deleteGroupe(groupe.getNom());
 		
 		List<Groupe> groupes = daoGroupe.allGroupes();
 		model.addAttribute("groupes", groupes);
