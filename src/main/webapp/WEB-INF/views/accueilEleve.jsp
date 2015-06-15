@@ -19,16 +19,16 @@
      <div class="wrapper wrapper-content animated fadeInRight">
        <div class="row">
        <h1 style="text-align:center">Mon profil</h1>
-	       <div class="col-lg-4" style="text-align:center">
+	       <div class="col-lg-3" style="text-align:center">
 	       <h2>Absences</h2>
 	       		<canvas id="doughnutChart" height="420" width="900" style="width: 450px; height: 210px;"></canvas>
 	       </div>
-	        <div class="col-lg-4" style="text-align:center">
+	        <div class="col-lg-6" style="text-align:center">
 	       <h2>Cours</h2>
 			<div id="calendar" class="fc fc-ltr fc-unthemed">
 			</div>	
 		</div>
-	        <div class="col-lg-4" style="text-align:center">
+	        <div class="col-lg-3" style="text-align:center">
 	       <h2>Tuteur</h2>
 	       	<p>Nom Prénom</p>
 	       	<p>E-mail</p>
@@ -98,15 +98,9 @@ $(document).ready(function() {
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         },
-        editable: true,
-        droppable: true, // this allows things to be dropped onto the calendar
-        drop: function() {
-            // is the "remove after drop" checkbox checked?
-            if ($('#drop-remove').is(':checked')) {
-                // if so, remove the element from the "Draggable Events" list
-                $(this).remove();
-            }
-        },
+        editable: false,
+        droppable: false, // this allows things to be dropped onto the calendar
+
         events: [
             {
                 title: 'All Day Event',
