@@ -20,19 +20,19 @@
        <div class="row">
        <h1 style="text-align:center">Mon profil</h1>
 	       <div class="col-lg-3" style="text-align:center">
-	       <h2>Absences</h2>
-	       		<canvas id="doughnutChart" height="420" width="900" style="width: 450px; height: 210px;"></canvas>
+	       		<h2>Tuteur</h2>
+		       	<p>Nom Prénom</p>
+		       	<p>E-mail</p>
+		       	<p>Remarques tuteur :</p>
 	       </div>
 	        <div class="col-lg-6" style="text-align:center">
-	       <h2>Cours</h2>
-			<div id="calendar" class="fc fc-ltr fc-unthemed">
-			</div>	
-		</div>
+	       		<h2>Cours</h2>
+				<div id="calendar" class="fc fc-ltr fc-unthemed">
+				</div>	
+			</div>
 	        <div class="col-lg-3" style="text-align:center">
-	       <h2>Tuteur</h2>
-	       	<p>Nom Prénom</p>
-	       	<p>E-mail</p>
-	       	<p>Remarques tuteur :</p>
+	       		<h2>Absences</h2>
+	       		<canvas id="doughnutChart" height="420" width="900" style="width: 450px; height: 210px;"></canvas>
 	       </div>
        </div>
      </div>
