@@ -1,13 +1,18 @@
 package edu.isep.controllers;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,15 +31,19 @@ public class AjoutDeadlineController {
 	public AjoutDeadlineController(){
 
 
-		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Anaïs/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
+//		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Anaï¿½s/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
 //		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
-//		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Victorien/git/GAPP2/src/main/java/edu/isep/gapp/Bean.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Victorien/git/GAPP2/src/main/java/edu/isep/gapp/Bean.xml");
 		daoDeadline = (DeadlineJDBCTemplate) context.getBean("deadlineDAO");
 		u = new HashMap<Integer, Deadline>();	
 		d = new HashMap<String, Deadline>();	
 
 	}
-	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	}
 	@RequestMapping(value="/ajoutDeadline",method = RequestMethod.GET)
 	public String Exemple(Model model){
 		List<Deadline> deadlines = daoDeadline.allDeadline();
