@@ -410,6 +410,17 @@ function verifCoeff(id) {
 
 //----Grille de compétences
 
+//Gérer grille de compétences dynamique
+
+$("div[name^='gereafficher-']").on('click', function(e) {
+	e.preventDefault();
+	console.log('click');
+	var idfamille = $(this).attr('name').split('-')[1];
+	var idcomp = $(this).attr('name').split('-')[2];
+	$("[name='geredisplay-"+idfamille+"-"+idcomp+"']").toggle(200);
+})
+
+
 //Grille de compétences dynamiques
 $("span[name^='showGrille-']").on('click', function(e) {
 	e.preventDefault();
@@ -418,7 +429,6 @@ $("span[name^='showGrille-']").on('click', function(e) {
 	
 	$("table[name^='grille-']").hide();
 	$("table[name='grille-"+idFamille+"']").fadeIn(200);
-	
 })
 
 $("[name^='affichersouscomp-']").on('click', function(e) {

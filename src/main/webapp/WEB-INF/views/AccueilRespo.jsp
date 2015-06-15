@@ -211,11 +211,11 @@
 										<div id="<c:out value="${allcompetences.id}"/>" class="panel-collapse collapse in">
 			                                   	<c:forEach var="allsouscompetences" items="${allsouscompetences}">
 													<c:if test="${allsouscompetences.competences_id == allcompetences.id}">
-														<div class='blueCompetence' style="height:25px"><c:out value="${allsouscompetences.sous_competences}"/><i onclick="dramModalConfirm('<c:out value="${allsouscompetences.id}"/>','supprimerCompetence','<c:out value="${allsouscompetences.sous_competences}"/>','deletecompetence')" style='float:right;cursor:pointer; margin:5px' type="submit" class="fa fa-trash"></i><i style='float:right;margin:5px;cursor:pointer' onclick="update('competence','<c:out value="${allsouscompetences.sous_competences}"/>','<c:out value="${allsouscompetences.competences_id}"/>','<c:out value="${allsouscompetences.getB()}"/>','<c:out value="${allsouscompetences.getI()}"/>','<c:out value="${allsouscompetences.getM()}"/>','<c:out value="${allsouscompetences.getE()}"/>','<c:out value="${allsouscompetences.id}"/>')" data-toggle="modal" data-target="#myModalUpdateCompetences"  class="fa fa-pencil"></i></div>
-														<li style="list-style-type:none;margin-left:30px">B : <c:out value="${allsouscompetences.getB()}"/></li>
-														<li style="list-style-type:none;margin-left:30px">I : <c:out value="${allsouscompetences.getI()}"/></li>
-														<li style="list-style-type:none;margin-left:30px">M : <c:out value="${allsouscompetences.getM()}"/></li>
-														<li style="list-style-type:none;margin-left:30px">E : <c:out value="${allsouscompetences.getE()}"/></li>
+														<div name='gereafficher-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>' class='blueCompetence' style="height:25px"><c:out value="${allsouscompetences.sous_competences}"/><i onclick="dramModalConfirm('<c:out value="${allsouscompetences.id}"/>','supprimerCompetence','<c:out value="${allsouscompetences.sous_competences}"/>','deletecompetence')" style='float:right;cursor:pointer; margin:5px' type="submit" class="fa fa-trash"></i><i style='float:right;margin:5px;cursor:pointer' onclick="update('competence','<c:out value="${allsouscompetences.sous_competences}"/>','<c:out value="${allsouscompetences.competences_id}"/>','<c:out value="${allsouscompetences.getB()}"/>','<c:out value="${allsouscompetences.getI()}"/>','<c:out value="${allsouscompetences.getM()}"/>','<c:out value="${allsouscompetences.getE()}"/>','<c:out value="${allsouscompetences.id}"/>')" data-toggle="modal" data-target="#myModalUpdateCompetences"  class="fa fa-pencil"></i></div>
+														<li name="geredisplay-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>" style="list-style-type:none;margin-left:30px">B : <c:out value="${allsouscompetences.getB()}"/></li>
+														<li name="geredisplay-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>" style="list-style-type:none;margin-left:30px">I : <c:out value="${allsouscompetences.getI()}"/></li>
+														<li name="geredisplay-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>" style="list-style-type:none;margin-left:30px">M : <c:out value="${allsouscompetences.getM()}"/></li>
+														<li name="geredisplay-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>" style="list-style-type:none;margin-left:30px">E : <c:out value="${allsouscompetences.getE()}"/></li>
 													</c:if>
 												</c:forEach> 							
                                         </div>
@@ -293,5 +293,21 @@
 
         </div>
 <%@ include file="include/bas_de_page.jsp" %>
+
+<script>
+//Afficher que la grille N°1
+ $(document).ready(function(){
+	 var span  = $("table[name^='grille-']");
+	 for(var i =1; i<span.length;i++) {
+		 $(span[i]).hide();
+	 }
+	 
+	$("[name^='souscompgrille-']").hide();
+	$("li[name^='geredisplay-']").hide();
+   });
+  
+   
+ 
+</script>
 
 
