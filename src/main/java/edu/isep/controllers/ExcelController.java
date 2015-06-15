@@ -32,7 +32,7 @@ public class ExcelController {
 	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
 	public void addUser(User user, Model model){
 		
-		daoUser.readCsvFile("/Users/Victorien/git/GAPP2/Liste_groupe_APP_-_G7.csv");
+		daoUser.readCsvFile("/Users/Victorien/git/GAPP2/E1415_groupes APP S2.csv");
 		
 	}
 }
