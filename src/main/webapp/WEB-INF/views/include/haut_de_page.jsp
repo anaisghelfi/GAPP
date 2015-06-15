@@ -34,7 +34,7 @@
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a href="profile.html">Profil</a></li>
                             <li class="divider"></li>
-                            <li><a href="login.html">Déconnexion</a></li>
+                            <li><a href="deconnexion">Déconnexion</a></li>
                         </ul>
                     </div>
                     <div class="logo-element">
@@ -45,7 +45,7 @@
                     <a href="#"> <i class="fa fa-table"></i><span class="nav-label">Grille de compétences</span> </a>
                 </li>
                 <li>
-                    <a href="#"> <i class="fa fa-search"></i><span class="nav-label">Rechercher</span></a>
+                    <a href="/rechercheEleves"> <i class="fa fa-search"></i><span class="nav-label">Rechercher</span></a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-calendar"></i><span class="nav-label">Ajouter des deadlines</span></a>
@@ -76,7 +76,7 @@
         </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    <a href="login.html">
+                    <a href="deconnexion">
                         <i class="fa fa-sign-out"></i> Déconnexion
                     </a>
                 </li>
