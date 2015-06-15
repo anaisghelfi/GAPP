@@ -14,6 +14,8 @@
     <link href="<c:url value="/resources/css/plugins/toastr/toastr.min.css" />" rel="stylesheet" type="text/css" media="screen" />
     <link href="<c:url value="/resources/css/animate.css" />" rel="stylesheet" type="text/css" media="screen" />
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" type="text/css" media="screen" />
+    <link href="<c:url value="/resources/css/fullcalendar.css" />" rel="stylesheet" type="text/css" media="screen" />
+   
 
 </head>
 
