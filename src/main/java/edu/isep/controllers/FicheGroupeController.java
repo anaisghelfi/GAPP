@@ -12,23 +12,28 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import edu.isep.beans.Competences;
+import edu.isep.beans.Eleve;
 import edu.isep.beans.Groupe;
-import edu.isep.beans.SousCompetences;
 import edu.isep.beans.SousGroupe;
 import edu.isep.beans.User;
+import edu.isep.daoImp.SousGroupesJDBCTemplate;
+import edu.isep.daoImp.TuteurJDBCTemplate;
 import edu.isep.daoImp.elevesJDBCTemplate;
 
 
 @Controller
 public class FicheGroupeController {
+	
 	private elevesJDBCTemplate dao;
 
-	
+	private Map<Integer, Eleve> e;
+
+
 	
 	public FicheGroupeController(){
 
@@ -41,17 +46,21 @@ public class FicheGroupeController {
 
 		
 		dao = (elevesJDBCTemplate) context.getBean("elevesDAO");
-		
-
+		e = new HashMap<Integer, Eleve>();
 	
 	}
 
 	
 
-	@RequestMapping(value = "/ficheGroupe", method = RequestMethod.GET)
-	public String viewgroupe(Model model)
+	@RequestMapping(value = "/ficheGroupe/{numberGroup}", method = RequestMethod.GET)
+	public String getEleves(@PathVariable("numberGroup") String numberGroup, Model model) 
 	{
-
+		String groupeno = (String)numberGroup;
+//		Pour r√©cup√©rer tous les ÈlËves d'un groupe
+		List<Eleve> eleves = dao.elevesParGroupe((String)groupeno);
+		model.addAttribute("numerogroupe", groupeno);
+		model.addAttribute("alleleves", eleves);
+		
 		
 		
 		return "ficheGroupe";
@@ -60,3 +69,5 @@ public class FicheGroupeController {
 	
 	
 }
+
+

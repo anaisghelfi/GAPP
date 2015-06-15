@@ -12,7 +12,7 @@
                             <a>Tous les groupes</a>
                         </li>
                         <li class="active">
-                            <strong>Groupe </strong>
+                            <strong>Groupe <c:out value="${numerogroupe}"/></strong>
                         </li>
                     </ol>
                 </div>
@@ -30,7 +30,42 @@
                     	<h5>Elèves du groupe</h5>
                     </div>
                     <div class="ibox-content">
-						test
+ 						<table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Prénom</th>
+                                    <th>Code élève</th>
+                                    <th colspan="2">Séance du </th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th><span class="badge badge-primary">Présent</span></th>
+                                    <th><span class="badge badge-danger">Absent</span></th>
+                                </tr>                                
+                                </thead>
+                                <tbody>
+                               <form action="addAbsences" method='POST'> 
+			                   <c:forEach var="alleleves" items="${alleleves}">
+								<tr>	
+									<td><c:out value="${alleleves.nom}"/></td>
+									<td><c:out value="${alleleves.prenom}"/></td>
+									<td><c:out value="${alleleves.code_eleve}"/></td>
+									<td><input type="radio" name="absence<c:out value="${alleleves.id}"/>" value="présent-<c:out value="${alleleves.id}"/>"><br></td>
+									<td><input type="radio" name="absence<c:out value="${alleleves.id}"/>" value="absent-<c:out value="${alleleves.id}"/>"><br></td>
+								</tr>
+								</c:forEach> 	                                
+
+
+                                </tbody>
+                         </table>
+                         <div class='col-lg-9'></div>
+                         <div class="col-lg-3"><button type="submit" class="btn btn-w-m btn-success btn-sm">Valider</button>
+                         </form>
+                         </div>
+                            
                  
               
                 
@@ -41,50 +76,29 @@
     <div class="col-lg-4">        
     	<div class="ibox">
         	<div class="ibox-title">
-            	<h5>Visualisation des Groupes</h5>
+            	<h5>Informations Générales</h5>
             </div>
             <div class="ibox-content">
             	<h4>
-                	<c:forEach var="groupe" items="${groupes}">
-                    <span class='label label-primary'><c:out value="${groupe.nom}"/></span>
-                    </c:forEach>                            	                         
-                </h4> 
-					<c:forEach var="sousGroupe" items="${sousGroupes}">
-                    <table class="table table-bordered">
-                    	<thead>
-                        	<caption style="background-color: #1AB394;color: #fff;text-align: center;"><c:out value="${sousGroupe.nom}"></c:out></caption>
-	                        <tr>
-	                        	<th>Nom</th>
-	                            <th>Prénom</th>
-	                            <th>Mail</th>
-	                            <th>Note</th>
-	                        </tr>
-                        </thead>
-                                <!-- Faire un foreach avec les élèves dans le groupe -->
-                        <tbody>
-                        	<c:forEach var="eleve" items="${eleves}">
-                            	<c:if test="eleve.groupe == sousGroupe.nom">
-	                            <tr>
-	                               <td><c:out value="${eleve.nom}"></c:out></td>
-	                               <td><c:out value="${eleve.prenom}"></c:out></td>
-	                               <td><c:out value="${eleve.mail}"></c:out></td>
-	                               <td><c:out value="${eleve.note}"></c:out></td>
-	                            </tr>
-	                            </c:if>
-	                         </c:forEach>
-                         </tbody>
-                      </table>
-                      </c:forEach>
-                                
-                              
-                            
-
-                        </div>
-                    </div>
+					Grille de compétences                          	                         
+                </h4> </br>
+				
+				<button type="submit" class="btn btn-w-m btn-success">Remplir la grille de compétences</button>
+				</br></br></br>
+		
+            	<h4>
+					Remarques générales sur le groupe                          	                         
+                </h4> </br>
                 
-                </div> <!-- Fin du 2e col lg 6 -->          
-            </div>
-        </div>
+                <textarea style="width: 100%; height: 100px"></textarea>
+                
+                <button type="submit" class="btn btn-w-m btn-success btn-xs">Soumettre</button>
+             </div>
+       </div>
+                
+  	</div> <!-- Fin du 2e col lg 4 -->          
+  </div>
+</div>
                 
                 
                 

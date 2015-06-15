@@ -436,3 +436,8 @@ $("[name^='affichersouscomp-']").on('click', function(e) {
 	var idcomp = $(this).attr('name').split('-')[2];
 	$("[name='souscompgrille-"+idfamille+"-"+idcomp+"']").toggle(200);
 })
+
+//----------------------------------------------
+
+//-----Fiche élèves par le tuteur
+
