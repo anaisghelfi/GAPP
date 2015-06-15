@@ -24,7 +24,11 @@
 
     <!-- Custom and plugin javascript -->
     <script src="<c:url value="/resources/js/GAPP.js"/>"></script>
+    <script src="<c:url value="/resources/js/Chart.min.js"/>"></script>
+  
+    
     <script src="<c:url value="/resources/js/plugins/pace/pace.min.js"/>"></script>
+
 
 </body>
 
