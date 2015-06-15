@@ -26,10 +26,9 @@ public class HomeController {
 	public HomeController(){
 //		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/brandonemartins/Documents/A2/Web_Techno/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
 //		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Ana�s/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
-//		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Victorien/git/GAPP2/src/main/java/edu/isep/gapp/Bean.xml");
-	ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
-
-		
+		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Victorien/git/GAPP2/src/main/java/edu/isep/gapp/Bean.xml");
+//	ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
+				
 	}
 	
 	@RequestMapping(value = "/")
@@ -41,7 +40,13 @@ public class HomeController {
 	@RequestMapping(value = "/connexion",method = RequestMethod.POST)
 	public String connexion(HttpServletRequest request ,HttpSession session, @RequestParam("login") String login,@RequestParam("password") String password){
 		
-		
+		session = request.getSession();
+		 session.setAttribute("login", "vgauch");
+		 session.setAttribute("number", 7335);
+		 session.setAttribute("email", "victorien@gmail.com");
+		 session.setAttribute("nom", "Gauch");
+		 session.setAttribute("prenom", "Victorien");
+		 session.setAttribute("type", "eleve");
 		try {
 			LdapObject newUser = LdapAccess.LDAPget(login,password);
 

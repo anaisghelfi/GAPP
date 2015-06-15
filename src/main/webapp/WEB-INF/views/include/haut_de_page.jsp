@@ -29,12 +29,12 @@
                            <!--  <img alt="image" class="img-circle" src="img/profile_small.jpg" />-->
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Matthieu Manceny</strong>
-                             </span> <span class="text-muted text-xs block">Responsable d'APP <b class="caret"></b></span> </span> </a>
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><c:out value='${sessionScope.prenom} ' /><c:out value='${ sessionScope.nom}'/></strong>
+                             </span> <span class="text-muted text-xs block"><c:out value='${sessionScope.type }'/><b class="caret"></b></span> </span> </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="profile.html">Profil</a></li>
+                            <li><a href="accueilEleves">Profil</a></li>
                             <li class="divider"></li>
-                            <li><a href="login.html">Déconnexion</a></li>
+                            <li><a href="deconnexion">Déconnexion</a></li>
                         </ul>
                     </div>
                     <div class="logo-element">
@@ -45,16 +45,16 @@
                     <a href="#"> <i class="fa fa-table"></i><span class="nav-label">Grille de compétences</span> </a>
                 </li>
                 <li>
-                    <a href="#"> <i class="fa fa-search"></i><span class="nav-label">Rechercher</span></a>
+                    <a href="rechercheEleves"> <i class="fa fa-search"></i><span class="nav-label">Rechercher</span></a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-calendar"></i><span class="nav-label">Ajouter des deadlines</span></a>
+                    <a href="ajoutDeadline"><i class="fa fa-calendar"></i><span class="nav-label">Ajouter des deadlines</span></a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Attribuer les rôles </span></a>
                 </li>
                 <li>
-                    <a href="#"> <i class="fa fa-users"></i><span class="nav-label">Attribuer les groupes</span> </a>
+                    <a href="attribGroupe"> <i class="fa fa-users"></i><span class="nav-label">Attribuer les groupes</span> </a>
                 </li>
 
             </ul>
@@ -76,7 +76,7 @@
         </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    <a href="login.html">
+                    <a href="deconnexion">
                         <i class="fa fa-sign-out"></i> Déconnexion
                     </a>
                 </li>

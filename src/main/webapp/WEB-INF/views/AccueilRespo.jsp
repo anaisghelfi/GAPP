@@ -1,98 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Accueil responsable</title>
-
-	<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet" type="text/css" media="screen" />
-	<link href="<c:url value="/resources/fonts/css/font-awesome.css" />" rel="stylesheet" type="text/css" media="screen" />
-    <!-- Toastr style -->
-    <link href="<c:url value="/resources/css/plugins/toastr/toastr.min.css" />" rel="stylesheet" type="text/css" media="screen" />
-    <link href="<c:url value="/resources/css/animate.css" />" rel="stylesheet" type="text/css" media="screen" />
-    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" type="text/css" media="screen" />
-
-</head>
-
-
-<body>
-
-    <div id="wrapper">
-
-    <nav class="navbar-default navbar-static-side" role="navigation">
-        <div class="sidebar-collapse">
-            <ul class="nav" id="side-menu">
-                <li class="nav-header">
-                    <div class="dropdown profile-element"> <span>
-                           <!--  <img alt="image" class="img-circle" src="img/profile_small.jpg" />-->
-                             </span>
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Matthieu Manceny</strong>
-                             </span> <span class="text-muted text-xs block">Responsable d'APP <b class="caret"></b></span> </span> </a>
-                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="profile.html">Profil</a></li>
-                            <li class="divider"></li>
-                            <li><a href="login.html">DÃ©connexion</a></li>
-                        </ul>
-                    </div>
-                    <div class="logo-element">
-                        GAPP
-                    </div>
-                </li>
-                <li>
-                    <a href="#"> <i class="fa fa-table"></i><span class="nav-label">Grille de compÃ©tences</span> </a>
-                </li>
-                <li>
-                    <a href="#"> <i class="fa fa-search"></i><span class="nav-label">Rechercher</span></a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-calendar"></i><span class="nav-label">Ajouter des deadlines</span></a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Attribuer les rÃ´les </span></a>
-                </li>
-                <li>
-                    <a href="#"> <i class="fa fa-users"></i><span class="nav-label">Attribuer les groupes</span> </a>
-                </li>
-
-            </ul>
-
-        </div>
-    </nav>
-
-        <div id="page-wrapper" class="gray-bg">
-        <div class="row border-bottom">
-        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
-            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-            <form role="search" class="navbar-form-custom" action="search_results.html">
-                <div class="form-group">
-                        <h4 style="margin-top:20px; margin-left:15px">Bienvenue sur GAPP.</h4>
-                   
-                </div>
-            </form>
-        </div>
-            <ul class="nav navbar-top-links navbar-right">
-                <li>
-                    <a href="login.html">
-                        <i class="fa fa-sign-out"></i> DÃ©connexion
-                    </a>
-                </li>
-            </ul>
-
-        </nav>
-        </div>
+ <%@ include file="include/haut_de_page.jsp" %>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>Grille de compÃ©tences</h2>
+                    <h2>Grille de compétences</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="#">Accueil</a>
                         </li>
                         <li class="active">
-                            <strong>Grille de compÃ©tences</strong>
+                            <strong>Grille de compétences</strong>
                         </li>
                     </ol>
                 </div>
@@ -106,11 +21,11 @@
                 <div class="col-lg-6">
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>GÃ©rer la grille de compÃ©tences</h5>
+                            <h5>Gérer la grille de compétences</h5>
                         </div>
                         <div class="ibox-content">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                                Ajouter une famille de compÃ©tences
+                                Ajouter une famille de compétences
                             </button></br></br>
 
 <!-- Pop up pour ajouter une nouvelle famille -->
@@ -121,7 +36,7 @@
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                             <i class="fa fa-laptop modal-icon"></i>
-                                            <h4 class="modal-title">Ajouter une famille de compÃ©tences</h4>
+                                            <h4 class="modal-title">Ajouter une famille de compétences</h4>
                                            <form method="POST" action="addfamille">
                                              <div class='form-group'>
                                                 <label>Nom</label>
@@ -142,14 +57,14 @@
                                 </div>
                             </div>
                             
-<!-- Pop up pour la MAJ d'une famille de compÃ©tence -->
+<!-- Pop up pour la MAJ d'une famille de compétence -->
                             <div class="modal inmodal" id="myModalUpdateFamille" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog">
                                 <div class="modal-content animated bounceInRight">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                             <i class="fa fa-laptop modal-icon"></i>
-                                            <h4 class="modal-title">Editer une famille de compÃ©tences</h4>
+                                            <h4 class="modal-title">Editer une famille de compétences</h4>
                                            <form method="POST" action="updatefamille">
                                              <div class='form-group'>
                                                 <input type='hidden' name="id" id='idfamille' class='form-control' />
@@ -172,7 +87,7 @@
                             </div>                            
                             
                             <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#myModal2">
-                                Ajouter une compÃ©tences
+                                Ajouter une compétences
                             </button>
                             
                             <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
@@ -181,11 +96,11 @@
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                             <i class="fa fa-laptop modal-icon"></i>
-                                            <h4 class="modal-title">Ajouter une compÃ©tence</h4>
+                                            <h4 class="modal-title">Ajouter une compétence</h4>
                                              <form method="POST" action="addcompetence">
                                              <div class='form-group'>
                                                 <label>Nom</label>
-                                                <input name="sous_competences" type='text' id="addsouscompetence" class='form-control' placeholder='Nom de la compÃ©tence' />
+                                                <input name="sous_competences" type='text' id="addsouscompetence" class='form-control' placeholder='Nom de la compétence' />
                                             </div>
                                             <div class='form-group'>
                                                 <label>Famille</label>
@@ -201,7 +116,7 @@
 											                                            
                                         </div>
                                         <div class="modal-body">
-                                        	<h3 style='text-align:center'>Niveaux associÃ©s</h4>
+                                        	<h3 style='text-align:center'>Niveaux associés</h4>
                                             <div class='form-group'>
                                                 <input class='form-control' name="B" placeholder='B'></input>
                                             </div>
@@ -232,11 +147,11 @@
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                             <i class="fa fa-laptop modal-icon"></i>
-                                            <h4 class="modal-title">Editer une compÃ©tence</h4>
+                                            <h4 class="modal-title">Editer une compétence</h4>
                                              <form method="POST" action="updatecompetence">
                                              <div class='form-group'>
                                                 <label>Nom</label>
-                                                <input name="sous_competences" type='text' id="updatesouscompetence" class='form-control' placeholder='Nom de la compÃ©tence' />
+                                                <input name="sous_competences" type='text' id="updatesouscompetence" class='form-control' placeholder='Nom de la compétence' />
                                             </div>
                                             <input type='hidden' name="id" id='idsouscomp' class='form-control' />
                                             <div class='form-group'>
@@ -253,7 +168,7 @@
 											                                            
                                         </div>
                                         <div class="modal-body">
-                                        	<h3 style='text-align:center'>Niveaux associÃ©s</h4>
+                                        	<h3 style='text-align:center'>Niveaux associés</h4>
                                             <div class='form-group'>
                                                 <input class='form-control' id="updateB" name="B" placeholder='B'></input>
                                             </div>
@@ -317,7 +232,7 @@
                 <div class="col-lg-6">
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>Grille de compÃ©tences</h5>
+                            <h5>Grille de compétences</h5>
                         </div>
                         <div class="ibox-content">
                             <h4>
@@ -331,7 +246,7 @@
                                 <thead>
                                     <caption style="background-color: #1AB394;color: #fff;text-align: center;"><c:out value="${allcompetences.famille}"/></caption>
                                     <tr>
-                                        <td>CompÃ©tence</td>
+                                        <td>Compétence</td>
                                         <td>Niveau</td>
 
                                     </tr>
@@ -377,47 +292,6 @@
 
 
         </div>
-        <div class="footer">
-            <div class="pull-right">
-                Projet <strong>GAPP</strong> ISEP.
-            </div>
-            <div>
-                <strong>Copyright</strong> Equipe "rouge vif" &copy; 2015
-            </div>
-        </div>
-
-        </div>
-        </div>
+<%@ include file="include/bas_de_page.jsp" %>
 
 
-
-
-    <!-- Mainly scripts -->
-    <script src="<c:url value="/resources/js/jquery-2.1.1.js" />"></script>
-   <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-   <script src="<c:url value="/resources/js/plugins/metisMenu/jquery.metisMenu.js" />"></script>
-   <script src="<c:url value="/resources/js/plugins/slimScroll/jquery.slimscroll.min.js" />"></script>
-
-    <!-- Custom and plugin javascript -->
-    <script src="<c:url value="/resources/js/GAPP.js" />"></script>
-   <script src="<c:url value="/resources/js/plugins/pace/pace.min.js" />"></script>
-
-<script>
-//Afficher que la grille NÂ°1
- $(document).ready(function(){
-	 var span  = $("table[name^='grille-']");
-	 for(var i =1; i<span.length;i++) {
-		 $(span[i]).hide();
-	 }
-	 
-	$("[name^='souscompgrille-']").hide();
-	 
-   });
-  
-   
- 
-</script>
-
-
-</body>
-</html>

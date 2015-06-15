@@ -23,7 +23,8 @@ public class ExcelController {
 	
 	
 	public ExcelController(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Victorien/git/GAPP2/src/main/java/edu/isep/gapp/Bean.xml");
+//		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
 		//		Declaration des DAO et variables
 		daoUser = (UserJDBCTemplate) context.getBean("userDAO");
 	
@@ -32,7 +33,7 @@ public class ExcelController {
 	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
 	public void addUser(User user, Model model){
 		
-		daoUser.readCsvFile("/Users/Victorien/git/GAPP2/Liste_groupe_APP_-_G7.csv");
+		daoUser.readCsvFile("/Users/Victorien/git/GAPP2/E1415_groupes APP S2.csv");
 		
 	}
 }
