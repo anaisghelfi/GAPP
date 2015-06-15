@@ -1,15 +1,17 @@
 package edu.isep.daoImp;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import edu.isep.beans.Eleve;
-import edu.isep.beans.Tuteur;
+import edu.isep.beans.Seances;
 
 public class elevesJDBCTemplate {
 	private DataSource datasource;
@@ -70,18 +72,26 @@ public class elevesJDBCTemplate {
 		return eleves;
 	}
 	
+	public List<Seances> allSeances(){
+		String sql = "SELECT * FROM seances";
+		
+		ArrayList<Seances> seances =  new ArrayList<Seances>();
+		
+		List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql);
+		
+		for (Map row : rows) {
+			Seances seance =  new Seances();
+			
+			seance.setId(Integer.parseInt(String.valueOf(row.get("id"))));
+			//seance.setDate_seance((String)row.get("date_seance"));
+			seance.setNumero_seance(Integer.parseInt(String.valueOf(row.get("numero_seance"))));
+			
+			
+			seances.add(seance);
+		}
+
+		return seances;
+	}
 	
-	
-//	fonction pour selectionner les élèves qui n'ont pas de groupe
-	
-//	fonction pour selectionner les élèves qui ont un groupe
-	
-//	fonction pour selectionner les élèves d'un certain groupe en param
-	
-	
-//	public void insertAttribution(User user){
-//		String sql = "INSERT INTO users(user,password,type) VALUES(?,?,?)";
-//		jdbcTemplateObject.update(sql,new Object[]{user.getUser(),user.getPassword(),user.getType()});
-//		return;
-//	}
 }
+

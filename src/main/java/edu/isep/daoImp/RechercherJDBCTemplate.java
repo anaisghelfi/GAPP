@@ -50,28 +50,4 @@ public <List>Eleve getNom(String nom){
 	}
 	
 	
-	
-//		Récupérer tous les groupes
-		/*public List<Eleve> allEleves(){
-			String sql = "SELECT * FROM eleves WHERE nom = ? ";
-			
-			ArrayList<Eleve> ListEleves =  new ArrayList<Eleve>();
-			
-			List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql);
-			
-			for (Map row : rows) {
-				Eleve eleves =  new Eleve();
-				
-				eleves.setId(Integer.parseInt(String.valueOf(row.get("id"))));
-				eleves.setNom((String)row.get("nom"));
-				eleves.setPrenom((String)row.get("prenom"));
-				eleves.setPromo((String) row.get("promo"));
-				eleves.setMail((String) row.get("mail"));		
-				eleves.setGroupe((String) row.get("groupe"));
-				ListEleves.add(eleves);
-			}
-
-			return ListEleves;
-		}*/
-	
 }

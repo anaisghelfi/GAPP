@@ -269,6 +269,8 @@ function WinMove() {
         .disableSelection();
 }
 
+//Show General Modal To Delete
+
 function dramModalConfirm(id,type,name,action) {
 	if(type == 'supprimerFamille') {
 		var title = 'Etes-vous sûr de vouloir supprimer cette famille : "'+name+'" ?';
@@ -306,22 +308,32 @@ console.log(action);
 	
 }
 
+
 function destroyConfirmModal() {
 	$("#modalConfirm").remove();
 	$(".modal-backdrop").remove();
 	
 }
 
-function update(type,param1,param2,param3) {
+//Show General Modal To Update
+function update(type,param1,param2,param3,param4,param5,param6,param7) {
 	if (type=="famille") {
 		$("#idfamille").val(param1);
 		$("#famillename").val(param2);
 		$("#coefficientfamille").val(param3);
 	}
-	console.log("click");
+	else if (type=='competence') {
+		$("#updatesouscompetence").val(param1);
+		$("#updatecompfamille").val(param2);
+		$("#updateB").val(param3);
+		$("#updateI").val(param4);
+		$("#updateM").val(param5);
+		$("#updateE").val(param6);		
+		$("#idsouscomp").val(param7);
+	}
 }
 
-//VERIFIER REMPLISSAGE DES CHAMPS
+//----------------------VERIFIER REMPLISSAGE DES CHAMPS
 function ajouterfamille() {
 	var nameBool = verfiBool("#addfamille");
 	var coeffBool = verifCoeff("#addcoefficient");
@@ -331,8 +343,31 @@ function ajouterfamille() {
 	else {
 		return false;
 	}
+}
+
+function updatefamille() {
+	var nameBool = verfiBool("#famillename");
+	var coeffBool = verifCoeff("#coefficientfamille");
+	if ((nameBool && coeffBool) === true) {
+		return true;
+	}
+	else {
+		return false;
+	}	
+}
+
+function ajoutercompetence() {
+	var nameBool = verfiBool("#addsouscompetence");
+	if ((nameBool) === true) {
+		return true;
+	}
+	else {
+		return false;
+	}
 
 }
+
+
 
 function ajouterCompetence() {
 	var nameBool = verfiBool("#addsouscompetence");
@@ -370,3 +405,24 @@ function verifCoeff(id) {
 		return false;
 	}
 }
+
+//--------------------------------------------
+
+//----Grille de compétences
+
+//Grille de compétences dynamiques
+$("span[name^='showGrille-']").on('click', function(e) {
+	e.preventDefault();
+	var name = $(this).attr('name');
+	var idFamille = name.split("-")[1];
+	
+	$("table[name^='grille-']").hide();
+	$("table[name='grille-"+idFamille+"']").fadeIn(200);
+	
+})
+
+$("[name^='affichersouscomp-']").on('click', function(e) {
+	var idfamille = $(this).attr('name').split('-')[1];
+	var idcomp = $(this).attr('name').split('-')[2];
+	$("[name='souscompgrille-"+idfamille+"-"+idcomp+"']").toggle(200);
+})
