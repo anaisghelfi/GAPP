@@ -9,7 +9,7 @@
                             <a href="#">Accueil</a>
                         </li>
                         <li>
-                            <a>Tous les groupes</a>
+                            <a>Tous mes groupes</a>
                         </li>
                         <li class="active">
                             <strong>Groupe <c:out value="${numerogroupe}"/></strong>
@@ -30,6 +30,9 @@
                     	<h5>Elèves du groupe</h5>
                     </div>
                     <div class="ibox-content">
+                    <div style="display:none" id="alert" class="alert alert-danger alert-dismissable">
+                    	Veuillez renseignez les absences de tous les élèves du groupe !
+                    </div>
  						<table class="table table-bordered">
                                 <thead>
                                 <tr>
@@ -47,14 +50,14 @@
                                 </tr>                                
                                 </thead>
                                 <tbody>
-                               <form action="addAbsences" method='POST'> 
+                               <form  method='POST' action="../addAbsences/<c:out value="${numerogroupe}"/>"> 
 			                   <c:forEach var="alleleves" items="${alleleves}">
 								<tr>	
 									<td><c:out value="${alleleves.nom}"/></td>
 									<td><c:out value="${alleleves.prenom}"/></td>
 									<td><c:out value="${alleleves.code_eleve}"/></td>
-									<td><input type="radio" name="absence<c:out value="${alleleves.id}"/>" value="présent-<c:out value="${alleleves.id}"/>"><br></td>
-									<td><input type="radio" name="absence<c:out value="${alleleves.id}"/>" value="absent-<c:out value="${alleleves.id}"/>"><br></td>
+									<td><input type="radio" name="absence-<c:out value="${alleleves.id}"/>" value="present"><br></td>
+									<td><input type="radio" name="absence-<c:out value="${alleleves.id}"/>" value="absent"><br></td>
 								</tr>
 								</c:forEach> 	                                
 
@@ -62,7 +65,7 @@
                                 </tbody>
                          </table>
                          <div class='col-lg-9'></div>
-                         <div class="col-lg-3"><button type="submit" class="btn btn-w-m btn-success btn-sm">Valider</button>
+                         <div class="col-lg-3"><button type="submit" onclick="return validAbsence()" class="btn btn-w-m btn-success btn-sm">Valider</button>
                          </form>
                          </div>
                             
@@ -100,33 +103,37 @@
   </div>
 </div>
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-
 
            
 	
 	<%@ include file="include/bas_de_page.jsp" %>
+	
+<script>//-----Fiche élèves par le tuteur
+
+//Vérifier que les input radio sont tous checks
+
+function validAbsence() {
+	var input = $( "input:radio" );
+	var nameTab = [];
+	var bool = true;
+	for(var i=0; i<input.length;i++) {
+		var name = $(input[i]).attr('name');
+		if(name !== nameTab[nameTab.length-1]) {
+			nameTab.push(name);
+		}		
+	}
+	
+	
+	
+	for(j=0;j<nameTab.length;j++) {
+		console.log(nameTab[j]);
+		var value = $( "[name='"+nameTab[j]+"']:checked").val();
+		if (value === undefined){
+			bool = false;
+			$("#alert").show(200);
+		}
+	}
+	
+	return bool;
+}</script>
 	
