@@ -24,10 +24,10 @@ public class FicheEleveController {
 
 	public FicheEleveController(){
 	
-//		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Anaï¿½s/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Anaïs/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
 		
 //		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
-		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Victorien/git/GAPP2/src/main/java/edu/isep/gapp/Bean.xml");
+//		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Victorien/git/GAPP2/src/main/java/edu/isep/gapp/Bean.xml");
 //		Declaration des DAO et variables
 		
 		daoEleve = (elevesJDBCTemplate) context.getBean("elevesDAO");

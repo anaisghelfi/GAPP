@@ -439,5 +439,3 @@ $("[name^='affichersouscomp-']").on('click', function(e) {
 
 //----------------------------------------------
 
-//-----Fiche élèves par le tuteur
-
