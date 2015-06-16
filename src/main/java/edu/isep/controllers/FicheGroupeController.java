@@ -56,13 +56,10 @@ public class FicheGroupeController {
 	public String getEleves(@PathVariable("numberGroup") String numberGroup, Model model) 
 	{
 		String groupeno = (String)numberGroup;
-//		Pour récupérer tous les �l�ves d'un groupe
+//		Pour récupérer tous les �l�ves d'un groupe
 		List<Eleve> eleves = dao.elevesParGroupe((String)groupeno);
 		model.addAttribute("numerogroupe", groupeno);
 		model.addAttribute("alleleves", eleves);
-		
-		
-		
 		return "ficheGroupe";
 	}
 	

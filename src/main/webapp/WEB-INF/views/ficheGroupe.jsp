@@ -100,33 +100,7 @@
   </div>
 </div>
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-
-
            
-	
+        
 	<%@ include file="include/bas_de_page.jsp" %>
 	
