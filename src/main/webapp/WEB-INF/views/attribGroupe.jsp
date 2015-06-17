@@ -47,7 +47,7 @@
 	                                        </div>
 	                                        <div class='form-group'>
 		                                    	<label>Nom du tuteur</label>
-		                                        <select name="groupes_id" class="form-control">
+		                                        <select name="tuteur_id" class="form-control">
 													<c:forEach var="tuteur" items="${tuteurs}">
 													<option value="${tuteur.id}"><c:out value="${tuteur.nom} ${tuteur.prenom}"/></option>
 													</c:forEach>
@@ -109,10 +109,65 @@
 							<div style="margin-bottom:6px" class="panel panel-primary">
 								<div class="panel-heading">
 	                            	<h5 class="panel-title">
-	                                	<a data-toggle="collapse" data-parent="#accordion" href="#<c:out value="${groupe.id}"/>"><c:out value="${groupe.nom}"/><a href="<c:url value="/deleteGroupe?groupe=${groupe.nom}" />" ><i style='float:right; margin:5px'  type="submit" class="fa fa-trash"></i></a><i style='float:right;margin:5px' class="fa fa-pencil"></i></a>
+	                                	<a data-toggle="collapse" data-parent="#accordion" href="#<c:out value="${groupe.id}"/>"><c:out value="${groupe.nom}"/><i style='float:right; margin:5px'  type="submit" class="fa fa-trash" data-toggle="modal" data-target="#myModalDeleteGroupe<c:out value="${groupe.id}"/>"></i><i style='float:right;margin:5px' class="fa fa-pencil" data-toggle="modal" data-target="#myModalUpdateGroupe"></i></a>
 	                                </h5>
 	                            </div>
 							</div>
+							
+							<!-- Pop up pour la MAJ d'un groupe -->
+<!--                             <div class="modal inmodal" id="myModalUpdateGroupe" tabindex="-1" role="dialog" aria-hidden="true"> -->
+<!--                                 <div class="modal-dialog"> -->
+<!--                                 <div class="modal-content animated bounceInRight"> -->
+<!--                                         <div class="modal-header"> -->
+<!--                                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
+<!--                                             <i class="fa fa-laptop modal-icon"></i> -->
+<!--                                             <h4 class="modal-title">Editer un groupe</h4> -->
+<!--                                            <form method="POST" action="updateGroupe"> -->
+<!--                                              <div class='form-group'> -->
+<%--                                                 <input type='hidden' name="id" id='idgroupe' class='form-control' value="<c:out value="${groupe.id}"/>"/> --%>
+<!--                                                 <label>Nom</label> -->
+<%--                                                 <input type='text' name="famille" id='famillename' class='form-control' placeholder='<c:out value="${groupe.nom}"/>' /> --%>
+<!--                                             </div> -->
+<!--                                             <div class='form-group'> -->
+<!--                                                 <label>Tuteur</label> -->
+<!--                                                 <select name="groupes_id" class="form-control"> -->
+<%-- 													<c:forEach var="tuteur" items="${tuteurs}"> --%>
+<%-- 													<option value="${tuteur.id}"><c:out value="${tuteur.nom} ${tuteur.prenom}"/></option> --%>
+<%-- 													</c:forEach> --%>
+<!-- 												</select> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                         <div class="modal-footer"> -->
+<!--                                             <button type="submit" class="btn btn-white" data-dismiss="modal">Fermer</button> -->
+<!--                                             <button type="submit" class="btn btn-primary">Sauvegarder</button> -->
+<!--                                         </div> -->
+<!--                                         </form> -->
+<!--                                     </div> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+                            
+                            <!-- Pop up pour la suppression d'un groupe -->
+                            <div class="modal inmodal" id="myModalDeleteGroupe<c:out value="${groupe.id}"/>" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content animated bounceInRight">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <i class="fa fa-laptop modal-icon"></i>
+                                            <h4 class="modal-title">Êtes-vous sur de vouloir supprimer ce groupe</h4>
+                                           <form method="POST" action="deleteGroupe">
+                                             <div class='form-group'>
+                                                <input type='hidden' name="id" id='idgroupe' class='form-control' value="<c:out value="${groupe.id}"/>"/>                                               
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-white" data-dismiss="modal">Fermer</button>
+                                            <button type="submit" class="btn btn-primary">Supprimer</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
 										
 							<div id="<c:out value="${groupe.id}"/>" class="panel-collapse collapse in">
                             	<div class="panel-body">
@@ -157,7 +212,7 @@
                                 <!-- Faire un foreach avec les élèves dans le groupe -->
                         <tbody>
                         	<c:forEach var="eleve" items="${eleves}">
-                            	<c:if test="eleve.groupe == sousGroupe.nom">
+                            	<c:if test="${eleve.groupe == sousGroupe.nom }">
 	                            <tr>
 	                               <td><c:out value="${eleve.nom}"></c:out></td>
 	                               <td><c:out value="${eleve.prenom}"></c:out></td>
@@ -176,61 +231,61 @@
                         </div>
                     </div>
                 
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Visualisation des Groupes exemple</h5>
-                        </div>
-                        <div class="ibox-content">
-                        	<h4>
-                            	<c:forEach var="groupe" items="${groupes}">
-                                	<span class='label label-primary'><c:out value="${groupe.nom}"/></span>
-                            	</c:forEach>                            	                         
-                            </h4>
+<!--                     <div class="ibox"> -->
+<!--                         <div class="ibox-title"> -->
+<!--                             <h5>Visualisation des Groupes exemple</h5> -->
+<!--                         </div> -->
+<!--                         <div class="ibox-content"> -->
+<!--                         	<h4> -->
+<%--                             	<c:forEach var="groupe" items="${groupes}"> --%>
+<%--                                 	<span class='label label-primary'><c:out value="${groupe.nom}"/></span> --%>
+<%--                             	</c:forEach>                            	                          --%>
+<!--                             </h4> -->
                             
-							<c:forEach var="sousGroupe" items="${sousGroupes}">
-                            <table class="table table-bordered">
-                            	<thead>
-                            	<caption style="background-color: #1AB394;color: #fff;text-align: center;"><c:out value="${sousGroupe.nom}"></c:out></caption>
-	                            	<tr>
-	                                	<th>#</th>
-	                                    <th>Nom</th>
-	                                    <th>Prénom</th>
-	                                    <th>Mail</th>
-	                                    <th>Note</th>
-	                                </tr>
-                                </thead>
-                                <!-- Faire un foreach avec les élèves dans le groupe -->
-                                 <tbody>
-	                                <tr>
-	                                    <td>1</td>
-	                                    <td>Mark</td>
-	                                    <td>Otto</td>
-	                                    <td>@mdo</td>
-	                                    <th>Note</th>
-	                                </tr>
-	                                <tr>
-	                                    <td>2</td>
-	                                    <td>Jacob</td>
-	                                    <td>Thornton</td>
-	                                    <td>@fat</td>
-	                                    <th>Note</th>
-	                                </tr>
-	                                <tr>
-	                                    <td>3</td>
-	                                    <td>Larry</td>
-	                                    <td>the Bird</td>
-	                                    <td>@twitter</td>
-	                                    <th>Note</th>
-	                                </tr>
-                                </tbody>
-                            </table>
-                            </c:forEach>
+<%-- 							<c:forEach var="sousGroupe" items="${sousGroupes}"> --%>
+<!--                             <table class="table table-bordered"> -->
+<!--                             	<thead> -->
+<%--                             	<caption style="background-color: #1AB394;color: #fff;text-align: center;"><c:out value="${sousGroupe.nom}"></c:out></caption> --%>
+<!-- 	                            	<tr> -->
+<!-- 	                                	<th>#</th> -->
+<!-- 	                                    <th>Nom</th> -->
+<!-- 	                                    <th>Prénom</th> -->
+<!-- 	                                    <th>Mail</th> -->
+<!-- 	                                    <th>Note</th> -->
+<!-- 	                                </tr> -->
+<!--                                 </thead> -->
+<!--                                 Faire un foreach avec les élèves dans le groupe -->
+<!--                                  <tbody> -->
+<!-- 	                                <tr> -->
+<!-- 	                                    <td>1</td> -->
+<!-- 	                                    <td>Mark</td> -->
+<!-- 	                                    <td>Otto</td> -->
+<!-- 	                                    <td>@mdo</td> -->
+<!-- 	                                    <th>Note</th> -->
+<!-- 	                                </tr> -->
+<!-- 	                                <tr> -->
+<!-- 	                                    <td>2</td> -->
+<!-- 	                                    <td>Jacob</td> -->
+<!-- 	                                    <td>Thornton</td> -->
+<!-- 	                                    <td>@fat</td> -->
+<!-- 	                                    <th>Note</th> -->
+<!-- 	                                </tr> -->
+<!-- 	                                <tr> -->
+<!-- 	                                    <td>3</td> -->
+<!-- 	                                    <td>Larry</td> -->
+<!-- 	                                    <td>the Bird</td> -->
+<!-- 	                                    <td>@twitter</td> -->
+<!-- 	                                    <th>Note</th> -->
+<!-- 	                                </tr> -->
+<!--                                 </tbody> -->
+<!--                             </table> -->
+<%--                             </c:forEach> --%>
                                 
                               
                             
 
-                        </div>
-                    </div>
+<!--                         </div> -->
+<!--                     </div> -->
                 </div> <!-- Fin du 2e col lg 6 -->          
             </div>
         </div>
@@ -268,30 +323,7 @@
                 
                 
                 
-<!--                 <div class="col-lg-6"> -->
-<!--                     <div class="ibox"> -->
-<!--                         <div class="ibox-title"> -->
-<!--                             <h5>Enlever un groupe</h5> -->
-<!--                         </div> -->
-<!--                         <div class="ibox-content"> -->
-<!--                         <form action="deleteGroupe" method="post"> -->
-<!--                        			<div class='form-group'> -->
-<!--                                     <label>Nom du groupe</label> -->
-<!-- 									<select name="nom" class='form-control'> -->
-<%-- 										<c:forEach var="groupe" items="${groupes}"> --%>
-<%-- 											<option value="${groupe.nom}"><c:out value="${groupe.nom}"/></option> --%>
-<%-- 										</c:forEach> --%>
-<!-- 									</select>                                           -->
-<!-- 								</div> -->
-								
-<!--                                 <div class="modal-footer"> -->
-<!--                                     <button type="submit" class="btn btn-primary">Supprimer</button> -->
-<!--                                 </div>                                                                -->
-<!-- 						</form> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                 </div> -->
-                
+
                 
                 
                 

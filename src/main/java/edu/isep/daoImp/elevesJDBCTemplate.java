@@ -20,8 +20,9 @@ public class elevesJDBCTemplate {
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 	
+//	Fonction qui retourne tous les élèves
 	public List<Eleve> allEleves(){
-		String sql = "SELECT * FROM tuteur";
+		String sql = "SELECT * FROM eleves";
 		
 		ArrayList<Eleve> eleves =  new ArrayList<Eleve>();
 		
@@ -37,13 +38,14 @@ public class elevesJDBCTemplate {
 			eleve.setCode_eleve(Integer.parseInt(String.valueOf(row.get("code_eleve"))));
 			eleve.setPromo((String)row.get("promo"));
 			eleve.setGroupe((String)row.get("groupe"));
-			eleve.setNote(Integer.parseInt(String.valueOf(row.get("note"))));
+			if(row.get("note") != null){eleve.setNote(Integer.parseInt(String.valueOf(row.get("note"))));}
 			
 			eleves.add(eleve);
 		}
 
 		return eleves;
 	}
+	
 	
 //	fonction qui retourne une liste d'eleve avec nom en parametre
 	public List<Eleve> elevesParNom(String nom){

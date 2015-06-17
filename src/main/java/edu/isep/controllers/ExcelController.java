@@ -23,7 +23,9 @@ public class ExcelController {
 	
 	
 	public ExcelController(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Victorien/git/GAPP2/src/main/java/edu/isep/gapp/Bean.xml");
+//		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Victorien/git/GAPP2/src/main/java/edu/isep/gapp/Bean.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/brandonemartins/Documents/A2/Web_Techno/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
+
 		//		Declaration des DAO et variables
 		daoUser = (UserJDBCTemplate) context.getBean("userDAO");
 	
