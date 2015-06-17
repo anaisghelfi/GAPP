@@ -44,12 +44,7 @@ public class FicheGroupeController {
 	
 	public FicheGroupeController(){
 
-
-		//ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
-		//ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/brandonemartins/Documents/A2/Web_Techno/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
-		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Ana�s/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
-		//ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Victorien/git/GAPP2/src/main/java/edu/isep/gapp/Bean.xml");
-
+		ApplicationContext context = new ClassPathXmlApplicationContext("Bean.xml");
 		
 		
 		dao = (elevesJDBCTemplate) context.getBean("elevesDAO");
