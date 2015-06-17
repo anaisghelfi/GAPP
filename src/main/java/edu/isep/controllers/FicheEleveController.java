@@ -24,9 +24,8 @@ public class FicheEleveController {
 	private elevesJDBCTemplate daoEleve;
 
 	public FicheEleveController(){
-		
-		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
-
+	
+		ApplicationContext context = new ClassPathXmlApplicationContext("Bean.xml");
 //		Declaration des DAO et variables
 		
 		daoEleve = (elevesJDBCTemplate) context.getBean("elevesDAO");
@@ -41,7 +40,7 @@ public class FicheEleveController {
 	session.getAttribute("number");
 
 	
-	model.addAttribute("nom", nom);// Paramètre de l'URL
+	model.addAttribute("nom", nom);// Paramï¿½tre de l'URL
 	List<Eleve> eleves = daoEleve.elevesParNom(nom);
 	model.addAttribute("eleves", eleves);
 	

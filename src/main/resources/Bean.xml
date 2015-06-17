@@ -10,7 +10,7 @@
  <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
  <property name="url" value="jdbc:mysql://localhost:3306/gapp"/> 
  <property name="username" value="root"/>
- <property name="password" value=""/>
+ <property name="password" value="root"/>
 
 
 <!--  <property name="driverClassName" value="com.mysql.jdbc.Driver"/> -->
@@ -50,6 +50,10 @@
 </bean>
 
 <bean id="tuteurDAO" class="edu.isep.daoImp.TuteurJDBCTemplate">
+	<property name="dataSource" ref="dataSource"/>
+</bean>
+
+<bean id="absencesDAO" class="edu.isep.daoImp.AbsencesJDBCTemplate">
 	<property name="dataSource" ref="dataSource"/>
 </bean>
 

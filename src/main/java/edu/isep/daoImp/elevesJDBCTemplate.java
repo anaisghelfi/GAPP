@@ -94,6 +94,7 @@ public class elevesJDBCTemplate {
 		return seances;
 	}
 	
+<<<<<<< HEAD
 
 
 //fonction qui retourne le tuteur de l'élève
@@ -118,6 +119,34 @@ public List<Tuteur> tuteurEleve(String nom){
 	}
 
 	return tuteurs;
+=======
+//	fonction qui retourne une liste d'eleve par groupe
+	public List<Eleve> elevesParGroupe(String groupe){
+		String sql = "SELECT * FROM eleves where groupe = ?";
+		
+		ArrayList<Eleve> eleves =  new ArrayList<Eleve>();
+		
+		List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql, new Object[]{groupe});
+		
+		for (Map row : rows) {
+			Eleve eleve =  new Eleve();
+			
+			eleve.setId(Integer.parseInt(String.valueOf(row.get("id"))));
+			eleve.setNom((String)row.get("nom"));
+			eleve.setPrenom((String)row.get("prenom"));
+			eleve.setMail((String)row.get("mail"));
+			eleve.setPromo((String)row.get("promo"));
+			eleve.setGroupe((String)row.get("groupe"));
+			eleve.setCode_eleve(Integer.parseInt(String.valueOf(row.get("code_eleve"))));
+			eleve.setNote(Integer.parseInt(String.valueOf(row.get("note"))));
+			
+			eleves.add(eleve);
+		}
+
+		return eleves;
+	}	
+	
+>>>>>>> 11c51614048f29b359c0582d6d25040a95aeea10
 }
 
 }

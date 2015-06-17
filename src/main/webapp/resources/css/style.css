@@ -6424,6 +6424,8 @@ body.skin-3 {
 }
 .blueCompetence {
 	background-color: rgba(52, 152, 219, 0.77);
+	padding-top: 3px;
+	cursor:	pointer;
 	padding-left: 7px;
 	color: white;
 	border-radius: 4px;
