@@ -64,6 +64,7 @@ public class AttribGroupeController {
 //	Chemin pour la page en GET normal
 	@RequestMapping(value="/attribGroupe", method = RequestMethod.GET)
 	public String Exemple(Model model){
+		
 //		Pour récupérer tous les groupes
 		List<Groupe> groupes = daoGroupe.allGroupes();
 		model.addAttribute("groupes", groupes);
@@ -79,6 +80,10 @@ public class AttribGroupeController {
 		List<Tuteur> tuteurs = daoTuteur.allTuteurs();
 		model.addAttribute("tuteurs", tuteurs);
 		
+//		Pour récupérer tous les élèves
+		List<Eleve> eleves = daoEleve.allEleves();
+		model.addAttribute("eleves", eleves);
+
 		return "attribGroupe"; 
 	}
 	
@@ -102,6 +107,10 @@ public class AttribGroupeController {
 		}
 		model.addAttribute("sousGroupes", sousGroupes);
 		
+//		Pour récupérer tous les tuteurs
+		List<Tuteur> tuteurs = daoTuteur.allTuteurs();
+		model.addAttribute("tuteurs", tuteurs);
+		
 		return "attribGroupe";
 	}
 	
@@ -110,7 +119,7 @@ public class AttribGroupeController {
 	public String delete(Groupe groupe, Model model)
 	{		
 		g.put(groupe.getId(), groupe);
-		daoGroupe.deleteGroupe(groupe.getNom());
+		daoGroupe.deleteGroupe(groupe.getId());
 		
 		List<Groupe> groupes = daoGroupe.allGroupes();
 		model.addAttribute("groupes", groupes);
@@ -121,6 +130,10 @@ public class AttribGroupeController {
 			sg.setGroupe(daoGroupe.getGroupe(sg.getGroupes_id()));
 		}
 		model.addAttribute("sousGroupes", sousGroupes);
+		
+//		Pour récupérer tous les tuteurs
+		List<Tuteur> tuteurs = daoTuteur.allTuteurs();
+		model.addAttribute("tuteurs", tuteurs);
 		
 		return "attribGroupe";
 	}
@@ -145,6 +158,10 @@ public class AttribGroupeController {
 		}
 		model.addAttribute("sousGroupes", sousGroupes);
 		
+//		Pour récupérer tous les tuteurs
+		List<Tuteur> tuteurs = daoTuteur.allTuteurs();
+		model.addAttribute("tuteurs", tuteurs);
+		
 		return "attribGroupe";
 	}
 	
@@ -165,6 +182,35 @@ public class AttribGroupeController {
 			sg.setGroupe(daoGroupe.getGroupe(sg.getGroupes_id()));
 		}
 		model.addAttribute("sousGroupes", sousGroupes);
+		
+//		Pour récupérer tous les tuteurs
+		List<Tuteur> tuteurs = daoTuteur.allTuteurs();
+		model.addAttribute("tuteurs", tuteurs);
+		
+		return "attribGroupe";
+	}
+	
+//	A FAIIIIIIIIIRE
+	@RequestMapping(value = "/updateGroupe", method = RequestMethod.POST)
+	public String updateGroupe(SousGroupe sousGroupe, Groupe groupe, Model model)
+	{
+//		Mettre à jour le groupe
+		daoGroupe.updateGroupe(groupe.getNom());
+		
+//		Pour récupérer tous les groupes
+		List<Groupe> groupes = daoGroupe.allGroupes();
+		model.addAttribute("groupes", groupes);
+		
+//		Pour récupérer tous les sous groupes
+		List<SousGroupe> sousGroupes = daoSousGroupe.allSousGroupes();
+		for( SousGroupe sg : sousGroupes){
+			sg.setGroupe(daoGroupe.getGroupe(sg.getGroupes_id()));
+		}
+		model.addAttribute("sousGroupes", sousGroupes);
+		
+//		Pour récupérer tous les tuteurs
+		List<Tuteur> tuteurs = daoTuteur.allTuteurs();
+		model.addAttribute("tuteurs", tuteurs);
 		
 		return "attribGroupe";
 	}

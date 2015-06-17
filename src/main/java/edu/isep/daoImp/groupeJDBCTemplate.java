@@ -45,7 +45,7 @@ public class groupeJDBCTemplate {
 	
 //	Récupérer tous les groupes
 	public List<Groupe> allGroupes(){
-		String sql = "SELECT * FROM groupes";
+		String sql = "SELECT * FROM groupes ORDER BY nom ASC";
 		
 		ArrayList<Groupe> groupes =  new ArrayList<Groupe>();
 		
@@ -72,8 +72,15 @@ public class groupeJDBCTemplate {
 	}
 
 //	Supprimer un groupe
-	public void deleteGroupe(String NomGroupe){
-		String sql = "DELETE FROM groupes WHERE nom = ?";
+	public void deleteGroupe(int id){
+		String sql = "DELETE FROM groupes WHERE id = ?";
+		jdbcTemplateObject.update(sql,new Object[]{id});
+		return;
+	}
+	
+//	Supprimer un groupe
+	public void updateGroupe(String NomGroupe){
+		String sql = "UPDATE groupe SET WHERE";
 		jdbcTemplateObject.update(sql,new Object[]{NomGroupe});
 		return;
 	}
