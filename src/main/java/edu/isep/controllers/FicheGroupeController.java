@@ -44,17 +44,12 @@ public class FicheGroupeController {
 	private Map<Integer, Competences> c;
 	private Map<Integer, SousCompetences> sc;
 
-//A VERIFIER : Séance pour le tuteur en session aujourd'hui ou non (Si oui envoyer la date dans le model + dans l'insertion de l'absence)
-//A FAIRE EN PLUS : Ajouter le nom de la séance (plutot le numéro) ??
+//A VERIFIER : Sï¿½ance pour le tuteur en session aujourd'hui ou non (Si oui envoyer la date dans le model + dans l'insertion de l'absence)
+//A FAIRE EN PLUS : Ajouter le nom de la sï¿½ance (plutot le numï¿½ro) ??
 	
 	public FicheGroupeController(){
 
-
-		//ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
-		//ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/brandonemartins/Documents/A2/Web_Techno/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
-		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Anaïs/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
-		//ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Victorien/git/GAPP2/src/main/java/edu/isep/gapp/Bean.xml");
-
+		ApplicationContext context = new ClassPathXmlApplicationContext("Bean.xml");
 		
 		
 		dao = (elevesJDBCTemplate) context.getBean("elevesDAO");
@@ -73,11 +68,14 @@ public class FicheGroupeController {
 	@RequestMapping(value = "/ficheGroupe-{numgroupe}", method = RequestMethod.GET)
 	public String getEleves(@PathVariable String numgroupe,Model model) 
 	{
+
 		String groupeno = (String)numgroupe;
-//		Pour rÃ©cupÃ©rer tous les élèves d'un groupe
+//		Pour rÃ©cupÃ©rer tous les ï¿½lï¿½ves d'un groupe
+
 		List<Eleve> eleves = dao.elevesParGroupe((String)groupeno);
 		model.addAttribute("numerogroupe", groupeno);
 		model.addAttribute("alleleves", eleves);
+
 		
 		List<Competences> allcompetences = daoCompetences.allCompetences();
 		model.addAttribute("allcompetences", allcompetences);
@@ -85,6 +83,7 @@ public class FicheGroupeController {
 		List<SousCompetences> allsouscompetences = daoCompetences.allSousCompetences();
 		model.addAttribute("allsouscompetences", allsouscompetences);
 		
+
 		return "ficheGroupe";
 	}
 	
@@ -92,7 +91,7 @@ public class FicheGroupeController {
 	public String addAbsences(HttpServletRequest request,@PathVariable String numgroupe,Model model) 
 	{
 		String groupeno = (String)numgroupe;
-//		Pour rÃ©cupÃ©rer tous les élèves d'un groupe
+//		Pour rÃ©cupÃ©rer tous les ï¿½lï¿½ves d'un groupe
 		List<Eleve> eleves = dao.elevesParGroupe((String)groupeno);
 		model.addAttribute("numerogroupe", groupeno);
 		model.addAttribute("alleleves", eleves);

@@ -34,7 +34,7 @@
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><c:out value='${sessionScope.prenom} ' /><c:out value='${ sessionScope.nom}'/></strong>
                              </span> <span class="text-muted text-xs block"><c:out value='${sessionScope.type }'/><b class="caret"></b></span> </span> </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="accueilEleves">Profil</a></li>
+                            <li><a href="ficheEleve?nom=${sessionScope.nom}">Profil</a></li>
                             <li class="divider"></li>
                             <li><a href="deconnexion">Déconnexion</a></li>
                         </ul>

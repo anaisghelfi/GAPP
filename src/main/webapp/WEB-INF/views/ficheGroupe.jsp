@@ -180,8 +180,7 @@
 </div>
                 
 
-           
-	
+        
 	<%@ include file="include/bas_de_page.jsp" %>
 	
 <script>//-----Fiche élèves par le tuteur

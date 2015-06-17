@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.isep.beans.Eleve;
 import edu.isep.beans.Seances;
+import edu.isep.beans.Tuteur;
 import edu.isep.daoImp.elevesJDBCTemplate;
 
 @Controller
@@ -24,10 +25,7 @@ public class FicheEleveController {
 
 	public FicheEleveController(){
 	
-		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Anaïs/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
-		
-//		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
-//		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Victorien/git/GAPP2/src/main/java/edu/isep/gapp/Bean.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("Bean.xml");
 //		Declaration des DAO et variables
 		
 		daoEleve = (elevesJDBCTemplate) context.getBean("elevesDAO");
@@ -49,7 +47,8 @@ public class FicheEleveController {
 	List<Seances> seances = daoEleve.allSeances();
 	model.addAttribute("seances",seances);
 	
-	
+	List<Tuteur> tuteurs = daoEleve.tuteurEleve(nom);
+	model.addAttribute("tuteurs",tuteurs);
 	
 		return "ficheEleve";
 	}
