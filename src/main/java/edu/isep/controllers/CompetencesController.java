@@ -33,9 +33,7 @@ public class CompetencesController {
 	
 	public CompetencesController(){
 
-		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/brandonemartins/Documents/A2/Web_Techno/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
-//		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Ana�s/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
-//		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/Victorien/git/GAPP2/src/main/java/edu/isep/gapp/Bean.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("Bean.xml");
 
 
 		c = new HashMap<Integer, Competences>();
@@ -112,9 +110,11 @@ public class CompetencesController {
 		List<SousCompetences> allsouscompetences = dao.allSousCompetences();
 		model.addAttribute("allsouscompetences", allsouscompetences);
 		
+		System.out.println(allsouscompetences);
+		
 		return "AccueilRespo";
 	}
-
+	
 	@RequestMapping(value="/updatefamille",method = RequestMethod.POST)
 	public String updateFamille(Competences comp,Model model){
 		dao.updateCompetence(comp);
@@ -127,6 +127,19 @@ public class CompetencesController {
 		
 		return "AccueilRespo";
 	}	
+	
+	@RequestMapping(value="/updatecompetence",method = RequestMethod.POST)
+	public String updateCompetence(SousCompetences souscomp,Model model){
+		dao.updateSousCompetence(souscomp);
+		
+		List<Competences> allcompetences = dao.allCompetences();
+		model.addAttribute("allcompetences", allcompetences);
+		
+		List<SousCompetences> allsouscompetences = dao.allSousCompetences();
+		model.addAttribute("allsouscompetences", allsouscompetences);
+		
+		return "AccueilRespo";
+	}		
 	
 	@RequestMapping(value = "/addcompetence", method = RequestMethod.GET)
 	public String viewcompetences(Model model)

@@ -173,7 +173,7 @@
                             	<div class="panel-body">
 			                    	<c:forEach var="sousGroupe" items="${sousGroupes}">
 										<c:if test="${sousGroupe.groupes_id == groupe.id}">
-											<li><c:out value="${sousGroupe.nom}"/></li>
+											<li><a href="ficheGroupe/${sousGroupe.nom}"><c:out value="${sousGroupe.nom}"/></a></li>
 										</c:if>
 									</c:forEach> 
 								</div>

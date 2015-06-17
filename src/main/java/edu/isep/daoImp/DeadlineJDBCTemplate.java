@@ -1,5 +1,6 @@
 package edu.isep.daoImp;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +22,7 @@ public class DeadlineJDBCTemplate {
 		this.datasource = dataSource;
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
+	
 	
 	//Ajouter une deadline
 	public void ajout_deadline(Deadline deadline){
@@ -48,10 +50,11 @@ public class DeadlineJDBCTemplate {
 		for (Map row : rows) {
 			Deadline deadline =  new Deadline();
 			
+			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
 			deadline.setId(Integer.parseInt(String.valueOf(row.get("id"))));
 			deadline.setTitre((String)row.get("titre"));
 			deadline.setDescription((String)row.get("description"));
-			deadline.setDate_limite((Date)row.get("date_limite"));
+			deadline.setDate_limite((Date) row.get("date_limite"));
 			deadline.setGroupes_id(Integer.parseInt(String.valueOf(row.get("groupes_id"))));
 			
 			deadlines.add(deadline);
@@ -59,5 +62,6 @@ public class DeadlineJDBCTemplate {
 
 		return deadlines;
 	}
+	
 	
 }

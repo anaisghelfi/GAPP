@@ -38,7 +38,7 @@
 							<c:forEach var="eleve" items="${eleves}">
 								<div class="form-group">
 									<strong>Eleve :</strong> <c:out value="${eleve.nom}"/> <c:out value="${eleve.prenom}"/>
-									<a href="http://localhost:8080/gapp/ficheEleve?=<c:out value="${eleve.nom}"/>">Voir sa fiche</a>
+									<a href="http://localhost:8080/gapp/ficheEleve?nom=<c:out value="${eleve.nom}"/>">Voir sa fiche</a>
 								</div>
 							</c:forEach>													
 							

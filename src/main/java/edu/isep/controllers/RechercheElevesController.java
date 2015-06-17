@@ -32,9 +32,9 @@ public class RechercheElevesController {
 
 	
 	public RechercheElevesController(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/brandonemartins/Documents/A2/Web_Techno/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
 
-//		ApplicationContext context = new ClassPathXmlApplicationContext("file:/Users/David/git/GAPP/src/main/java/edu/isep/gapp/Bean.xml");
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("Bean.xml");
 
 //		Declaration des DAO et variables
 		

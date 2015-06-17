@@ -56,6 +56,12 @@ public class CompetencesJDBCTemplate {
 	}
 	
 	
+//	Update une competence
+	public void updateSousCompetence(SousCompetences souscompetences){
+		String sql = "UPDATE sous_competences SET sous_competences = ?, competences_id = ?, B = ?, I = ?, M = ?, E = ? WHERE id = ?";
+		jdbcTemplateObject.update(sql,new Object[]{souscompetences.getSous_competences(),souscompetences.getCompetences_id(),souscompetences.getB(),souscompetences.getI(),souscompetences.getI(),souscompetences.getM(),souscompetences.getE()});
+		return;
+	}	
 	
 	public void insertSousCompetences(SousCompetences souscompetences){
 		String sql = "INSERT INTO sous_competences(sous_competences,competences_id,B,I,M,E) VALUES(?,?,?,?,?,?)";
@@ -63,6 +69,7 @@ public class CompetencesJDBCTemplate {
 		return;
 	}
 	
+
 	
 	public List<Competences> allCompetences() {
 		String sql = "SELECT * FROM competences";
@@ -97,10 +104,10 @@ public class CompetencesJDBCTemplate {
 			souscompetence.setId(Integer.parseInt(String.valueOf(row.get("id"))));
 			souscompetence.setSous_competences((String)row.get("sous_competences"));
 			souscompetence.setCompetences_id((int) row.get("competences_id"));
-			souscompetence.setSous_competences((String)row.get("B"));
-			souscompetence.setSous_competences((String)row.get("I"));
-			souscompetence.setSous_competences((String)row.get("M"));
-			souscompetence.setSous_competences((String)row.get("E"));
+			souscompetence.setB((String)row.get("B"));
+			souscompetence.setI((String)row.get("I"));
+			souscompetence.setM((String)row.get("M"));
+			souscompetence.setE((String)row.get("E"));
 			
 			souscompetences.add(souscompetence);
 		}

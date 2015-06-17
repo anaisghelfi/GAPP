@@ -1,14 +1,17 @@
 package edu.isep.daoImp;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import edu.isep.beans.Eleve;
+import edu.isep.beans.Seances;
 import edu.isep.beans.Tuteur;
 
 public class elevesJDBCTemplate {
@@ -72,18 +75,77 @@ public class elevesJDBCTemplate {
 		return eleves;
 	}
 	
+	public List<Seances> allSeances(){
+		String sql = "SELECT * FROM seances";
+		
+		ArrayList<Seances> seances =  new ArrayList<Seances>();
+		
+		List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql);
+		
+		for (Map row : rows) {
+			Seances seance =  new Seances();
+			
+			seance.setId(Integer.parseInt(String.valueOf(row.get("id"))));
+			//seance.setDate_seance((String)row.get("date_seance"));
+			seance.setNumero_seance(Integer.parseInt(String.valueOf(row.get("numero_seance"))));
+			
+			
+			seances.add(seance);
+		}
+
+		return seances;
+	}
 	
+
+
+//fonction qui retourne le tuteur de l'�l�ve
+
+public List<Tuteur> tuteurEleve(String nom){
+	String sql = "SELECT tuteur.nom, tuteur.prenom, tuteur.mail FROM tuteur JOIN groupes ON tuteur.id = groupes.tuteur_id JOIN eleves ON groupes.nom = eleves.groupe WHERE eleves.nom LIKE ?";
 	
-//	fonction pour selectionner les élèves qui n'ont pas de groupe
+	ArrayList<Tuteur> tuteurs =  new ArrayList<Tuteur>();
 	
-//	fonction pour selectionner les élèves qui ont un groupe
+	List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql, new Object[]{nom});
 	
-//	fonction pour selectionner les élèves d'un certain groupe en param
+	for (Map row : rows) {
+		Tuteur tuteur =  new Tuteur();
+		
+	//	tuteur.setId(Integer.parseInt(String.valueOf(row.get("id"))));
+		tuteur.setNom((String)row.get("nom"));
+		tuteur.setPrenom((String)row.get("prenom"));
+		tuteur.setMail((String)row.get("mail"));
+		
+		
+		tuteurs.add(tuteur);
+	}
+
+	return tuteurs;
+}
+
+	//	fonction qui retourne une liste d'eleve par groupe
+	public List<Eleve> elevesParGroupe(String groupe){
+		String sql = "SELECT * FROM eleves where groupe = ?";
+		
+		ArrayList<Eleve> eleves =  new ArrayList<Eleve>();
+		
+		List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql, new Object[]{groupe});
+		
+		for (Map row : rows) {
+			Eleve eleve =  new Eleve();
+			
+			eleve.setId(Integer.parseInt(String.valueOf(row.get("id"))));
+			eleve.setNom((String)row.get("nom"));
+			eleve.setPrenom((String)row.get("prenom"));
+			eleve.setMail((String)row.get("mail"));
+			eleve.setPromo((String)row.get("promo"));
+			eleve.setGroupe((String)row.get("groupe"));
+			eleve.setCode_eleve(Integer.parseInt(String.valueOf(row.get("code_eleve"))));
+			eleve.setNote(Integer.parseInt(String.valueOf(row.get("note"))));
+			
+			eleves.add(eleve);
+		}
+
+		return eleves;
+	}	
 	
-	
-//	public void insertAttribution(User user){
-//		String sql = "INSERT INTO users(user,password,type) VALUES(?,?,?)";
-//		jdbcTemplateObject.update(sql,new Object[]{user.getUser(),user.getPassword(),user.getType()});
-//		return;
-//	}
 }

@@ -12,8 +12,7 @@ public class UserJDBCTemplate{
 	private DataSource datasource;
 	private JdbcTemplate jdbcTemplateObject;
 	private static final String COMMA_DELIMITER = ";";
-	private static final int STUDENT_LNAME_IDX = 0;
-	private static final int STUDENT_FNAME_IDX = 1;
+	
 	
 	public void setDataSource(DataSource dataSource){
 		this.datasource = dataSource;
@@ -21,8 +20,8 @@ public class UserJDBCTemplate{
 	}
 	
 	public void insertUser(User user){
-		String sql = "INSERT INTO users(lastname,firstname) VALUES(?,?)";
-		jdbcTemplateObject.update(sql,new Object[]{user.getLastname(),user.getFirstname()});
+		String sql = "INSERT INTO eleves(nom,prenom,code_eleve,promo,mail,groupe,note) VALUES(?,?,?,2017,null,?,?)";
+		jdbcTemplateObject.update(sql,new Object[]{user.getNom(),user.getPrenom(),user.getCodeEleve(),user.getGroupe(),user.getNote()});
 		return;
 	}
 	public void readCsvFile(String fileName) {
@@ -38,12 +37,14 @@ public class UserJDBCTemplate{
             fileReader.readLine();
             
             while ((line = fileReader.readLine()) != null) {
-               
+              
                 String[] tokens = line.split(COMMA_DELIMITER);
                 if(tokens.length > 0) {
                 	User user = new User();
-                	user.setLastname(tokens[STUDENT_LNAME_IDX]);
-                	user.setFirstname(tokens[STUDENT_FNAME_IDX]);
+                	user.setNom(tokens[0]);
+                	user.setPrenom(tokens[1]);
+                	user.setCodeEleve(Integer.parseInt(tokens[2]));
+                	user.setGroupe(tokens[3]);
                 	insertUser(user);
 				}
             }
