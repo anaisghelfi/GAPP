@@ -94,7 +94,6 @@ public class elevesJDBCTemplate {
 		return seances;
 	}
 	
-<<<<<<< HEAD
 
 
 //fonction qui retourne le tuteur de l'élève
@@ -119,8 +118,9 @@ public List<Tuteur> tuteurEleve(String nom){
 	}
 
 	return tuteurs;
-=======
-//	fonction qui retourne une liste d'eleve par groupe
+}
+
+	//	fonction qui retourne une liste d'eleve par groupe
 	public List<Eleve> elevesParGroupe(String groupe){
 		String sql = "SELECT * FROM eleves where groupe = ?";
 		
@@ -146,7 +146,4 @@ public List<Tuteur> tuteurEleve(String nom){
 		return eleves;
 	}	
 	
->>>>>>> 11c51614048f29b359c0582d6d25040a95aeea10
-}
-
 }
