@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import edu.isep.beans.Eleve;
 import edu.isep.beans.Seances;
+import edu.isep.beans.Tuteur;
 
 public class elevesJDBCTemplate {
 	private DataSource datasource;
@@ -93,5 +94,30 @@ public class elevesJDBCTemplate {
 		return seances;
 	}
 	
+
+
+//fonction qui retourne le tuteur de l'élève
+
+public List<Tuteur> tuteurEleve(String nom){
+	String sql = "SELECT tuteur.nom, tuteur.prenom, tuteur.mail FROM tuteur JOIN groupes ON tuteur.id = groupes.tuteur_id JOIN eleves ON groupes.nom = eleves.groupe WHERE eleves.nom LIKE ?";
+	
+	ArrayList<Tuteur> tuteurs =  new ArrayList<Tuteur>();
+	
+	List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql, new Object[]{nom});
+	
+	for (Map row : rows) {
+		Tuteur tuteur =  new Tuteur();
+		
+	//	tuteur.setId(Integer.parseInt(String.valueOf(row.get("id"))));
+		tuteur.setNom((String)row.get("nom"));
+		tuteur.setPrenom((String)row.get("prenom"));
+		tuteur.setMail((String)row.get("mail"));
+		
+		
+		tuteurs.add(tuteur);
+	}
+
+	return tuteurs;
 }
 
+}
