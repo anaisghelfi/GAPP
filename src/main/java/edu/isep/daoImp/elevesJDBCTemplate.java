@@ -1,9 +1,11 @@
 package edu.isep.daoImp;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 
 import javax.sql.DataSource;
@@ -85,6 +87,7 @@ public class elevesJDBCTemplate {
 		for (Map row : rows) {
 			Seances seance =  new Seances();
 			
+			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
 			seance.setId(Integer.parseInt(String.valueOf(row.get("id"))));
 			//seance.setDate_seance((String)row.get("date_seance")); ICI VICOOO
 			seance.setNumero_seance(Integer.parseInt(String.valueOf(row.get("numero_seance"))));

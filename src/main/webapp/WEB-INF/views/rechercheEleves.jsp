@@ -47,39 +47,185 @@
                 </div>
 			
 			
-                <div class="col-lg-6">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Rechercher un groupe d'APP</h5>
-                        </div>
-                        	<div class="ibox-content">
-                            
-                            	
-                       			<div class='form-group'>
-                                     <label>Accéder à un sous-groupe d'APP</label>
-                                     
- 									<select name="id" class="form-control">
- 										<c:forEach var="groupe" items="${groupes}">
- 										<optgroup label="${groupe.nom}">
- 											<c:forEach var="sousGroupe" items="${sousGroupes}">
- 												<c:if test="${sousGroupe.groupes_id == groupe.id}">
- 													<option value="http://localhost:8080/gapp/ficheGroupe?=<c:out value="${sousGroupe.nom}"/>" ><c:out value="${sousGroupe.nom}"/></option>
- 												</c:if> 												
- 											</c:forEach>
- 										</optgroup>
- 										</c:forEach>
- 									</select>
- 								</div>
-								
-                       	 </div>
+			
+					<div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Trouver un groupe d'APP <small>avec ses sous-groupes associés</small></h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
                     </div>
                 </div>
-                
-              
+                <div class="ibox-content">
+
+                    <div id="jstree1">
+                        <ul>
+                            <li class="jstree-open">Groupe d'APP 
+                                <ul>
+                         
+	                                <c:forEach var="groupe" items="${groupes}">
+	                                	<li> <c:out value="${groupe.nom}"/>
+	                                
+			                                <ul>
+				                                <c:forEach var="sousGroupe" items="${sousGroupes}">
+													<c:if test="${sousGroupe.groupes_id == groupe.id}">
+														<li data-jstree='{"type":"css"}'>
+															<a href="ficheGroupe/${sousGroupe.nom}"><c:out value="${sousGroupe.nom}"/></a>
+														</li>
+													</c:if>
+												</c:forEach> 
+			                                </ul>
+	                                
+										</li>
+									</c:forEach>
+                                
+
+	                                </ul>
+	                            </li>
+	                        </ul>
+	                    </div>
+	
+		                </div>
+		            </div>
+		        </div>
+			              
+                </div>
             </div>
 
 
-        </div>
        
        
 <%@ include file="include/bas_de_page.jsp" %>
+
+<style>
+    .jstree-open > .jstree-anchor > .fa-folder:before {
+        content: "\f07c";
+    }
+
+    .jstree-default .jstree-icon.none {
+        width: 0;
+    }
+</style>
+
+<script>
+    $(document).ready(function(){
+
+        $('#jstree1').jstree({
+            'core' : {
+                'check_callback' : true
+            },
+            'plugins' : [ 'types', 'dnd' ],
+            'types' : {
+                'default' : {
+                    'icon' : 'fa fa-folder'
+                },
+                'html' : {
+                    'icon' : 'fa fa-file-code-o'
+                },
+                'svg' : {
+                    'icon' : 'fa fa-file-picture-o'
+                },
+                'css' : {
+                    'icon' : 'fa fa-file-code-o'
+                },
+                'img' : {
+                    'icon' : 'fa fa-file-image-o'
+                },
+                'js' : {
+                    'icon' : 'fa fa-file-text-o'
+                }
+
+            }
+        });
+
+        $('#using_json').jstree({ 'core' : {
+            'data' : [
+                'Empty Folder',
+                {
+                    'text': 'Resources',
+                    'state': {
+                        'opened': true
+                    },
+                    'children': [
+                        {
+                            'text': 'css',
+                            'children': [
+                                {
+                                    'text': 'animate.css', 'icon': 'none'
+                                },
+                                {
+                                    'text': 'bootstrap.css', 'icon': 'none'
+                                },
+                                {
+                                    'text': 'main.css', 'icon': 'none'
+                                },
+                                {
+                                    'text': 'style.css', 'icon': 'none'
+                                }
+                            ],
+                            'state': {
+                                'opened': true
+                            }
+                        },
+                        {
+                            'text': 'js',
+                            'children': [
+                                {
+                                    'text': 'bootstrap.js', 'icon': 'none'
+                                },
+                                {
+                                    'text': 'inspinia.min.js', 'icon': 'none'
+                                },
+                                {
+                                    'text': 'jquery.min.js', 'icon': 'none'
+                                },
+                                {
+                                    'text': 'jsTree.min.js', 'icon': 'none'
+                                },
+                                {
+                                    'text': 'custom.min.js', 'icon': 'none'
+                                }
+                            ],
+                            'state': {
+                                'opened': true
+                            }
+                        },
+                        {
+                            'text': 'html',
+                            'children': [
+                                {
+                                    'text': 'layout.html', 'icon': 'none'
+                                },
+                                {
+                                    'text': 'navigation.html', 'icon': 'none'
+                                },
+                                {
+                                    'text': 'navbar.html', 'icon': 'none'
+                                },
+                                {
+                                    'text': 'footer.html', 'icon': 'none'
+                                },
+                                {
+                                    'text': 'sidebar.html', 'icon': 'none'
+                                }
+                            ],
+                            'state': {
+                                'opened': true
+                            }
+                        }
+                    ]
+                },
+                'Fonts',
+                'Images',
+                'Scripts',
+                'Templates',
+            ]
+        } });
+
+    });
+</script>
