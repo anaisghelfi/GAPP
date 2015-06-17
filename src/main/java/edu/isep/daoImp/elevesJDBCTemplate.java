@@ -84,7 +84,7 @@ public class elevesJDBCTemplate {
 			Seances seance =  new Seances();
 			
 			seance.setId(Integer.parseInt(String.valueOf(row.get("id"))));
-			//seance.setDate_seance((String)row.get("date_seance"));
+			//seance.setDate_seance((String)row.get("date_seance")); ICI VICOOO
 			seance.setNumero_seance(Integer.parseInt(String.valueOf(row.get("numero_seance"))));
 			
 			
