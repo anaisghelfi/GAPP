@@ -37,9 +37,10 @@ public class RechercheElevesController {
 
 	
 	public RechercheElevesController(){
+
 		
 		ApplicationContext context = new ClassPathXmlApplicationContext("Bean.xml");
-		
+
 //		Declaration des DAO et variables
 		
 		daoEleve = (elevesJDBCTemplate) context.getBean("elevesDAO");
