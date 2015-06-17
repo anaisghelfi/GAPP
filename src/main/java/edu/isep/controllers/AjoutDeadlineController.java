@@ -17,13 +17,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.isep.beans.Deadline;
+import edu.isep.beans.Groupe;
 import edu.isep.daoImp.DeadlineJDBCTemplate;
+import edu.isep.daoImp.groupeJDBCTemplate;
 
 
 @Controller
 public class AjoutDeadlineController {
 	
 	private DeadlineJDBCTemplate daoDeadline;
+	private groupeJDBCTemplate daoGroupe;
+
 	private Map<Integer, Deadline> u;
 	private Map<String,Deadline> d;
 	
@@ -33,6 +37,8 @@ public class AjoutDeadlineController {
 		ApplicationContext context = new ClassPathXmlApplicationContext("Bean.xml");
 
 		daoDeadline = (DeadlineJDBCTemplate) context.getBean("deadlineDAO");
+		daoGroupe = (groupeJDBCTemplate) context.getBean("groupeDAO");
+
 		u = new HashMap<Integer, Deadline>();	
 		d = new HashMap<String, Deadline>();	
 
@@ -46,6 +52,10 @@ public class AjoutDeadlineController {
 	public String Exemple(Model model){
 		List<Deadline> deadlines = daoDeadline.allDeadline();
 		model.addAttribute("deadlines",deadlines);
+		
+		List<Groupe> groupes = daoGroupe.allGroupes();
+		model.addAttribute("groupes", groupes);
+		
 		return "ajoutDeadline";
 	}
 	

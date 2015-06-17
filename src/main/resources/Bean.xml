@@ -18,6 +18,7 @@
 <!--  <property name="username" value="root"/> -->
 <!--  <property name="password" value="root"/> -->
 
+
 </bean>
 
 <bean id="userDAO" class="edu.isep.daoImp.UserJDBCTemplate">
