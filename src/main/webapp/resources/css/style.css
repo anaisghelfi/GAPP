@@ -6432,3 +6432,13 @@ body.skin-3 {
 	margin-left: 14px;
 	margin-bottom:5px;
 }
+.rotate {
+	font-size:	10px;
+	width: 10%;
+	word-break:	break-word;
+}
+.primary {
+	  background-color: #3498db;
+	  border-color: #3498db;
+	  color: #FFFFFF;
+}

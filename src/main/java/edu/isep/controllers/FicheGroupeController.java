@@ -23,11 +23,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.isep.beans.Competences;
+import edu.isep.beans.SousCompetences;
 import edu.isep.beans.Eleve;
 import edu.isep.beans.User;
 import edu.isep.beans.Absences;
 import edu.isep.daoImp.elevesJDBCTemplate;
 import edu.isep.daoImp.AbsencesJDBCTemplate;
+import edu.isep.daoImp.CompetencesJDBCTemplate;
 
 
 @Controller
@@ -35,9 +37,12 @@ public class FicheGroupeController {
 	
 	private elevesJDBCTemplate dao;
 	private AbsencesJDBCTemplate daoAbsences;
+	private CompetencesJDBCTemplate daoCompetences;
 
 	private Map<Integer, Eleve> e;
-	private Map<Integer, Absences> c;
+	private Map<Integer, Absences> a;
+	private Map<Integer, Competences> c;
+	private Map<Integer, SousCompetences> sc;
 
 //A VERIFIER : S�ance pour le tuteur en session aujourd'hui ou non (Si oui envoyer la date dans le model + dans l'insertion de l'absence)
 //A FAIRE EN PLUS : Ajouter le nom de la s�ance (plutot le num�ro) ??
@@ -49,15 +54,18 @@ public class FicheGroupeController {
 		
 		dao = (elevesJDBCTemplate) context.getBean("elevesDAO");
 		daoAbsences = (AbsencesJDBCTemplate) context.getBean("absencesDAO");
+		daoCompetences = (CompetencesJDBCTemplate) context.getBean("competencesDAO");
 		
 		e = new HashMap<Integer, Eleve>();
-		c = new HashMap<Integer, Absences>();
+		a = new HashMap<Integer, Absences>();
+		c = new HashMap<Integer, Competences>();
+		sc = new HashMap<Integer, SousCompetences>();
 	
 	}
 
 	
 
-	@RequestMapping(value = "/ficheGroupe/{numgroupe}", method = RequestMethod.GET)
+	@RequestMapping(value = "/ficheGroupe-{numgroupe}", method = RequestMethod.GET)
 	public String getEleves(@PathVariable String numgroupe,Model model) 
 	{
 
@@ -68,10 +76,18 @@ public class FicheGroupeController {
 		model.addAttribute("numerogroupe", groupeno);
 		model.addAttribute("alleleves", eleves);
 
+		
+		List<Competences> allcompetences = daoCompetences.allCompetences();
+		model.addAttribute("allcompetences", allcompetences);
+		
+		List<SousCompetences> allsouscompetences = daoCompetences.allSousCompetences();
+		model.addAttribute("allsouscompetences", allsouscompetences);
+		
+
 		return "ficheGroupe";
 	}
 	
-	@RequestMapping(value ="/addAbsences/{numgroupe}", method = RequestMethod.POST)
+	@RequestMapping(value ="/addAbsences-{numgroupe}", method = RequestMethod.POST)
 	public String addAbsences(HttpServletRequest request,@PathVariable String numgroupe,Model model) 
 	{
 		String groupeno = (String)numgroupe;
@@ -79,6 +95,8 @@ public class FicheGroupeController {
 		List<Eleve> eleves = dao.elevesParGroupe((String)groupeno);
 		model.addAttribute("numerogroupe", groupeno);
 		model.addAttribute("alleleves", eleves);
+		
+		
 		
 		for(int i=0;i<eleves.size();i++){
 			int id = eleves.get(i).getId();
