@@ -78,7 +78,7 @@ public class AttribGroupeController {
 //		Pour récupérer tous les tuteurs
 		List<Tuteur> tuteurs = daoTuteur.allTuteurs();
 		model.addAttribute("tuteurs", tuteurs);
-
+		
 		return "attribGroupe"; 
 	}
 	
@@ -88,7 +88,7 @@ public class AttribGroupeController {
 	{
 //		VOIR COMMENT METTRE LE TUTEUR ID
 //		Pour ins�rer un groupe
-//		groupe.setTuteur_id(1);
+		groupe.setTuteur_id(1);
 		g.put(groupe.getId(), groupe);
 		daoGroupe.addGroup(groupe);
 		
