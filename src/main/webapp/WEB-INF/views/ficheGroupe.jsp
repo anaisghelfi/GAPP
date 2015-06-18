@@ -125,6 +125,7 @@
 												<c:forEach var="allsouscompetences" items="${allsouscompetences}">
 													<c:if test="${allsouscompetences.competences_id == allcompetences.id}">		
 													<tr>	
+														
 														<td class='primary'><c:out value="${allsouscompetences.sous_competences}"/></td>
 														<td rowspan="5"><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"/></td>
 														<td rowspan="5"><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"/></td>
@@ -153,6 +154,66 @@
 				
 				                                </tbody>
 				                         </table>
+				                         
+				 						<table class="table table-bordered">
+				                                <thead>
+				                                <tr>
+				                                    <th rowspan="2">Compétence</th>
+				                                    <th colspan="5">Niveau</th>
+				                                    <th rowspan="2">Eleves</th>
+				                                </tr>   
+				                                <tr>
+				                                    
+				                                    <th class="rotate">Non acquis</th>
+				                                    <th class="rotate">En cours</th>
+				                                    <th class="rotate">Acquis</th>
+				                                    <th class="rotate">En cours d'acquisition</th>
+				                                    <th class="rotate">Acquis (ou dépassé)</th>
+				                                    
+				                                </tr>   				                                
+				                                </thead>
+				                                <tbody>
+							                   
+												<c:forEach var="allsouscompetences" items="${allsouscompetences}">
+													<c:if test="${allsouscompetences.competences_id == allcompetences.id}">		
+														
+															<c:forEach var="alleleves" items="${alleleves}">
+															<tr>
+															<c:set var="count" value="0" scope="page" />
+															 
+															<c:if test="${count == 0}">
+																<td class='primary'><c:out value="${allsouscompetences.sous_competences}"/> <c:out value="${count}"/></td>
+															</c:if>
+															<c:if test="${count == 1} ">
+																<td>B : <c:out value="${allsouscompetences.getB()}"/></td>
+															</c:if>
+															<c:if test="${count == 2}">
+																<td>I : <c:out value="${allsouscompetences.getI()}"/></td>
+															</c:if>
+															<c:if test="${count == 3}">
+																<td><i>M : <c:out value="${allsouscompetences.getM()}"/></i></td>
+															</c:if>		
+															<c:if test="${count == 4}">
+																<td colspan="2"><i>E : <c:out value="${allsouscompetences.getE()}"/></i></td>
+															</c:if>		
+															<c:set var="count" value="${count + 1}" scope="page"/>											
+															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"/></td>
+															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"/></td>
+															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"/></td>
+															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"/></td>
+															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"/></td>
+															<td><c:out value="${alleleves.prenom}"/> <c:out value="${alleleves.nom}"/></td>
+															
+															</tr>
+															</c:forEach>
+													
+											
+													</c:if>
+												</c:forEach>										
+				
+				                                </tbody>
+				                         </table>				                         
+				                         
 				                         </c:forEach>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-white" data-dismiss="modal">Fermer</button>
