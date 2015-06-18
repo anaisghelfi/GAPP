@@ -1,9 +1,11 @@
 package edu.isep.daoImp;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 
 import javax.sql.DataSource;
@@ -85,6 +87,7 @@ public class elevesJDBCTemplate {
 		for (Map row : rows) {
 			Seances seance =  new Seances();
 			
+			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
 			seance.setId(Integer.parseInt(String.valueOf(row.get("id"))));
 			//seance.setDate_seance((String)row.get("date_seance")); ICI VICOOO
 			seance.setNumero_seance(Integer.parseInt(String.valueOf(row.get("numero_seance"))));
@@ -98,7 +101,7 @@ public class elevesJDBCTemplate {
 	
 
 
-//fonction qui retourne le tuteur de l'�l�ve
+//fonction qui retourne le tuteur de l'�l�ve
 
 public List<Tuteur> tuteurEleve(String nom){
 	String sql = "SELECT tuteur.nom, tuteur.prenom, tuteur.mail FROM tuteur JOIN groupes ON tuteur.id = groupes.tuteur_id JOIN eleves ON groupes.nom = eleves.groupe WHERE eleves.nom LIKE ?";
@@ -129,6 +132,32 @@ public List<Tuteur> tuteurEleve(String nom){
 		ArrayList<Eleve> eleves =  new ArrayList<Eleve>();
 		
 		List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql, new Object[]{groupe});
+		
+		for (Map row : rows) {
+			Eleve eleve =  new Eleve();
+			
+			eleve.setId(Integer.parseInt(String.valueOf(row.get("id"))));
+			eleve.setNom((String)row.get("nom"));
+			eleve.setPrenom((String)row.get("prenom"));
+			eleve.setMail((String)row.get("mail"));
+			eleve.setPromo((String)row.get("promo"));
+			eleve.setGroupe((String)row.get("groupe"));
+			eleve.setCode_eleve(Integer.parseInt(String.valueOf(row.get("code_eleve"))));
+			eleve.setNote(Integer.parseInt(String.valueOf(row.get("note"))));
+			
+			eleves.add(eleve);
+		}
+
+		return eleves;
+	}	
+	
+//	fonction qui retourne la liste d'élève du meme groupe que l'élève donné en param (par son code élève)
+	public List<Eleve> elevesDeMemeGroupe(int code_eleve){
+		String sql = "SELECT * FROM eleves where groupe = (SELECT groupe FROM eleves WHERE code_eleve = ?)";
+		
+		ArrayList<Eleve> eleves =  new ArrayList<Eleve>();
+		
+		List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql, new Object[]{code_eleve});
 		
 		for (Map row : rows) {
 			Eleve eleve =  new Eleve();

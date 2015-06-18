@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import edu.isep.beans.Deadline;
 import edu.isep.beans.Groupe;
+import edu.isep.beans.Seances;
 
 public class DeadlineJDBCTemplate {
 	
@@ -61,6 +62,36 @@ public class DeadlineJDBCTemplate {
 		}
 
 		return deadlines;
+	}
+	
+	//Voir toutes les séances d'APP de tout les groupes
+	public List<Seances> allSeance(){
+		String sql = "SELECT * FROM seances";
+		
+		ArrayList<Seances> seances =  new ArrayList<Seances>();
+		
+		List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql);
+		
+		for (Map row : rows) {
+			Seances seance =  new Seances();
+			
+			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
+			seance.setId(Integer.parseInt(String.valueOf(row.get("id"))));
+			seance.setDate_seance((Date)row.get("date_seance"));
+			seance.setNumero_seance(Integer.parseInt(String.valueOf(row.get("numero_seance"))));
+			seance.setGroupes_id(Integer.parseInt(String.valueOf(row.get("groupes_id"))));
+			
+			seances.add(seance);
+		}
+
+		return seances;
+	}
+	
+	//Ajouter une séance d'APP
+	public void ajout_seance(Seances seance){
+		String sql = "INSERT INTO seances(numero_seance, date_seance, groupes_id) VALUES(?,?,?)";
+		jdbcTemplateObject.update(sql,new Object[]{seance.getNumero_seance(),seance.getDate_seance(),seance.getGroupes_id()});
+		return ;
 	}
 	
 	

@@ -12,6 +12,7 @@
 	<link href="<c:url value="/resources/fonts/css/font-awesome.css" />" rel="stylesheet" type="text/css" media="screen" />
     <!-- Toastr style -->
     <link href="<c:url value="/resources/css/plugins/toastr/toastr.min.css" />" rel="stylesheet" type="text/css" media="screen" />
+    <link href="<c:url value="/resources/css/plugins/jsTree/style.min.css" />" rel="stylesheet" type="text/css" media="screen" />
     <link href="<c:url value="/resources/css/animate.css" />" rel="stylesheet" type="text/css" media="screen" />
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet" type="text/css" media="screen" />
     <link href="<c:url value="/resources/css/fullcalendar.css" />" rel="stylesheet" type="text/css" media="screen" />

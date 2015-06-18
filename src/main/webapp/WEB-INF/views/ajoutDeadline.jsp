@@ -85,6 +85,31 @@
                        	 </div>
                     </div>
                 </div>
+                
+                
+                <div class="col-lg-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Ajouter une nouvelle séance</h5>
+                        </div>
+                        	<div class="ibox-content">
+                            
+                            	<form method="post" action="add_seance">
+								  <div class="form-group"><label>Numéro de séance :</label> <input type="text" name="numero_seance" class="form-control" ></div>
+								  <div class="form-group"><label>Date :</label> <input type="text" name="date_seance" class="form-control"></div>
+									 <div class="form-group"><label>Groupe :</label>
+											<select name="groupes_id" class="form-control">
+													<c:forEach var="groupe" items="${groupes}">
+													<option value="${groupe.id}"><c:out value="${groupe.nom}"/></option>
+													</c:forEach>
+											</select>	
+									</div> 							
+										<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" name="valider"><strong>Valider</strong></button>
+								</form>
+                            
+                       	 </div>
+                    </div>
+                </div>
               
             </div>
 
