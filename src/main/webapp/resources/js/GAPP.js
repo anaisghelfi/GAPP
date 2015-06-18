@@ -55,17 +55,7 @@ $(document).ready(function () {
         wheelStep: 10
     });
 
-    // Open close small chat
-    $('.open-small-chat').click(function(){
-        $(this).children().toggleClass('fa-comments').toggleClass('fa-remove');
-        $('.small-chat-box').toggleClass('active');
-    });
 
-    // Initialize slimscroll for small chat
-    $('.small-chat-box .content').slimScroll({
-        height: '234px',
-        railOpacity: 0.4
-    });
 
     // Small todo handler
     $('.check-link').click( function(){
@@ -76,12 +66,6 @@ $(document).ready(function () {
         return false;
     });
 
-    // Append config box / Only for demo purpose
-    // Uncomment on server mode to enable XHR calls
-    $.get("skin-config.html", function (data) {
-        if (!$('body').hasClass('no-skin-config'))
-            $('body').append(data);
-    });
 
     // Minimalize menu
     $('.navbar-minimalize').click(function () {
@@ -90,11 +74,6 @@ $(document).ready(function () {
 
     });
 
-    // Tooltips demo
-    $('.tooltip-demo').tooltip({
-        selector: "[data-toggle=tooltip]",
-        container: "body"
-    });
 
     // Move modal to body
     // Fix Bootstrap backdrop issu with animation.css
@@ -148,9 +127,9 @@ $(document).ready(function () {
         .popover();
 
     // Add slimscroll to element
-    $('.full-height-scroll').slimscroll({
+    	/*$('.full-height-scroll').slimscroll({
         height: '100%'
-    })
+    })*/
 });
 
 
