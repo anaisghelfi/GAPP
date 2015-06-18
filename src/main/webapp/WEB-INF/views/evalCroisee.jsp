@@ -28,34 +28,85 @@
             	<div class="ibox-title">
                 	<h5>Faire l'évaluation croisée de mon groupe</h5>
                 </div>
-                <div class="ibox-content">
-                	<table>
-<!--                 	Ligne avec les compétences -->
-                		<tr>
-                			<th></th>
-                		</tr>
-                		
-<!--                 	Ligne avec la descritpion des compétences -->
-                		<tr>
-                			<th></th>
-                		</tr>
-                		
-<!--                 	Ligne avec les niveaux -->
-						<tr>
-                			<th></th>
-                		</tr>
-                		
-<!--                 	Ligne avec tous les noms des membres du groupes (y compris celui connecté) et checkbox pour cocher niveau -->
-						<tr>
-                			<th></th>
-                		</tr>
-                		
-                		
-                	
-                	
-                	
-                	
-                	</table>
+                <div class="ibox-content" style="overflow-x: auto">
+                	<form >
+                		<table class="table table-bordered text-center"  style="width:auto">
+	                		<thead>
+	<!--                 	Ligne avec les compétences -->
+		                		<tr>
+		                			<th class="text-center">Nom des Eleves</th>
+		                			<c:forEach var="competence" items="${competences}">
+		                				<th colspan="4" class="text-center" ><c:out value="${competence.famille}"></c:out></th>
+		                				
+		                			</c:forEach>
+		                		</tr>
+	                		</thead>
+	                		
+	                		<tbody>
+	                		
+<!-- 		                	Ligne avec la descritpion des compétences -->
+		                		<tr>
+		                			<th></th>
+		                			<c:forEach  var="competence" items="${competences}">
+		                			<th colspan="4" class="text-center">Description</th>
+		                			</c:forEach>
+		                		</tr>
+		                		
+		<!--                 	Ligne avec les niveaux -->
+								<tr>
+									<th></th>
+									<c:forEach  var="competence" items="${competences}">
+										<c:forEach begin="1" end="4" var="i">
+			                				<th class="text-center">
+			                					<c:choose>
+													<c:when test="${i == 1}">
+													Non Acquis
+													</c:when>
+													<c:when test="${i == 2}">
+													En cours d'acquisition
+													</c:when>
+													<c:when test="${i == 3}">
+													Acquis 
+													</c:when>
+													<c:when test="${i == 4}">
+													Dépassé
+													</c:when>
+												</c:choose>
+											</th>
+			                			</c:forEach>
+			                		</c:forEach>
+		                		</tr>
+		                		
+		<!--                 	Ligne avec tous les noms des membres du groupes (y compris celui connecté) et checkbox pour cocher niveau -->
+								<c:forEach var="eleve" items="${eleves}">
+								<tr>
+									<th><c:out value="${eleve.prenom} ${eleve.nom}"></c:out></th>
+									<c:forEach  var="competence" items="${competences}">
+									<c:forEach begin="1" end="4" var="i">
+			                		<th class="text-center">
+			                			<c:choose>
+											<c:when test="${i == 1}">
+												<input type="radio" name="${competence.id}" value="1">
+											</c:when>
+											<c:when test="${i == 2}">
+												<input type="radio" name="${competence.id}" value="2">
+											</c:when>
+											<c:when test="${i == 3}">
+												<input type="radio" name="${competence.id}" value="3">
+											</c:when>
+											<c:when test="${i == 4}">
+												<input type="radio" name="${competence.id}" value="4">
+											</c:when>
+										</c:choose>
+									</th>
+			             			</c:forEach>
+			             			</c:forEach>	
+		                		</tr>
+		                		</c:forEach>
+	                		</tbody>
+	                	</table>
+	                	<input type="submit" value="Envoyer" class="btn btn-primary">
+                	</form>
                 </div>
             </div>
         </div>
