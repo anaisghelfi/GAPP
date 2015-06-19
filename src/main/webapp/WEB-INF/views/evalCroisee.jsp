@@ -30,7 +30,7 @@
                 </div>
                 <div class="ibox-content" style="overflow-x: auto">
                 	<form >
-                		<table class="table table-bordered text-center"  style="width:auto">
+                		<table id="EvalCroisee" class="table table-bordered text-center"  style="width:auto">
 	                		<thead>
 	<!--                 	Ligne avec les compétences -->
 		                		<tr>
@@ -86,16 +86,16 @@
 			                		<th class="text-center">
 			                			<c:choose>
 											<c:when test="${i == 1}">
-												<input type="radio" name="${competence.id}" value="1">
+												<input type="radio" name="${competence.id}_${eleve.code_eleve}" value="1">
 											</c:when>
 											<c:when test="${i == 2}">
-												<input type="radio" name="${competence.id}" value="2">
+												<input type="radio" name="${competence.id}_${eleve.code_eleve}" value="2">
 											</c:when>
 											<c:when test="${i == 3}">
-												<input type="radio" name="${competence.id}" value="3">
+												<input type="radio" name="${competence.id}_${eleve.code_eleve}" value="3">
 											</c:when>
 											<c:when test="${i == 4}">
-												<input type="radio" name="${competence.id}" value="4">
+												<input type="radio" name="${competence.id}_${eleve.code_eleve}" value="4">
 											</c:when>
 										</c:choose>
 									</th>
@@ -112,7 +112,8 @@
         </div>
     </div>
 </div>
-                	
+
+        	
 					
  
  

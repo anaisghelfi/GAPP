@@ -13,9 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.isep.beans.Competences;
 import edu.isep.beans.Eleve;
+import edu.isep.beans.EvalCroisee;
 import edu.isep.beans.Groupe;
 import edu.isep.beans.SousGroupe;
 import edu.isep.beans.Tuteur;
@@ -31,6 +33,7 @@ public class EvalCroiseeController {
 	private EvalCroiseeJDBCTemplate daoEvalCroisee;
 	
 	private Map<Integer, Eleve> e;
+	private Map<Integer, EvalCroisee> ec;
 
 	public EvalCroiseeController(){
 		
@@ -41,6 +44,7 @@ public class EvalCroiseeController {
 		daoEvalCroisee = (EvalCroiseeJDBCTemplate) context.getBean("EvalCroiseeDAO");
 		
 		e = new HashMap<Integer, Eleve>();
+		ec = new HashMap<Integer, EvalCroisee>();
 
 
 	}
@@ -60,16 +64,23 @@ public class EvalCroiseeController {
 			List<Competences> competences = daoCompetences.allCompetences();
 			model.addAttribute("competences", competences);
 			
+//			Fonction qui va chercher toutes les notes eval croisees déjà remplies
+			List<EvalCroisee> evalCroisees = daoEvalCroisee.evalCroiseeParGroupe(code_eleve);
+			model.addAttribute("evalCroisees", evalCroisees);
+			
 			
 
 			return "evalCroisee"; 
 		}
 		
 //		Pour traiter l'envoi de l'eval croisee
-		@RequestMapping(value="/InsererNoteEvalCroisee", method = RequestMethod.POST)
-		public String Note(HttpServletRequest request, HttpSession session, Model model){
+		@RequestMapping(value="/insererNoteEvalCroisee", method = RequestMethod.POST)
+		public @ResponseBody void Note(HttpServletRequest request, HttpSession session, Model model, EvalCroisee evalcroisee){
 			
-			return "";
+			evalcroisee.setEleve_juge_code_eleve(Integer.parseInt(String.valueOf(session.getAttribute("number"))));
+			ec.put(evalcroisee.getId(), evalcroisee);
+			daoEvalCroisee.InsertNote(evalcroisee);
+			
 		}
 		
 	}
