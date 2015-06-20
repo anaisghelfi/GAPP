@@ -37,12 +37,6 @@ public class AttribGroupeController {
 	public AttribGroupeController(){
 
 		ApplicationContext context = new ClassPathXmlApplicationContext("Bean.xml");
-		//		Declaration des DAO et variables
-		daoEleve = (elevesJDBCTemplate) context.getBean("elevesDAO");
-		e = new HashMap<Integer, Eleve>();
-		daoGroupe = (groupeJDBCTemplate) context.getBean("groupeDAO");
-		g = new HashMap<Integer, Groupe>();
-
 		
 //		Declaration des DAO et variables
 
