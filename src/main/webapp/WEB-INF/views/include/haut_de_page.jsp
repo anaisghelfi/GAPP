@@ -54,7 +54,7 @@
                     <a href="ajoutDeadline"><i class="fa fa-calendar"></i><span class="nav-label">Ajouter des deadlines</span></a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Attribuer les rôles </span></a>
+                    <a href="attribRole"><i class="fa fa-user"></i> <span class="nav-label">Attribuer les rôles </span></a>
                 </li>
                 <li>
                     <a href="attribGroupe"> <i class="fa fa-users"></i><span class="nav-label">Attribuer les groupes</span> </a>

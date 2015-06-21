@@ -13,13 +13,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.isep.beans.Competences;
 import edu.isep.beans.Eleve;
+import edu.isep.beans.EvalCroisee;
 import edu.isep.beans.Groupe;
 import edu.isep.beans.SousGroupe;
 import edu.isep.beans.Tuteur;
 import edu.isep.daoImp.CompetencesJDBCTemplate;
+import edu.isep.daoImp.EvalCroiseeJDBCTemplate;
 import edu.isep.daoImp.elevesJDBCTemplate;
 
 @Controller
@@ -27,8 +30,10 @@ public class EvalCroiseeController {
 	
 	private elevesJDBCTemplate daoEleve;
 	private CompetencesJDBCTemplate daoCompetences;
+	private EvalCroiseeJDBCTemplate daoEvalCroisee;
 	
 	private Map<Integer, Eleve> e;
+	private Map<Integer, EvalCroisee> ec;
 
 	public EvalCroiseeController(){
 		
@@ -36,8 +41,10 @@ public class EvalCroiseeController {
 		
 		daoEleve = (elevesJDBCTemplate) context.getBean("elevesDAO");
 		daoCompetences = (CompetencesJDBCTemplate) context.getBean("competencesDAO");
+		daoEvalCroisee = (EvalCroiseeJDBCTemplate) context.getBean("EvalCroiseeDAO");
 		
 		e = new HashMap<Integer, Eleve>();
+		ec = new HashMap<Integer, EvalCroisee>();
 
 
 	}
@@ -46,21 +53,34 @@ public class EvalCroiseeController {
 			
 			session = request.getSession();
 			session.getAttribute("login");
-			Object code_eleve = session.getAttribute("number");//Demander Vico comment recup ca
+			int code_eleve = Integer.parseInt(String.valueOf(session.getAttribute("number")));
+//			model.addAttribute("code_eleve", code_eleve);
 			
 //			Fonction qui va chercher les élèves du groupe de la personne connecté
-//			List<Eleve> eleves = daoEleve.elevesDeMemeGroupe(code_eleve);
-//			model.addAttribute("eleves", eleves);
-			
-			
+			List<Eleve> eleves = daoEleve.elevesDeMemeGroupe(code_eleve);
+			model.addAttribute("eleves", eleves);
 			
 //			Fonction qui va chercher toutes les compétences
 			List<Competences> competences = daoCompetences.allCompetences();
 			model.addAttribute("competences", competences);
 			
+//			Fonction qui va chercher toutes les notes eval croisees déjà remplies
+			List<EvalCroisee> evalCroisees = daoEvalCroisee.evalCroiseeParGroupe(code_eleve);
+			model.addAttribute("evalCroisees", evalCroisees);
+			
 			
 
 			return "evalCroisee"; 
+		}
+		
+//		Pour traiter l'envoi de l'eval croisee
+		@RequestMapping(value="/insererNoteEvalCroisee", method = RequestMethod.POST)
+		public @ResponseBody void Note(HttpServletRequest request, HttpSession session, Model model, EvalCroisee evalcroisee){
+			
+			evalcroisee.setEleve_juge_code_eleve(Integer.parseInt(String.valueOf(session.getAttribute("number"))));
+			ec.put(evalcroisee.getId(), evalcroisee);
+			daoEvalCroisee.InsertNote(evalcroisee);
+			
 		}
 		
 	}

@@ -6,6 +6,7 @@ public class Tuteur {
 	private String nom;
 	private String prenom;
 	private String mail;
+	private int type;
 	
 	public int getId() {
 		return id;
@@ -31,5 +32,12 @@ public class Tuteur {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	
 	
 }

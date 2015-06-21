@@ -52,7 +52,7 @@ public class groupeJDBCTemplate {
 		List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql);
 		
 		for (Map row : rows) {
-			Groupe groupe =  new Groupe();
+			Groupe groupe =  new Groupe(); 
 			
 			groupe.setId(Integer.parseInt(String.valueOf(row.get("id"))));
 			groupe.setNom((String)row.get("nom"));
