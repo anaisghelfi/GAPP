@@ -15,10 +15,10 @@ import edu.isep.beans.Eleve;
 public class ExportNoteJDBCTemplate {
 	
 	private DataSource datasource;
-	private static JdbcTemplate jdbcTemplateObject;
-	private static final String COMMA_DELIMITER = ",";
+	private JdbcTemplate jdbcTemplateObject;
+	private static final String COMMA_DELIMITER = ";";
 	private static final String NEW_LINE_SEPARATOR = "\n";
-	private static final String FILE_HEADER = "Nom,Prenom,Code eleve,Groupe,Note";
+	private static final String FILE_HEADER = "Nom;Prenom;Code eleve;Groupe;Note";
 	
 	public void setDataSource(DataSource dataSource){
 		this.datasource = dataSource;
@@ -40,7 +40,7 @@ public class ExportNoteJDBCTemplate {
 					eleve.setPrenom((String)row.get("prenom"));
 					eleve.setCode_eleve(Integer.parseInt(String.valueOf(row.get("code_eleve"))));
 					eleve.setGroupe((String)row.get("groupe"));
-					if(row.get("note") != null){eleve.setNote(Integer.parseInt(String.valueOf(row.get("note"))));}
+					if(row.get("note") != null){eleve.setNote((double) row.get("note"));}
 					
 					eleves.add(eleve);
 				}
@@ -66,16 +66,13 @@ public class ExportNoteJDBCTemplate {
 						fileWriter.append(COMMA_DELIMITER);
 						fileWriter.append(eleve.getGroupe());
 						fileWriter.append(COMMA_DELIMITER);
-						fileWriter.append(Integer.toString((int) eleve.getNote()));
+						fileWriter.append(String.valueOf(eleve.getNote()));
 						fileWriter.append(NEW_LINE_SEPARATOR);
 					}
-
-					
-					
-					System.out.println("CSV file was created successfully !!!");
+					System.out.println("L'export a fonctionné!!!");
 					
 				} catch (Exception e) {
-					System.out.println("Error in CsvFileWriter !!!");
+					System.out.println("Erreur d'écriture du fichier!!!");
 					e.printStackTrace();
 				} finally {
 					
@@ -83,7 +80,7 @@ public class ExportNoteJDBCTemplate {
 						fileWriter.flush();
 						fileWriter.close();
 					} catch (IOException e) {
-						System.out.println("Error while flushing/closing fileWriter !!!");
+						System.out.println("Erreur flushing/closing fileWriter !!!");
 		                e.printStackTrace();
 					}
 					
