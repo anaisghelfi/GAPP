@@ -165,6 +165,7 @@
 				                                    <th rowspan="2">Compétence</th>
 				                                    <th colspan="5">Niveau</th>
 				                                    <th rowspan="2">Eleves</th>
+				                                    <th style="word-break:	break-word;width=15%" rowspan="2">Remarques</th>
 				                                </tr>   
 				                                <tr>
 				                                    
@@ -181,32 +182,32 @@
 												<c:forEach var="allsouscompetences" items="${allsouscompetences}">
 													<c:if test="${allsouscompetences.competences_id == allcompetences.id}">		
 														
-															<c:forEach var="alleleves" items="${alleleves}">
+															<c:forEach var="alleleves" items="${alleleves}" varStatus="loop">
 															<tr>
-															<c:set var="count" value="0" scope="page" />
 															 
-															<c:if test="${count == 0}">
-																<td class='primary'><c:out value="${allsouscompetences.sous_competences}"/> <c:out value="${count}"/></td>
+															<c:if test="${loop.index == 0}">
+																<td class='primary'><c:out value="${allsouscompetences.sous_competences}"/> </td>
 															</c:if>
-															<c:if test="${count == 1} ">
+															<c:if test="${loop.index == 1}">
 																<td>B : <c:out value="${allsouscompetences.getB()}"/></td>
-															</c:if>
-															<c:if test="${count == 2}">
+															</c:if>															
+															<c:if test="${loop.index == 2}">
 																<td>I : <c:out value="${allsouscompetences.getI()}"/></td>
 															</c:if>
-															<c:if test="${count == 3}">
+															<c:if test="${loop.index == 3}">
 																<td><i>M : <c:out value="${allsouscompetences.getM()}"/></i></td>
 															</c:if>		
-															<c:if test="${count == 4}">
-																<td colspan="2"><i>E : <c:out value="${allsouscompetences.getE()}"/></i></td>
+															<c:if test="${loop.index == 4}">
+															
+																<td rowspan="2"><i>E : <c:out value="${allsouscompetences.getE()}"/></i></td>
 															</c:if>		
-															<c:set var="count" value="${1+count}" scope="page"/>											
 															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
 															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
 															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
 															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
 															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
 															<td><c:out value="${alleleves.prenom}"/> <c:out value="${alleleves.nom}"/></td>
+															<td><textarea style="height:100%;resize:none" name="grouperemarques-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"></textarea></td>
 															
 															</tr>
 															</c:forEach>
