@@ -101,15 +101,22 @@
  <script src="<c:url value="/resources/js/moment.min.js"/>"></script>
   <script src="<c:url value="/resources/js/fullcalendar.min.js"/>"></script>
 <script>
+	
+	var total = 5;
+	var absence = 1;
+	var presence = 4;
+	var presenceP= ((total - absence)/total)*100;
+	var absenceP = 100 - presenceP;
+	
     var doughnutData = [
         {
-            value: 70,
+            value: presenceP,
             color: "#3A99D9",
             highlight: "rgba(58,153,217,0.8)",
             label: "Présent"
         },
         {
-            value: 30,
+            value: absenceP,
             color: "#e74c3c",
             highlight: "rgba(231, 76, 60,0.8)",
             label: "Absent"
