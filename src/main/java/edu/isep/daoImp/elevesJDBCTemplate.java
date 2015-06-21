@@ -43,7 +43,7 @@ public class elevesJDBCTemplate {
 			eleve.setCode_eleve(Integer.parseInt(String.valueOf(row.get("code_eleve"))));
 			eleve.setPromo((String)row.get("promo"));
 			eleve.setGroupe((String)row.get("groupe"));
-			if(row.get("note") != null){eleve.setNote(Integer.parseInt(String.valueOf(row.get("note"))));}
+			if(row.get("note") != null){eleve.setNote((double) row.get("note"));}
 			
 			eleves.add(eleve);
 		}
@@ -69,7 +69,7 @@ public class elevesJDBCTemplate {
 			eleve.setMail((String)row.get("mail"));
 			eleve.setPromo((String)row.get("promo"));
 			eleve.setGroupe((String)row.get("groupe"));
-			eleve.setNote(Integer.parseInt(String.valueOf(row.get("note"))));
+			eleve.setNote((double) row.get("note"));
 			
 			eleves.add(eleve);
 		}
@@ -143,7 +143,7 @@ public List<Tuteur> tuteurEleve(String nom){
 			eleve.setPromo((String)row.get("promo"));
 			eleve.setGroupe((String)row.get("groupe"));
 			eleve.setCode_eleve(Integer.parseInt(String.valueOf(row.get("code_eleve"))));
-			eleve.setNote(Integer.parseInt(String.valueOf(row.get("note"))));
+			if(row.get("note") != null){eleve.setNote((double)row.get("note"));}
 			
 			eleves.add(eleve);
 		}
@@ -169,7 +169,7 @@ public List<Tuteur> tuteurEleve(String nom){
 			eleve.setPromo((String)row.get("promo"));
 			eleve.setGroupe((String)row.get("groupe"));
 			eleve.setCode_eleve(Integer.parseInt(String.valueOf(row.get("code_eleve"))));
-			eleve.setNote(Integer.parseInt(String.valueOf(row.get("note"))));
+			eleve.setNote((double)row.get("note"));
 			
 			eleves.add(eleve);
 		}

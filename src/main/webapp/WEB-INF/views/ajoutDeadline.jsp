@@ -96,7 +96,7 @@
                             
                             	<form method="post" action="add_seance">
 								  <div class="form-group"><label>Numéro de séance :</label> <input type="text" name="numero_seance" class="form-control" ></div>
-								  <div class="form-group"><label>Date :</label> <input type="text" name="date_seance" class="form-control"></div>
+								  <div class="form-group"><label>Date :</label> <input type="date" name="date_seance" class="form-control"></div>
 									 <div class="form-group"><label>Groupe :</label>
 											<select name="groupes_id" class="form-control">
 													<c:forEach var="groupe" items="${groupes}">
