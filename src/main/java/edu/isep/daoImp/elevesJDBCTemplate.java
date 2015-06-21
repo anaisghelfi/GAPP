@@ -104,7 +104,7 @@ public class elevesJDBCTemplate {
 //fonction qui retourne le tuteur de l'�l�ve
 
 public List<Tuteur> tuteurEleve(String nom){
-	String sql = "SELECT tuteur.nom, tuteur.prenom, tuteur.mail FROM tuteur JOIN groupes ON tuteur.id = groupes.tuteur_id JOIN eleves ON groupes.nom = eleves.groupe WHERE eleves.nom LIKE ?";
+	String sql = "SELECT tuteur.nom, tuteur.prenom, tuteur.mail FROM tuteur JOIN groupes ON tuteur.id = groupes.tuteur_id JOIN eleves ON eleves.groupe LIKE CONCAT('%',groupes.nom,'%') WHERE eleves.nom LIKE ?";
 	
 	ArrayList<Tuteur> tuteurs =  new ArrayList<Tuteur>();
 	
