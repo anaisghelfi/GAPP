@@ -61,7 +61,7 @@
                     <a href="attribGroupe"> <i class="fa fa-users"></i><span class="nav-label">Attribuer les groupes</span> </a>
                 </li>
                  <li>
-                    <a href="exportNote"> <i class="fa fa-users"></i><span class="nav-label">Exporter les notes</span> </a>
+                    <a href="exportNote"> <i class="fa fa-calendar"></i><span class="nav-label">Exporter les notes</span> </a>
                 </li>
 
             </ul>
