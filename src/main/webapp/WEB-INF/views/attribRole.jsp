@@ -2,7 +2,7 @@
 
 	<div class="row wrapper border-bottom white-bg page-heading">
          <div class="col-lg-10">
-            <h2>Gestion des deadlines</h2>
+            <h2>Attribution des rôles</h2>
                <ol class="breadcrumb">
                    <li><a href="#">Accueil</a></li>
                    <li class="active"><strong>Attribuer les rôles</strong></li>
