@@ -97,10 +97,11 @@
                                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                            
                                             <h4 class="modal-title">Remplir la grille de compétences</h4>
-                                           <form method="POST" action="fillGrid">
+                                          
 
 
                                         </div>
+                                        
                                         <c:forEach var="allcompetences" items="${allcompetences}">
                                         <h6 class="modal-title"><c:out value="${allcompetences.famille}"/></h6>
 				 						<table class="table table-bordered">
@@ -154,6 +155,9 @@
 				
 				                                </tbody>
 				                         </table>
+				                         <button type="submit" class="btn btn-w-m btn-success">Valider la grille du groupe</button>
+				                         
+				                       <form method="POST" action ="fillCompetenceEleves-<c:out value="${numerogroupe}"/>-<c:out value="${allcompetences.id}"/>">
 				                         
 				 						<table class="table table-bordered">
 				                                <thead>
@@ -196,12 +200,12 @@
 															<c:if test="${count == 4}">
 																<td colspan="2"><i>E : <c:out value="${allsouscompetences.getE()}"/></i></td>
 															</c:if>		
-															<c:set var="count" value="${count + 1}" scope="page"/>											
-															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"/></td>
-															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"/></td>
-															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"/></td>
-															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"/></td>
-															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"/></td>
+															<c:set var="count" value="${1+count}" scope="page"/>											
+															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
+															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
+															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
+															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
+															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
 															<td><c:out value="${alleleves.prenom}"/> <c:out value="${alleleves.nom}"/></td>
 															
 															</tr>
@@ -212,14 +216,16 @@
 												</c:forEach>										
 				
 				                                </tbody>
-				                         </table>				                         
+				                         </table>	
 				                         
+				                         <button type="submit" class="btn btn-w-m btn-success">Valider la grille des élèves</button>			                         
+				                         </form>
 				                         </c:forEach>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-white" data-dismiss="modal">Fermer</button>
                                             <button type="submit" class="btn btn-primary">Sauvegarder</button>
                                         </div>
-                                        </form>
+                                        
                                     </div>
                                 </div>
                             </div>
