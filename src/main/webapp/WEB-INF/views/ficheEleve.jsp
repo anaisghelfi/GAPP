@@ -104,14 +104,14 @@
     var doughnutData = [
         {
             value: 70,
-            color: "#a3e1d4",
-            highlight: "#1ab394",
+            color: "#3A99D9",
+            highlight: "rgba(58,153,217,0.8)",
             label: "Présent"
         },
         {
             value: 30,
-            color: "#dedede",
-            highlight: "#1ab394",
+            color: "#e74c3c",
+            highlight: "rgba(231, 76, 60,0.8)",
             label: "Absent"
         },
     ];

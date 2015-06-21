@@ -69,7 +69,7 @@ public class elevesJDBCTemplate {
 			eleve.setMail((String)row.get("mail"));
 			eleve.setPromo((String)row.get("promo"));
 			eleve.setGroupe((String)row.get("groupe"));
-			eleve.setNote((double) row.get("note"));
+			if(row.get("note") != null){eleve.setNote((double) row.get("note"));}
 			
 			eleves.add(eleve);
 		}
