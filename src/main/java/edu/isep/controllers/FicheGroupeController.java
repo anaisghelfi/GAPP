@@ -148,22 +148,25 @@ public class FicheGroupeController {
 				System.out.println(ideleve);
 				
 				
-				Integer levelIdInt = Integer.parseInt(levelid);
+				
 				String remarques = request.getParameter("eleveremarques-"+numfamille+"-"+scid+"-"+ideleve);
 				//insère dans la table notes_competences
 				//!!!!!!!!!!!!!! remplace table notes_sous_competences par notes_competences_groupe (INUTILE)
 				
 				//nouvel objet note pour les élèves
 				
-				//vérfier si la value de l'input est vide ne pas l'insérer
-				NoteCompetences notecomp = new NoteCompetences();
-				notecomp.setEleves_id(ideleve);
-				notecomp.setCompetences_id(famillenumber);
-				notecomp.setNiveaux_competences_id(levelIdInt);
-				notecomp.setRemarques(remarques);
-				notecomp.setSous_competences_id(scid);
-
-				daoCompetences.ajoutGrilleEleve(notecomp);
+				//si la valeur de l'input est undefined on n'insère rien dans la BDD
+				if (levelid != null) {
+					Integer levelIdInt = Integer.parseInt(levelid);
+					NoteCompetences notecomp = new NoteCompetences();
+					notecomp.setEleves_id(ideleve);
+					notecomp.setCompetences_id(famillenumber);
+					notecomp.setNiveaux_competences_id(levelIdInt);
+					notecomp.setRemarques(remarques);
+					notecomp.setSous_competences_id(scid);
+	
+					daoCompetences.ajoutGrilleEleve(notecomp);
+					}
 				
 			}
 		}
