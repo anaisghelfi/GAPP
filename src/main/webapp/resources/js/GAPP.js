@@ -422,9 +422,7 @@ $("[name^='affichersouscomp-']").on('click', function(e) {
 //Appel AJAX à chaque fois que l'on clique un bouton radio pour qu'il soit enregistré
 
 $("#EvalCroisee input[type='radio']").click(function(){
-	
-//	alert("ca marche");
-	
+		
 //	Récup du name contenant competence_id et code_eleve de l'élève noté 
 	var duo_cpt_eleve = $(this).attr('name');
 //	On le coupe
@@ -432,21 +430,30 @@ $("#EvalCroisee input[type='radio']").click(function(){
 	
 	var competence = tmp[0];
 	var code_eleve_note = tmp[1];
-//	var code_eleve_juge = tmp[2];//Pris en session dans le controller
 	var note = $(this).attr("value");//1 2 3 4 en fonction du radio coché
-//	alert(competence +" "+code_eleve_note+" " +note);
+	
 	$.ajax({
 	       url : 'insererNoteEvalCroisee',
 	       type : 'post',
 	       data : 'competences_id=' + competence + '&eleve_note_code_eleve=' + code_eleve_note + '&niveau_competences_id=' + note,
-//	       success : function(code_html, statut){ // success est toujours en place, bien sûr !
-//	    	   alert("la note a bien été pris en compte");
-//	       },
-//
-//	       error : function(resultat, statut, erreur){
-//
-//	       }
 	    });
 	
+});
+
+//Verification que tous les boutons sont remplis 
+$("#EvalCroiseeform input[type='submit']").click(function(){
+
+	var radio = $("#EvalCroiseeform input[type='radio']");
+//	alert(radio.length);
+	
+//	for (i=0, i<formulaire.radios.length; i++) {
+//	   if (formulaire.radios[i].checked) {
+//	      var valeur = formulaire.radios[i].value;
+//	      alert(valeur + ' a été sélectionné');
+//	   }
+//	}
+	
+//	bloquer le formulaire : return $(this).onsubmit = false;
+
 });
 

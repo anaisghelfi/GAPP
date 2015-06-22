@@ -40,7 +40,7 @@
                 
                 
                 <div class="ibox-content" style="overflow-x: auto">
-                	<form >
+                	<form id="EvalCroiseeForm">
                 		<table id="EvalCroisee" class="table table-bordered text-center"  style="width:auto">
 	                		<thead>
 	<!--                 	Ligne avec les compétences -->
