@@ -13,7 +13,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import edu.isep.beans.Competences;
+import edu.isep.beans.Eleve;
 import edu.isep.beans.Groupe;
+import edu.isep.beans.NoteCompetences;
 import edu.isep.beans.SousCompetences;
 import edu.isep.daoImp.CompetencesJDBCTemplate;
 
@@ -91,6 +93,8 @@ public class CompetencesJDBCTemplate {
 		return competences;
 	}
 	
+	
+	
 	public List<SousCompetences> allSousCompetences(){
 		String sql = "SELECT * FROM sous_competences";
 		
@@ -115,8 +119,38 @@ public class CompetencesJDBCTemplate {
 		return souscompetences;
 	}
 	
+	public List<SousCompetences> souscompParFamille(Integer famille){
+		String sql = "SELECT * FROM sous_competences where competences_id = ?";
+		
+		ArrayList<SousCompetences> souscompetences =  new ArrayList<SousCompetences>();
+		
+		List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql, new Object[]{famille});
+		
+		for (Map row : rows) {
+			SousCompetences souscompetence =  new SousCompetences();
+			
+			souscompetence.setId(Integer.parseInt(String.valueOf(row.get("id"))));
+			souscompetence.setSous_competences((String)row.get("sous_competences"));
+			souscompetence.setCompetences_id((int) row.get("competences_id"));
+			souscompetence.setB((String)row.get("B"));
+			souscompetence.setI((String)row.get("I"));
+			souscompetence.setM((String)row.get("M"));
+			souscompetence.setE((String)row.get("E"));
+			
+			souscompetences.add(souscompetence);
+		}
 
+		return souscompetences;
+	}		
+		
 
+//Remplir grille de compétences 
+
+	public void ajoutGrilleEleve(NoteCompetences notecomp){
+		String sql = "INSERT INTO notes_competences(niveaux_competences_id,eleves_id,competences_id,sous_competences_id,remarques) VALUES(?,?,?,?,?)";
+		jdbcTemplateObject.update(sql,new Object[]{notecomp.getNiveaux_competences_id(),notecomp.getEleves_id(),notecomp.getCompetences_id(),notecomp.getSous_competences_id(),notecomp.getRemarques()});
+		return;
+	}	
 	
 	
 }

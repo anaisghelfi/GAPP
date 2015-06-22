@@ -10,6 +10,7 @@ import java.util.Date;
 
 
 
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.context.ApplicationContext;
@@ -26,6 +27,7 @@ import edu.isep.beans.Competences;
 import edu.isep.beans.SousCompetences;
 import edu.isep.beans.Eleve;
 import edu.isep.beans.User;
+import edu.isep.beans.NoteCompetences;
 import edu.isep.beans.Absences;
 import edu.isep.daoImp.elevesJDBCTemplate;
 import edu.isep.daoImp.AbsencesJDBCTemplate;
@@ -114,6 +116,50 @@ public class FicheGroupeController {
 	
 		return "ficheGroupe";
 	}	
+	
+	@RequestMapping(value ="/addGrilleE-{numgroupe}-{numfamille}", method = RequestMethod.POST)
+	public String addGrilleE(HttpServletRequest request,@PathVariable String numgroupe,@PathVariable Integer numfamille,Model model) 
+	{
+		String groupeno = (String)numgroupe;
+//		Pour rÃ©cupÃ©rer tous les ï¿½lï¿½ves d'un groupe
+		List<Eleve> eleves = dao.elevesParGroupe((String)numgroupe);
+		model.addAttribute("numerogroupe", numgroupe);
+		model.addAttribute("alleleves", eleves);
+		
+		//récupérer toutes les compétences de la famille à remplir
+		List<SousCompetences> scs = daoCompetences.souscompParFamille(numfamille);
+		
+		//pour toutes les compétences de la famille soumise au remplissage
+		for (int i=0;i<scs.size();i++) {
+			int scid = scs.get(i).getId();
+			//pour tous les membres du groupe 
+			for(int j=0;j<eleves.size();j++) {
+				//récupère les valeurs de tous les inputs remplis
+				int ideleve = eleves.get(i).getId();
+				
+				//récupère la valeur de l'input pour chaque compétence/famille/élève du groupe
+				String levelid = request.getParameter("eleve-"+numgroupe+"-"+numfamille+"-"+ideleve);
+				Integer levelIdInt = Integer.parseInt(levelid);
+				
+				String remarques = request.getParameter("eleveremarques-"+numgroupe+"-"+numfamille+"-"+ideleve);
+				//insère dans la table notes_competences
+				//!!!!!!!!!!!!!! remplace table notes_sous_competences par notes_competences_groupe (INUTILE)
+				
+				//nouvel objet note pour les élèves
+				NoteCompetences notecomp = new NoteCompetences();
+				notecomp.setCompetences_id(numfamille);
+				notecomp.setEleves_id(ideleve);
+				notecomp.setNiveaux_competences_id(levelIdInt);
+				notecomp.setRemarques(remarques);
+				notecomp.setSous_competences_id(scid);
+
+				daoCompetences.ajoutGrilleEleve(notecomp);
+				
+			}
+		}
+	
+		return "ficheGroupe";
+	}		
 	
 
 	

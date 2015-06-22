@@ -157,7 +157,7 @@
 				                         </table>
 				                         <button type="submit" class="btn btn-w-m btn-success">Valider la grille du groupe</button>
 				                         
-				                       <form method="POST" action ="fillCompetenceEleves-<c:out value="${numerogroupe}"/>-<c:out value="${allcompetences.id}"/>">
+				                       <form method="POST" action ="addGrilleE-<c:out value="${numerogroupe}"/>-<c:out value="${allcompetences.id}"/>">
 				                         
 				 						<table class="table table-bordered">
 				                                <thead>
@@ -201,13 +201,13 @@
 															
 																<td rowspan="2"><i>E : <c:out value="${allsouscompetences.getE()}"/></i></td>
 															</c:if>		
-															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
-															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
-															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
-															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
-															<td><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
+															<td><input type="radio" value="1" name="eleve-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
+															<td><input type="radio" value="2" name="eleve-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
+															<td><input type="radio" value="3" name="eleve-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
+															<td><input type="radio" value="4" name="eleve-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
+															<td><input type="radio" value="5" name="eleve-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
 															<td><c:out value="${alleleves.prenom}"/> <c:out value="${alleleves.nom}"/></td>
-															<td><textarea style="height:100%;resize:none" name="grouperemarques-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"></textarea></td>
+															<td><textarea style="height:100%;resize:none" name="eleveremarques-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"></textarea></td>
 															
 															</tr>
 															</c:forEach>
