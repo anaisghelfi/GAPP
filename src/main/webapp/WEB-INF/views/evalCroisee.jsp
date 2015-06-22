@@ -28,6 +28,17 @@
             	<div class="ibox-title">
                 	<h5>Faire l'évaluation croisée de mon groupe</h5>
                 </div>
+                
+<!--                 <div class="test"> -->
+<%--                 	<c:forEach var="evalCroisee" items="${evalCroisees}"> --%>
+<%--                 		<span><c:out value="${evalCroisee.competences_id}"></c:out></span><br> --%>
+<%--                 		<span><c:out value="${evalCroisee.niveau_competences_id}"></c:out></span><br> --%>
+<%--                 		<span><c:out value="${evalCroisee.eleve_note_code_eleve}"></c:out></span><br> --%>
+<%--                 		<span><c:out value="${evalCroisee.eleve_juge_code_eleve}"></c:out></span><br><br> --%>
+<%--                 	</c:forEach> --%>
+<!--                 </div> -->
+                
+                
                 <div class="ibox-content" style="overflow-x: auto">
                 	<form >
                 		<table id="EvalCroisee" class="table table-bordered text-center"  style="width:auto">
@@ -80,22 +91,70 @@
 		<!--                 	Ligne avec tous les noms des membres du groupes (y compris celui connecté) et checkbox pour cocher niveau -->
 								<c:forEach var="eleve" items="${eleves}">
 								<tr>
+<!-- 									colonne avec nom prenom -->
 									<th><c:out value="${eleve.prenom} ${eleve.nom}"></c:out></th>
+<!-- 									On parcoure toutes les compétences, et on crée une colonne pour chaque niveau -->
 									<c:forEach  var="competence" items="${competences}">
-									<c:forEach begin="1" end="4" var="i">
+									<c:forEach begin="1" end="4" var="j">
 			                		<th class="text-center">
+<!-- 			                			On met un bouton radio différent pour chaque compétences et niveau (name) -->
 			                			<c:choose>
-											<c:when test="${i == 1}">
-												<input type="radio" name="${competence.id}_${eleve.code_eleve}" value="1">
+
+											<c:when test="${j == 1}">
+												<c:set var="radio_pas_coche" value="true" scope="page" />
+<!-- 											On regarde toutes les evaluations croisees pour voir si elle a deja été remplit -->
+												<c:forEach var="evalCroisee" items="${evalCroisees}">													
+<!-- 												On met un radio coché si il a deja été enregistré en base de données	-->												 
+														<c:if test="${evalCroisee.competences_id == competence.id && eleve.code_eleve == evalCroisee.eleve_note_code_eleve && evalCroisee.niveau_competences_id == 1 && sessionScope.number == evalCroisee.eleve_juge_code_eleve}">
+															<input type="radio" name="${competence.id}_${eleve.code_eleve}" value="1" checked="checked">
+															<c:set var="radio_pas_coche" value="false" scope="page" />
+														</c:if>
+												</c:forEach>
+												<c:if test="${radio_pas_coche == true}">
+													<input type="radio" name="${competence.id}_${eleve.code_eleve}" value="1">
+												</c:if>
 											</c:when>
-											<c:when test="${i == 2}">
-												<input type="radio" name="${competence.id}_${eleve.code_eleve}" value="2">
+											<c:when test="${j == 2}">
+												<c:set var="radio_pas_coche" value="true" scope="page" />
+<!-- 											On regarde toutes les evaluations croisees pour voir si elle a deja été remplit -->
+												<c:forEach var="evalCroisee" items="${evalCroisees}">													
+<!-- 												On met un radio coché si il a deja été enregistré en base de données	-->												 
+													<c:if test="${evalCroisee.competences_id == competence.id && eleve.code_eleve == evalCroisee.eleve_note_code_eleve && evalCroisee.niveau_competences_id == 2 && sessionScope.number == evalCroisee.eleve_juge_code_eleve}">
+														<input type="radio" name="${competence.id}_${eleve.code_eleve}" value="2" checked="checked">
+														<c:set var="radio_pas_coche" value="false" scope="page" />
+													</c:if>
+												</c:forEach>
+												<c:if test="${radio_pas_coche == true}">
+													<input type="radio" name="${competence.id}_${eleve.code_eleve}" value="2">
+												</c:if>
 											</c:when>
-											<c:when test="${i == 3}">
-												<input type="radio" name="${competence.id}_${eleve.code_eleve}" value="3">
+											<c:when test="${j == 3}">
+												<c:set var="radio_pas_coche" value="true" scope="page" />
+<!-- 											On regarde toutes les evaluations croisees pour voir si elle a deja été remplit -->
+												<c:forEach var="evalCroisee" items="${evalCroisees}">													
+<!-- 												On met un radio coché si il a deja été enregistré en base de données	-->												 
+													<c:if test="${evalCroisee.competences_id == competence.id && eleve.code_eleve == evalCroisee.eleve_note_code_eleve && evalCroisee.niveau_competences_id == 3 && sessionScope.number == evalCroisee.eleve_juge_code_eleve}">
+														<input type="radio" name="${competence.id}_${eleve.code_eleve}" value="3" checked="checked">
+														<c:set var="radio_pas_coche" value="false" scope="page" />
+													</c:if>
+												</c:forEach>
+												<c:if test="${radio_pas_coche == true}">
+													<input type="radio" name="${competence.id}_${eleve.code_eleve}" value="3">
+												</c:if>
 											</c:when>
-											<c:when test="${i == 4}">
-												<input type="radio" name="${competence.id}_${eleve.code_eleve}" value="4">
+											<c:when test="${j == 4}">
+												<c:set var="radio_pas_coche" value="true" scope="page" />
+<!-- 											On regarde toutes les evaluations croisees pour voir si elle a deja été remplit -->
+												<c:forEach var="evalCroisee" items="${evalCroisees}">													
+<!-- 												On met un radio coché si il a deja été enregistré en base de données	-->												 
+													<c:if test="${evalCroisee.competences_id == competence.id && eleve.code_eleve == evalCroisee.eleve_note_code_eleve && evalCroisee.niveau_competences_id == 4 && sessionScope.number == evalCroisee.eleve_juge_code_eleve}">
+														<input type="radio" name="${competence.id}_${eleve.code_eleve}" value="4" checked="checked">
+														<c:set var="radio_pas_coche" value="false" scope="page" />
+													</c:if>
+												</c:forEach>
+												<c:if test="${radio_pas_coche == true}">
+													<input type="radio" name="${competence.id}_${eleve.code_eleve}" value="4">
+												</c:if>
 											</c:when>
 										</c:choose>
 									</th>
