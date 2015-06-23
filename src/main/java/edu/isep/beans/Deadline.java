@@ -9,6 +9,8 @@ public class Deadline {
 	private String description;	
 	private Date date_limite;
 	private int groupes_id;
+	
+	private String nom;
 
 	
 	
@@ -42,7 +44,12 @@ public class Deadline {
 	public void setGroupes_id(int groupes_id) {
 		this.groupes_id = groupes_id;
 	}
-
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
 	
 
 }
