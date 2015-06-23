@@ -7,17 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Date;
-
-
-
-
-
-
-<<<<<<< HEAD
-
-
-=======
->>>>>>> branch 'master' of https://github.com/anaisghelfi/GAPP.git
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -112,7 +101,7 @@ public class FicheGroupeController {
 		model.addAttribute("notecompetencesgroupe",notecompGroupe);
 
 		
-		//récupérer les absences
+		//rï¿½cupï¿½rer les absences
 		
 		return "ficheGroupe";
 	}
