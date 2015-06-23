@@ -31,14 +31,14 @@
 								 	<label>Accéder à la fiche élève :</label> 
 								  	<input type="text" name="nom" class="form-control" >
 								</div>
-								<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" name="valider"><strong>Valider</strong></button>
+								<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" name="valider"><strong>Valider</strong></button></br>
 							</form>
 							
 							
 							<c:forEach var="eleve" items="${eleves}">
 								<div class="form-group">
 									<strong>Eleve :</strong> <c:out value="${eleve.nom}"/> <c:out value="${eleve.prenom}"/>
-									<a href="http://localhost:8080/gapp/ficheEleve?nom=<c:out value="${eleve.nom}"/>">Voir sa fiche</a>
+									<a href="http://localhost:8080/gapp/ficheEleve?codeEleve=<c:out value="${eleve.code_eleve}"/>">Voir sa fiche</a>
 								</div>
 							</c:forEach>													
 							
@@ -52,14 +52,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Trouver un groupe d'APP <small>avec ses sous-groupes associés</small></h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>
-                    </div>
+                    
                 </div>
                 <div class="ibox-content">
 
@@ -75,7 +68,7 @@
 				                                <c:forEach var="sousGroupe" items="${sousGroupes}">
 													<c:if test="${sousGroupe.groupes_id == groupe.id}">
 														<li data-jstree='{"type":"css"}'>
-															<a href="ficheGroupe/${sousGroupe.nom}"><c:out value="${sousGroupe.nom}"/></a>
+															<a href="ficheGroupe-${sousGroupe.nom}"><c:out value="${sousGroupe.nom}"/></a>
 														</li>
 													</c:if>
 												</c:forEach> 
@@ -84,6 +77,29 @@
 										</li>
 									</c:forEach>
                                 
+<%-- <c:forEach var="groupe" items="${groupes}"> --%>
+<%-- 	                                	<li> <c:out value="${groupe.nom}"/> --%>
+	                                
+<!-- 			                                <ul> -->
+<%-- 				                                <c:forEach var="sousGroupe" items="${sousGroupes}"> --%>
+<%-- 													<c:if test="${sousGroupe.groupes_id == groupe.id}"> --%>
+<%-- 														<li name='ficheGroupe-${sousGroupe.nom}' data-jstree='{"type":"css"}'> --%>
+<%-- 															<c:out value="${sousGroupe.nom}"></c:out> --%>
+<!-- 														</li> -->
+<%-- 													</c:if> --%>
+<%-- 												</c:forEach>  --%>
+<!-- 			                                </ul> -->
+	                                
+<!-- 										</li> -->
+<%-- 									</c:forEach> --%>
+
+
+<!-- $("[name^='ficheGroupe-']").on('click',function(e) { -->
+<!-- 	e.preventDefault(); -->
+<!-- 	var link = $(this).attr('name'); -->
+<!-- 	window.location.href = link; -->
+<!-- 	console.log("click"); -->
+<!-- });  -->
 
 	                                </ul>
 	                            </li>

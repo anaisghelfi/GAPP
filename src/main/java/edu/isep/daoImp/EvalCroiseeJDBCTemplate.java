@@ -95,8 +95,21 @@ public class EvalCroiseeJDBCTemplate {
 			
 		}
 		
-//		Verifie que l'on peut afficher le tableau
+//		Verifie que l'on peut afficher le tableau d'evaluation croise pour un élève
 		public boolean verifDispoEvalCroisee(int code_eleve){
+			
+			String sql = "SELECT Count(*) FROM evaluations_croisees WHERE code_eleve = ? AND termine = 0";
+			int rownum = jdbcTemplateObject.queryForInt(sql, new Object[]{code_eleve});
+			
+			if(rownum == 1)
+				return true;
+			else
+				return false;
+
+		}
+		
+//		Verifie que l'on peut afficher le tableau d'evaluation croise pour un élève
+		public boolean verifDispoEvalCroiseeTuteur(int code_eleve){
 			
 			String sql = "SELECT Count(*) FROM evaluations_croisees WHERE code_eleve = ? AND termine = 0";
 			int rownum = jdbcTemplateObject.queryForInt(sql, new Object[]{code_eleve});

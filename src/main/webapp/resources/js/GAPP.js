@@ -457,9 +457,6 @@ $("#EvalCroiseeForm").submit(function(){
 	var radio = $("#EvalCroiseeForm input[type='radio']");
 	var radio_checked = $("#EvalCroiseeForm input[checked='checked']");
 	
-//	alert(radio.length);
-//	alert(radio_checked.length);
-	
 	if(radio_checked.length*4 != radio.length){
 		alert("Certains champs de l'évaluation croisée n'ont pas été rempli");
 		return false;
