@@ -58,8 +58,8 @@ public class HomeController {
 					 return "redirect:ficheEleve?nom="+newUser.getNomFamille();
 					 
 				case "professeur":
-					System.out.println("prof");
-					break;
+					return "redirect:rechercheEleves";
+						
 			}
 			
 		} catch(Exception e) {
