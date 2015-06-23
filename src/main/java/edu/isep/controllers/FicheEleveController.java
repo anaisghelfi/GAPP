@@ -33,21 +33,20 @@ public class FicheEleveController {
 
 
 	@RequestMapping(value = "/ficheEleve", method = RequestMethod.GET)
-	public  String Recherche(HttpServletRequest request, HttpSession session, @RequestParam("nom") String nom, Model model){
+	public  String Recherche(HttpServletRequest request, HttpSession session, @RequestParam("codeEleve") int codeEleve, Model model){
 		
 	session = request.getSession();
 	session.getAttribute("login");
 	session.getAttribute("number");
 
 	
-	model.addAttribute("nom", nom);// Param�tre de l'URL
-	List<Eleve> eleves = daoEleve.elevesParNom(nom);
+	List<Eleve> eleves = daoEleve.elevesParNomInt(codeEleve);
 	model.addAttribute("eleves", eleves);
 	
 	List<Seances> seances = daoEleve.allSeances();
 	model.addAttribute("seances",seances);
 	
-	List<Tuteur> tuteurs = daoEleve.tuteurEleve(nom);
+	List<Tuteur> tuteurs = daoEleve.tuteurEleve(codeEleve);
 	model.addAttribute("tuteurs",tuteurs);
 	
 		return "ficheEleve";

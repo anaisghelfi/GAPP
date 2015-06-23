@@ -29,6 +29,7 @@
 								<div class="form-group">
 									<strong>Nom :</strong> <c:out value="${eleve.nom}"/> </br>
 									<strong>Prénom :</strong> <c:out value="${eleve.prenom}"/> </br>
+									<strong>Code élève :</strong> <c:out value="${eleve.code_eleve}"/> </br>
 									<strong>Promo :</strong> <c:out value="${eleve.promo}"/> </br>
 									<strong>Groupe :</strong> <c:out value="${eleve.groupe}"/> </br>
 									<strong>E-Mail :</strong> <c:out value="${eleve.mail}"/></br>
@@ -83,7 +84,7 @@
                             <c:forEach var="seance" items="${seances}">
 								<div class="form-group">
 									<strong>Séance numéro :</strong> <c:out value="${seance.numero_seance}"/>
-									<!-- <strong>Date :</strong> <c:out value="${seance.date_seance}"/> Ne prends pas en charge date.sql-->
+									<strong>Date :</strong> <c:out value="${seance.date_seance}"/> 
 								</div>
 							</c:forEach>
                             
