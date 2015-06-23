@@ -98,13 +98,19 @@
                                            
                                             <h4 class="modal-title">Remplir la grille de compétences</h4>
                                           
-
+				                            <h4>
+				                            	<c:forEach var="allcompetences" items="${allcompetences}">
+				                                	<span style="cursor:pointer" name="showGrille-<c:out value="${allcompetences.id}"/>" class='label label-primary'><c:out value="${allcompetences.famille}"/></span>
+				                            	</c:forEach>
+				                            </h4>
 
                                         </div>
                                         
                                         <c:forEach var="allcompetences" items="${allcompetences}">
-                                        <h6 class="modal-title"><c:out value="${allcompetences.famille}"/></h6>
-				 						<table class="table table-bordered">
+                                        <div name="grille-<c:out value="${allcompetences.id}"/>">
+                                        <h6 style='text-align:center' class="modal-title"><c:out value="${allcompetences.famille}"/> <i style="cursor:pointer"  name="showgrilleEleve-<c:out value="${allcompetences.id}"/>" class="fa fa-user"></i> <i style="cursor:pointer;" name="showgrilleGroupe-<c:out value="${allcompetences.id}"/>" class="fa fa-users"></i></h6>
+				 						
+				 						<table id="grille-groupe-<c:out value="${allcompetences.id}"/>" class="table table-bordered">
 				                                <thead>
 				                                <tr>
 				                                    <th rowspan="2">Compétence</th>
@@ -159,7 +165,7 @@
 				                         
 				                       <form method="POST" action ="addGrilleE-<c:out value="${numerogroupe}"/>-<c:out value="${allcompetences.id}"/>">
 				                         
-				 						<table class="table table-bordered">
+				 						<table id="grille-eleves-<c:out value="${allcompetences.id}"/>" class="table table-bordered">
 				                                <thead>
 				                                <tr>
 				                                    <th rowspan="2">Compétence</th>
@@ -221,6 +227,7 @@
 				                         
 				                         <button type="submit" class="btn btn-w-m btn-success">Valider la grille des élèves</button>			                         
 				                         </form>
+				                         </div>
 				                         </c:forEach>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-white" data-dismiss="modal">Fermer</button>
@@ -278,5 +285,21 @@ function validAbsence() {
 	}
 	
 	return bool;
-}</script>
+}
+
+//Afficher que la grille N°1
+$(document).ready(function(){
+	 var span  = $("[name^='grille-']");
+	 for(var i =1; i<span.length;i++) {
+		 $(span[i]).hide();
+	 }
+	 
+	$("[name^='souscompgrille-']").hide();
+	$("li[name^='geredisplay-']").hide();
+ });
+
+ 
+
+
+</script>
 	
