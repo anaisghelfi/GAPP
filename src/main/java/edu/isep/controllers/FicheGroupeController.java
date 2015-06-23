@@ -13,7 +13,13 @@ import java.util.Date;
 
 
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> branch 'master' of https://github.com/anaisghelfi/GAPP.git
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -32,6 +38,7 @@ import edu.isep.beans.User;
 import edu.isep.beans.NoteCompetencesGroupe;
 import edu.isep.beans.NoteCompetences;
 import edu.isep.beans.Absences;
+import edu.isep.daoImp.MainJDBCTemplate;
 import edu.isep.daoImp.elevesJDBCTemplate;
 import edu.isep.daoImp.AbsencesJDBCTemplate;
 import edu.isep.daoImp.CompetencesJDBCTemplate;
@@ -43,6 +50,7 @@ public class FicheGroupeController {
 	private elevesJDBCTemplate dao;
 	private AbsencesJDBCTemplate daoAbsences;
 	private CompetencesJDBCTemplate daoCompetences;
+	private MainJDBCTemplate daoMain;
 
 	private Map<Integer, Eleve> e;
 	private Map<Integer, Absences> a;
@@ -60,6 +68,7 @@ public class FicheGroupeController {
 		dao = (elevesJDBCTemplate) context.getBean("elevesDAO");
 		daoAbsences = (AbsencesJDBCTemplate) context.getBean("absencesDAO");
 		daoCompetences = (CompetencesJDBCTemplate) context.getBean("competencesDAO");
+		daoMain = (MainJDBCTemplate) context.getBean("mainDAO");
 		
 		e = new HashMap<Integer, Eleve>();
 		a = new HashMap<Integer, Absences>();
@@ -71,8 +80,11 @@ public class FicheGroupeController {
 	
 
 	@RequestMapping(value = "/ficheGroupe-{numgroupe}", method = RequestMethod.GET)
-	public String getEleves(HttpServletRequest request,@PathVariable String numgroupe,Model model) 
+	public String getEleves(HttpSession session,HttpServletRequest request,@PathVariable String numgroupe,Model model) 
 	{
+		int tuteurType = daoMain.tuteurType((String) session.getAttribute("email"));
+		System.out.println(tuteurType);
+		model.addAttribute("typeTuteur",tuteurType);
 
 		String groupeno = (String)numgroupe;
 //		Pour rÃ©cupÃ©rer tous les ï¿½lï¿½ves d'un groupe
@@ -88,15 +100,17 @@ public class FicheGroupeController {
 		List<SousCompetences> allsouscompetences = daoCompetences.allSousCompetences();
 		model.addAttribute("allsouscompetences", allsouscompetences);
 		
-		//pour remplir la grille de compétences si ce n'est pas déjà fait
+		//pour remplir la grille de compï¿½tences si ce n'est pas dï¿½jï¿½ fait
 		
-		//récupérer les lignes de notes_competences des élèves du groupe actif
+		//rï¿½cupï¿½rer les lignes de notes_competences des ï¿½lï¿½ves du groupe actif
 		
 		List<NoteCompetences> notecompParGroupe = daoCompetences.getGrilleParGroupe(groupeno);
 		List<NoteCompetencesGroupe> notecompGroupe = daoCompetences.getGrilleGroupe(groupeno);
 		
+
 		model.addAttribute("notecompetences",notecompParGroupe);
 		model.addAttribute("notecompetencesgroupe",notecompGroupe);
+
 		
 		//récupérer les absences
 		
@@ -142,21 +156,21 @@ public class FicheGroupeController {
 		
 		Integer famillenumber = Integer.parseInt(numfamille);
 		
-		//récupérer toutes les compétences de la famille à remplir
+		//rï¿½cupï¿½rer toutes les compï¿½tences de la famille ï¿½ remplir
 		List<SousCompetences> scs = daoCompetences.souscompParFamille(famillenumber);
 		
-		//pour toutes les compétences de la famille soumise au remplissage
+		//pour toutes les compï¿½tences de la famille soumise au remplissage
 		for (int i=0;i<scs.size();i++) {
 			int scid = scs.get(i).getId();
 			//pour tous les membres du groupe 
 			for(int j=0;j<eleves.size();j++) {
-				//récupère les valeurs de tous les inputs remplis
+				//rï¿½cupï¿½re les valeurs de tous les inputs remplis
 				int ideleve = eleves.get(j).getId();
 				
-				//récupère la valeur de l'input pour chaque compétence/famille/élève du groupe
+				//rï¿½cupï¿½re la valeur de l'input pour chaque compï¿½tence/famille/ï¿½lï¿½ve du groupe
 				String levelid = request.getParameter("eleve-"+numfamille+"-"+scid+"-"+ideleve);
 				
-				//test si les bonnes variables sont récupérées
+				//test si les bonnes variables sont rï¿½cupï¿½rï¿½es
 				System.out.println(scid);
 				System.out.println(numfamille);
 				System.out.println(ideleve);
@@ -164,12 +178,12 @@ public class FicheGroupeController {
 				
 				
 				String remarques = request.getParameter("eleveremarques-"+numfamille+"-"+scid+"-"+ideleve);
-				//insère dans la table notes_competences
+				//insï¿½re dans la table notes_competences
 				//!!!!!!!!!!!!!! remplace table notes_sous_competences par notes_competences_groupe (INUTILE)
 				
-				//nouvel objet note pour les élèves
+				//nouvel objet note pour les ï¿½lï¿½ves
 				
-				//si la valeur de l'input est undefined on n'insère rien dans la BDD
+				//si la valeur de l'input est undefined on n'insï¿½re rien dans la BDD
 				if (levelid != null) {
 					Integer levelIdInt = Integer.parseInt(levelid);
 					NoteCompetences notecomp = new NoteCompetences();
@@ -179,7 +193,7 @@ public class FicheGroupeController {
 					notecomp.setRemarques(remarques);
 					notecomp.setSous_competences_id(scid);
 					
-					//vérifier en même temps si la compétence a déjà été notée
+					//vï¿½rifier en mï¿½me temps si la compï¿½tence a dï¿½jï¿½ ï¿½tï¿½ notï¿½e
 					daoCompetences.ajoutGrilleEleve(notecomp);
 					}
 				
@@ -200,31 +214,31 @@ public class FicheGroupeController {
 		
 		Integer famillenumber = Integer.parseInt(numfamille);
 		
-		//récupérer toutes les compétences de la famille à remplir
+		//rï¿½cupï¿½rer toutes les compï¿½tences de la famille ï¿½ remplir
 		List<SousCompetences> scs = daoCompetences.souscompParFamille(famillenumber);
 		
-		//pour toutes les compétences de la famille soumise au remplissage
+		//pour toutes les compï¿½tences de la famille soumise au remplissage
 		for (int i=0;i<scs.size();i++) {
 			int scid = scs.get(i).getId();
 			//pour tous les membres du groupe 
 
 				
-				//récupère la valeur de l'input pour chaque compétence/famille/élève du groupe
+				//rï¿½cupï¿½re la valeur de l'input pour chaque compï¿½tence/famille/ï¿½lï¿½ve du groupe
 				String levelid = request.getParameter("groupe-"+numfamille+"-"+scid);
 				
-				//test si les bonnes variables sont récupérées
+				//test si les bonnes variables sont rï¿½cupï¿½rï¿½es
 				System.out.println(scid);
 				System.out.println(numfamille);
 				
 				
 				
 				String remarques = request.getParameter("grouperemarques-"+numfamille+"-"+scid);
-				//insère dans la table notes_competences
+				//insï¿½re dans la table notes_competences
 				//!!!!!!!!!!!!!! remplace table notes_sous_competences par notes_competences_groupe (INUTILE)
 				
-				//nouvel objet note pour les élèves
+				//nouvel objet note pour les ï¿½lï¿½ves
 				
-				//si la valeur de l'input est undefined on n'insère rien dans la BDD
+				//si la valeur de l'input est undefined on n'insï¿½re rien dans la BDD
 				if (levelid != null) {
 					NoteCompetencesGroupe notecompgroupe = new NoteCompetencesGroupe();
 					Integer levelIdInt = Integer.parseInt(levelid);
@@ -234,7 +248,7 @@ public class FicheGroupeController {
 					notecompgroupe.setSous_competences_id(scid);
 					notecompgroupe.setGroupe(numgroupe);
 					
-					//vérifier en même temps si la compétence a déjà été notée
+					//vï¿½rifier en mï¿½me temps si la compï¿½tence a dï¿½jï¿½ ï¿½tï¿½ notï¿½e
 					daoCompetences.ajoutGrilleGroupe(notecompgroupe);
 					}
 				
