@@ -22,25 +22,33 @@
  
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row">
-
-		<div class="col-lg-12"><!-- Mettre dans cette col les boutons vers formulaire ajouts groupes, attribution des élèves, et liste des groupes, sous-groupes avec bouton pour supprimer -->               
+		
+		
+		
+		
+		<div class="col-lg-12">
         	<div class="ibox">
             	<div class="ibox-title">
                 	<h5>Faire l'évaluation croisée de mon groupe</h5>
                 </div>
                 
-<!--                 <div class="test"> -->
-<%--                 	<c:forEach var="evalCroisee" items="${evalCroisees}"> --%>
-<%--                 		<span><c:out value="${evalCroisee.competences_id}"></c:out></span><br> --%>
-<%--                 		<span><c:out value="${evalCroisee.niveau_competences_id}"></c:out></span><br> --%>
-<%--                 		<span><c:out value="${evalCroisee.eleve_note_code_eleve}"></c:out></span><br> --%>
-<%--                 		<span><c:out value="${evalCroisee.eleve_juge_code_eleve}"></c:out></span><br><br> --%>
-<%--                 	</c:forEach> --%>
-<!--                 </div> -->
+                <c:if test="${ message_validation == true }">
+					<div class="ibox-content"><!-- div qui s'affiche quand l'éval n'est pas disponible-->
+						<div class="alert alert-info" role="alert">Votre Evaluation croisée a bie été pris en compte</div>
+					</div>
+				</c:if>
                 
+                <c:if test="${ affichageTableau == false }">
+					<div class="ibox-content"><!-- div qui s'affiche quand l'éval n'est pas disponible-->
+						<div class="alert alert-info" role="alert">L'évaluation croisée n'est pas disponible</div>
+					</div>
+				</c:if>
+                
+                
+                <c:if test="${ affichageTableau == true }">
                 
                 <div class="ibox-content" style="overflow-x: auto">
-                	<form >
+                	<form id="EvalCroiseeForm" action="validerEvalCroisee" method="post">
                 		<table id="EvalCroisee" class="table table-bordered text-center"  style="width:auto">
 	                		<thead>
 	<!--                 	Ligne avec les compétences -->
@@ -114,6 +122,7 @@
 													<input type="radio" name="${competence.id}_${eleve.code_eleve}" value="1">
 												</c:if>
 											</c:when>
+											
 											<c:when test="${j == 2}">
 												<c:set var="radio_pas_coche" value="true" scope="page" />
 <!-- 											On regarde toutes les evaluations croisees pour voir si elle a deja été remplit -->
@@ -128,6 +137,7 @@
 													<input type="radio" name="${competence.id}_${eleve.code_eleve}" value="2">
 												</c:if>
 											</c:when>
+											
 											<c:when test="${j == 3}">
 												<c:set var="radio_pas_coche" value="true" scope="page" />
 <!-- 											On regarde toutes les evaluations croisees pour voir si elle a deja été remplit -->
@@ -142,6 +152,7 @@
 													<input type="radio" name="${competence.id}_${eleve.code_eleve}" value="3">
 												</c:if>
 											</c:when>
+											
 											<c:when test="${j == 4}">
 												<c:set var="radio_pas_coche" value="true" scope="page" />
 <!-- 											On regarde toutes les evaluations croisees pour voir si elle a deja été remplit -->
@@ -156,6 +167,7 @@
 													<input type="radio" name="${competence.id}_${eleve.code_eleve}" value="4">
 												</c:if>
 											</c:when>
+											
 										</c:choose>
 									</th>
 			             			</c:forEach>
@@ -167,8 +179,9 @@
 	                	<input type="submit" value="Envoyer" class="btn btn-primary">
                 	</form>
                 </div>
+                </c:if>
             </div>
-        </div>
+        </div>   
     </div>
 </div>
 
