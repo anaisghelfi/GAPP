@@ -76,4 +76,36 @@ public class EvalCroiseeJDBCTemplate {
 				
 		}
 		
+//		Pour rendre l'evalcroisee disponible
+		public void autorisationEvalCroisee(int code_eleve){
+			
+			String sql = "INSERT INTO evaluations_croisees(code_eleve, termine) VALUES(?, 0)";
+			jdbcTemplateObject.update(sql,new Object[]{ code_eleve });
+			return;
+		}
+		
+		
+//		Indiquer l'evaluation croisée est terminée
+		public void validationEvalCroisee(int code_eleve){
+			
+			String sql = "UPDATE evaluations_croisees SET termine = 1 WHERE code_eleve = ?";
+			jdbcTemplateObject.update(sql,new Object[]{code_eleve });
+			return;
+
+			
+		}
+		
+//		Verifie que l'on peut afficher le tableau
+		public boolean verifDispoEvalCroisee(int code_eleve){
+			
+			String sql = "SELECT Count(*) FROM evaluations_croisees WHERE code_eleve = ? AND termine = 0";
+			int rownum = jdbcTemplateObject.queryForInt(sql, new Object[]{code_eleve});
+			
+			if(rownum == 1)
+				return true;
+			else
+				return false;
+
+		}
+		
 	}

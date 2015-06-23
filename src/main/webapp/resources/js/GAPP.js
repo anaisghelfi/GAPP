@@ -441,19 +441,20 @@ $("#EvalCroisee input[type='radio']").click(function(){
 });
 
 //Verification que tous les boutons sont remplis 
-$("#EvalCroiseeform input[type='submit']").click(function(){
-
-	var radio = $("#EvalCroiseeform input[type='radio']");
+$("#EvalCroiseeForm").submit(function(){
+	
+	var radio = $("#EvalCroiseeForm input[type='radio']");
+	var radio_checked = $("#EvalCroiseeForm input[checked='checked']");
+	
 //	alert(radio.length);
+//	alert(radio_checked.length);
 	
-//	for (i=0, i<formulaire.radios.length; i++) {
-//	   if (formulaire.radios[i].checked) {
-//	      var valeur = formulaire.radios[i].value;
-//	      alert(valeur + ' a été sélectionné');
-//	   }
-//	}
+	if(radio_checked.length*4 != radio.length){
+		alert("Certains champs de l'évaluation croisée n'ont pas été rempli");
+		return false;
+	}
 	
-//	bloquer le formulaire : return $(this).onsubmit = false;
+	return true;
 
 });
 
