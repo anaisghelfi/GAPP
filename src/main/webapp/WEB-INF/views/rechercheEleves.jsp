@@ -24,25 +24,27 @@
                         <div class="ibox-title">
                             <h5>Rechercher un élève</h5>
                         </div>
-	                        <div class="ibox-content">
-							
+	                    <div class="ibox-content">	
 							<form method="post" action="rechercheEleves">
 								<div class="form-group">
 								 	<label>Accéder à la fiche élève :</label> 
 								  	<input type="text" name="nom" class="form-control" >
 								</div>
-								<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" name="valider"><strong>Valider</strong></button></br>
+					
+								<div class="form-group">
+								  	<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" name="valider"><strong>Valider</strong></button>  	
+								</div>
+
 							</form>
-							
-							
+						</div>
+						<div>
 							<c:forEach var="eleve" items="${eleves}">
 								<div class="form-group">
 									<strong>Eleve :</strong> <c:out value="${eleve.nom}"/> <c:out value="${eleve.prenom}"/>
 									<a href="http://localhost:8080/gapp/ficheEleve?codeEleve=<c:out value="${eleve.code_eleve}"/>">Voir sa fiche</a>
 								</div>
-							</c:forEach>													
-							
-	                        </div>
+							</c:forEach>														
+	                    </div>
                     </div>
                 </div>
 			
@@ -109,6 +111,19 @@
 		                </div>
 		            </div>
 		        </div>
+		        
+		        <c:if test="${afficheBouton == true }">
+		        <div id="BoutonEvalCroiseeTuteur" class="col-lg-6">
+		        	<div class="ibox">
+                        <div class="ibox-title">
+                        	<h5>Autoriser l'évaluation croisée</h5>
+                        </div>
+                        <div class="ibox-content">
+                        	<button type="button" class="btn btn-info" id="AutoriseEvalCroisee">Autoriser</button>
+                        </div>
+                    </div>
+		        </div>
+		        </c:if>
 			              
                 </div>
             </div>
