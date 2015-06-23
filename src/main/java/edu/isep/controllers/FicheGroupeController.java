@@ -118,7 +118,7 @@ public class FicheGroupeController {
 	}	
 	
 	@RequestMapping(value ="/addGrilleE-{numgroupe}-{numfamille}", method = RequestMethod.POST)
-	public String addGrilleE(HttpServletRequest request,@PathVariable String numgroupe,@PathVariable Integer numfamille,Model model) 
+	public String addGrilleE(HttpServletRequest request,@PathVariable String numgroupe,@PathVariable String numfamille,Model model) 
 	{
 		String groupeno = (String)numgroupe;
 //		Pour rÃ©cupÃ©rer tous les ï¿½lï¿½ves d'un groupe
@@ -126,8 +126,10 @@ public class FicheGroupeController {
 		model.addAttribute("numerogroupe", numgroupe);
 		model.addAttribute("alleleves", eleves);
 		
+		Integer famillenumber = Integer.parseInt(numfamille);
+		
 		//récupérer toutes les compétences de la famille à remplir
-		List<SousCompetences> scs = daoCompetences.souscompParFamille(numfamille);
+		List<SousCompetences> scs = daoCompetences.souscompParFamille(famillenumber);
 		
 		//pour toutes les compétences de la famille soumise au remplissage
 		for (int i=0;i<scs.size();i++) {
@@ -135,25 +137,36 @@ public class FicheGroupeController {
 			//pour tous les membres du groupe 
 			for(int j=0;j<eleves.size();j++) {
 				//récupère les valeurs de tous les inputs remplis
-				int ideleve = eleves.get(i).getId();
+				int ideleve = eleves.get(j).getId();
 				
 				//récupère la valeur de l'input pour chaque compétence/famille/élève du groupe
-				String levelid = request.getParameter("eleve-"+numgroupe+"-"+numfamille+"-"+ideleve);
-				Integer levelIdInt = Integer.parseInt(levelid);
+				String levelid = request.getParameter("eleve-"+numfamille+"-"+scid+"-"+ideleve);
 				
-				String remarques = request.getParameter("eleveremarques-"+numgroupe+"-"+numfamille+"-"+ideleve);
+				//test si les bonnes variables sont récupérées
+				System.out.println(scid);
+				System.out.println(numfamille);
+				System.out.println(ideleve);
+				
+				
+				
+				String remarques = request.getParameter("eleveremarques-"+numfamille+"-"+scid+"-"+ideleve);
 				//insère dans la table notes_competences
 				//!!!!!!!!!!!!!! remplace table notes_sous_competences par notes_competences_groupe (INUTILE)
 				
 				//nouvel objet note pour les élèves
-				NoteCompetences notecomp = new NoteCompetences();
-				notecomp.setCompetences_id(numfamille);
-				notecomp.setEleves_id(ideleve);
-				notecomp.setNiveaux_competences_id(levelIdInt);
-				notecomp.setRemarques(remarques);
-				notecomp.setSous_competences_id(scid);
-
-				daoCompetences.ajoutGrilleEleve(notecomp);
+				
+				//si la valeur de l'input est undefined on n'insère rien dans la BDD
+				if (levelid != null) {
+					Integer levelIdInt = Integer.parseInt(levelid);
+					NoteCompetences notecomp = new NoteCompetences();
+					notecomp.setEleves_id(ideleve);
+					notecomp.setCompetences_id(famillenumber);
+					notecomp.setNiveaux_competences_id(levelIdInt);
+					notecomp.setRemarques(remarques);
+					notecomp.setSous_competences_id(scid);
+	
+					daoCompetences.ajoutGrilleEleve(notecomp);
+					}
 				
 			}
 		}
