@@ -30,13 +30,34 @@
 								<div class="form-group"><strong>Titre :</strong> <c:out value="${deadline.titre}"/> 
 								<strong>Description :</strong> <c:out value="${deadline.description}"/>
 								<strong>Date limite :</strong> <c:out value="${deadline.date_limite}"/>
-								<strong>Groupe concerné :</strong> <c:out value="${deadline.groupes_id}"/></div> </br>
+								<strong>Groupe concerné :</strong> <c:out value="${deadline.nom}"/></div> </br>
 							</c:forEach>
 							
 	                        </div>
                     </div>
                 </div>
+                
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Voir les prochaines séances d'APP</h5>
+                        </div>
+	                        <div class="ibox-content">
+							
+							<c:forEach var="seance" items="${seances}">
+								<div class="form-group">
+								<strong>Séance numéro :</strong> <c:out value="${seance.numero_seance}"/> 
+								<strong>Date :</strong> <c:out value="${seance.date_seance}"/>
+								<strong>Groupe concerné :</strong> <c:out value="${seance.nom}"/></div></br>
+							</c:forEach>
+							
+	                        </div>
+                    </div>
+                </div>
+                
+                
 			
+			<div class="col-lg-12">
 			
                 <div class="col-lg-6">
                     <div class="ibox">
@@ -56,7 +77,7 @@
 													</c:forEach>
 											</select>	
 									</div> 									
-										<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" name="valider"><strong>Valider</strong></button>
+										<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" name="valider"><strong>Valider</strong></button></br>
 								</form>
                             
                        	 </div>
@@ -72,21 +93,25 @@
                             
                             	<form method="post" action="delete_deadline">
 								  <div class="form-group"><label>Titre :</label> 
-											<select name="groupes_id" class="form-control">
+											<select name="titre" class="form-control">
 													<c:forEach var="deadline" items="${deadlines}">
 													<option value="${deadline.titre}"><c:out value="${deadline.titre}"/></option>
 													</c:forEach>
 											</select>	
 									</div> 			
 								  
-										<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" name="valider"><strong>Supprimer</strong></button>
+										<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" name="valider"><strong>Supprimer</strong></button></br>
 								</form>
                             
                        	 </div>
                     </div>
                 </div>
                 
+           </div>
                 
+                
+ 		   <div class="col-lg-12">
+
                 <div class="col-lg-6">
                     <div class="ibox">
                         <div class="ibox-title">
@@ -104,17 +129,41 @@
 													</c:forEach>
 											</select>	
 									</div> 							
-										<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" name="valider"><strong>Valider</strong></button>
+										<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" name="valider"><strong>Valider</strong></button></br>
 								</form>
                             
                        	 </div>
                     </div>
                 </div>
+                
+                <div class="col-lg-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Supprimer une séance d'APP</h5>
+                        </div>
+                        	<div class="ibox-content">
+                            
+                            	<form method="post" action="delete_seance">
+								  <div class="form-group"><label>Titre :</label> 
+											<select name="id" class="form-control">
+													<c:forEach var="seance" items="${seances}">
+													<option value="${seance.id}">Date : <c:out value="${seance.date_seance}"/> Groupe : <c:out value="${seance.nom}"/></option>
+													</c:forEach>
+											</select>	
+									</div> 			
+								  
+										<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" name="valider"><strong>Supprimer</strong></button></br>
+								</form>
+                            
+                       	 </div>
+                    </div>
+                </div>
+                
+           </div>
+                
               
-            </div>
-
-
         </div>
+     </div>
        
        
 <%@ include file="include/bas_de_page.jsp" %>

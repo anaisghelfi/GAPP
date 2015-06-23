@@ -461,7 +461,8 @@ $("#EvalCroisee input[type='radio']").click(function(){
 $("#EvalCroiseeForm").submit(function(){
 	
 	var radio = $("#EvalCroiseeForm input[type='radio']");
-	var radio_checked = $("#EvalCroiseeForm input[checked='checked']");
+	var radio_checked = $("#EvalCroiseeForm input[type='radio']:checked, #EvalCroiseeForm input[checked='checked']");
+
 	
 //	alert(radio.length);
 //	alert(radio_checked.length);
@@ -473,5 +474,20 @@ $("#EvalCroiseeForm").submit(function(){
 	
 	return true;
 
+});
+//----------------------------------------------------------------
+//AJAX pour autoriser l'évaluation croisée
+$("#AutoriseEvalCroisee").click(function(){
+	
+	$.ajax({
+	       url : 'AutoriseEvalCroisee',
+	       type : 'post', 
+	       success : function(code_html, statut){ 
+	           alert("Vous avez bien autorisé l'évaluation croisée");
+	           $("#BoutonEvalCroiseeTuteur").hide();  
+	       },
+	       
+	    });
+	
 });
 

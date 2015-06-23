@@ -1,10 +1,12 @@
 package edu.isep.daoImp;
 
 
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 
 
@@ -66,6 +68,7 @@ public class elevesJDBCTemplate {
 			eleve.setId(Integer.parseInt(String.valueOf(row.get("id"))));
 			eleve.setNom((String)row.get("nom"));
 			eleve.setPrenom((String)row.get("prenom"));
+			eleve.setCode_eleve(Integer.parseInt(String.valueOf(row.get("code_eleve"))));
 			eleve.setMail((String)row.get("mail"));
 			eleve.setPromo((String)row.get("promo"));
 			eleve.setGroupe((String)row.get("groupe"));
@@ -75,6 +78,32 @@ public class elevesJDBCTemplate {
 		}
 
 		return eleves;
+	}
+	
+
+	public List<Eleve> elevesParNomInt(int code_eleve){
+		String sql = "SELECT * FROM eleves where code_eleve = ?";
+		
+		ArrayList<Eleve> elevesInt =  new ArrayList<Eleve>();
+		
+		List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql, new Object[]{code_eleve});
+		
+		for (Map row : rows) {
+			Eleve eleve =  new Eleve();
+			
+			eleve.setId(Integer.parseInt(String.valueOf(row.get("id"))));
+			eleve.setNom((String)row.get("nom"));
+			eleve.setPrenom((String)row.get("prenom"));
+			eleve.setCode_eleve(Integer.parseInt(String.valueOf(row.get("code_eleve"))));
+			eleve.setMail((String)row.get("mail"));
+			eleve.setPromo((String)row.get("promo"));
+			eleve.setGroupe((String)row.get("groupe"));
+			if(row.get("note") != null){eleve.setNote((double) row.get("note"));}
+			
+			elevesInt.add(eleve);
+		}
+
+		return elevesInt;
 	}
 	
 	public List<Seances> allSeances(){
@@ -89,7 +118,7 @@ public class elevesJDBCTemplate {
 			
 			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
 			seance.setId(Integer.parseInt(String.valueOf(row.get("id"))));
-			//seance.setDate_seance((String)row.get("date_seance")); ICI VICOOO
+			seance.setDate_seance((Date)row.get("date_seance"));
 			seance.setNumero_seance(Integer.parseInt(String.valueOf(row.get("numero_seance"))));
 			
 			
@@ -101,14 +130,15 @@ public class elevesJDBCTemplate {
 	
 
 
-//fonction qui retourne le tuteur de l'�l�ve
+//fonction qui retourne le tuteur de l'eleve
+	
 
-public List<Tuteur> tuteurEleve(String nom){
-	String sql = "SELECT tuteur.nom, tuteur.prenom, tuteur.mail FROM tuteur JOIN groupes ON tuteur.id = groupes.tuteur_id JOIN eleves ON eleves.groupe LIKE CONCAT('%',groupes.nom,'%') WHERE eleves.nom LIKE ?";
+public List<Tuteur> tuteurEleve(int code_eleve){
+	String sql = "SELECT tuteur.nom, tuteur.prenom, tuteur.mail FROM tuteur JOIN groupes ON tuteur.id = groupes.tuteur_id JOIN eleves ON eleves.groupe LIKE CONCAT('%',groupes.nom,'%') WHERE eleves.code_eleve = ?";
 	
 	ArrayList<Tuteur> tuteurs =  new ArrayList<Tuteur>();
 	
-	List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql, new Object[]{nom});
+	List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql, new Object[]{code_eleve});
 	
 	for (Map row : rows) {
 		Tuteur tuteur =  new Tuteur();
@@ -175,6 +205,8 @@ public List<Tuteur> tuteurEleve(String nom){
 		}
 
 		return eleves;
-	}	
+	}
+	
+	
 	
 }

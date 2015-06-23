@@ -32,6 +32,7 @@ public class AjoutDeadlineController {
 	private Map<Integer, Deadline> u;
 	private Map<String,Deadline> d;
 	private Map<Integer,Seances> s;
+	private Map<Integer,Seances> v;
 
 	
 	
@@ -44,7 +45,9 @@ public class AjoutDeadlineController {
 
 		u = new HashMap<Integer, Deadline>();	
 		d = new HashMap<String, Deadline>();
-		s = new HashMap<Integer, Seances>();	
+		s = new HashMap<Integer, Seances>();
+		v = new HashMap<Integer, Seances>();
+
 
 
 	}
@@ -61,6 +64,9 @@ public class AjoutDeadlineController {
 		List<Groupe> groupes = daoGroupe.allGroupes();
 		model.addAttribute("groupes", groupes);
 		
+		List<Seances> seances = daoDeadline.allSeance();
+		model.addAttribute("seances", seances);
+		
 		return "ajoutDeadline";
 	}
 	
@@ -76,6 +82,9 @@ public class AjoutDeadlineController {
 		List<Deadline> deadlines = daoDeadline.allDeadline();
 		model.addAttribute("deadlines",deadlines);
 		
+		List<Groupe> groupes = daoGroupe.allGroupes();
+		model.addAttribute("groupes", groupes);
+		
 		return "ajoutDeadline";
 	}
 	
@@ -90,6 +99,12 @@ public class AjoutDeadlineController {
 		List<Deadline> deadlines = daoDeadline.allDeadline();
 		model.addAttribute("deadlines",deadlines);
 		
+		List<Groupe> groupes = daoGroupe.allGroupes();
+		model.addAttribute("groupes", groupes);
+		
+		List<Seances> seances_delete = daoDeadline.allSeance();
+		model.addAttribute("seances", seances_delete);
+		
 		return "ajoutDeadline";
 	}
 	
@@ -103,6 +118,30 @@ public class AjoutDeadlineController {
 		
 		List<Seances> seances = daoDeadline.allSeance();
 		model.addAttribute("seances", seances);
+		
+		List<Groupe> groupes = daoGroupe.allGroupes();
+		model.addAttribute("groupes", groupes);
+		
+		return "ajoutDeadline";
+	}
+	
+	
+	@RequestMapping(value = "/delete_seance", method = RequestMethod.POST)
+	public String delete_seance(Seances seances, Model model)
+	{
+		
+		v.put(seances.getId(), seances);
+		daoDeadline.delete_seance(seances);
+		model.addAttribute("seance_delete", v);
+		
+		List<Seances> seances_delete = daoDeadline.allSeance();
+		model.addAttribute("seances", seances_delete);
+				
+		List<Deadline> deadlines = daoDeadline.allDeadline();
+		model.addAttribute("deadlines",deadlines);
+		
+		List<Groupe> groupes = daoGroupe.allGroupes();
+		model.addAttribute("groupes", groupes);
 		
 		return "ajoutDeadline";
 	}

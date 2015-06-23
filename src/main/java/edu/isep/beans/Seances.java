@@ -7,7 +7,9 @@ public class Seances {
 	private int id;
 	private int numero_seance;
 	private int groupes_id;
+	private String nom; 
 
+	
 	
 	public int getId() {
 		return id;
@@ -34,6 +36,12 @@ public class Seances {
 	}
 	public void setGroupes_id(int groupes_id) {
 		this.groupes_id = groupes_id;
+	}
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 	
 	

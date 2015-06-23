@@ -1,7 +1,10 @@
 package edu.isep.controllers;
 
+import java.util.List;
+
 import edu.isep.gapp.LdapAccess;
 import edu.isep.beans.LdapObject;
+import edu.isep.beans.Tuteur;
 import edu.isep.daoImp.CompetencesJDBCTemplate;
 import edu.isep.daoImp.HomeJDBCTemplate;
 
@@ -22,10 +25,13 @@ import org.springframework.web.bind.support.SessionStatus;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private HomeJDBCTemplate h;
 	
 	public HomeController(){
 
-		ApplicationContext context = new ClassPathXmlApplicationContext("Bean.xml");		
+		ApplicationContext context = new ClassPathXmlApplicationContext("Bean.xml");
+		h = (HomeJDBCTemplate) context.getBean("sessionDAO");
+		
 	}
 	
 	@RequestMapping(value = "/")
@@ -37,16 +43,25 @@ public class HomeController {
 	@RequestMapping(value = "/connexion",method = RequestMethod.POST)
 	public String connexion(HttpServletRequest request ,HttpSession session, @RequestParam("login") String login,@RequestParam("password") String password){
 		
+		/*session = request.getSession();
+		session.setAttribute("login", login);
+		session.setAttribute("email","mohamed.sellami@isep.fr");
+		session.setAttribute("nom", "Sellami");
+		session.setAttribute("prenom", "Mohamed");
+		session.setAttribute("type", "professeur");*/
+		
 		session = request.getSession();
-		 session.setAttribute("login", "vgauch");
+		session.setAttribute("login", login);
+		session.setAttribute("email","victorien.gauch@isep.fr");
 		 session.setAttribute("number", 7335);
-		 session.setAttribute("email", "victorien@gmail.com");
-		 session.setAttribute("nom", "Gauch");
-		 session.setAttribute("prenom", "Victorien");
-		 session.setAttribute("type", "eleve");
+		session.setAttribute("nom", "Gauch");
+		session.setAttribute("prenom", "Victorien");
+		session.setAttribute("type", "eleve");
+		
+	
 		try {
 			LdapObject newUser = LdapAccess.LDAPget(login,password);
-
+			
 			switch (newUser.getType()){
 			
 				case "eleve":
@@ -61,11 +76,26 @@ public class HomeController {
 					 session.setAttribute("type", newUser.getType());
 					 
 
-					 return "accueilEleve";
+					 return "redirect:ficheEleve?codeEleve="+newUser.getNumber();
 					 
 				case "professeur":
-					System.out.println("prof");
-					break;
+					int tuteurExist = h.tuteurExist(newUser.getMail());
+					if(tuteurExist == 0){
+						Tuteur t = new Tuteur();
+						t.setNom(newUser.getNom());
+						t.setPrenom(newUser.getPrenom());
+						t.setMail(newUser.getMail());
+						h.insertTuteur(t);
+					}
+					session = request.getSession();
+					session.setAttribute("login", login);
+					session.setAttribute("email", newUser.getMail());
+					session.setAttribute("nom", newUser.getNomFamille());
+					session.setAttribute("prenom", newUser.getPrenom());
+					session.setAttribute("type", newUser.getType());
+					
+					return "redirect:rechercheEleves";
+						
 			}
 			
 		} catch(Exception e) {

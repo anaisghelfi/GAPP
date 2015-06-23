@@ -11,8 +11,10 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import edu.isep.beans.Eleve;
 import edu.isep.beans.EvalCroisee;
 import edu.isep.beans.Groupe;
+import edu.isep.beans.SousGroupe;
 
 public class EvalCroiseeJDBCTemplate {
 
@@ -77,10 +79,13 @@ public class EvalCroiseeJDBCTemplate {
 		}
 		
 //		Pour rendre l'evalcroisee disponible
-		public void autorisationEvalCroisee(int code_eleve){
+		public void autorisationEvalCroisee( List<Eleve> eleves){
 			
-			String sql = "INSERT INTO evaluations_croisees(code_eleve, termine) VALUES(?, 0)";
-			jdbcTemplateObject.update(sql,new Object[]{ code_eleve });
+			for( Eleve e : eleves){
+				String sql = "INSERT INTO evaluations_croisees(code_eleve, termine) VALUES(?, 0)";
+				jdbcTemplateObject.update(sql,new Object[]{ e.getCode_eleve() });
+			}
+		
 			return;
 		}
 		
@@ -95,13 +100,26 @@ public class EvalCroiseeJDBCTemplate {
 			
 		}
 		
-//		Verifie que l'on peut afficher le tableau
+//		Verifie que l'on peut afficher le tableau d'evaluation croise pour un élève
 		public boolean verifDispoEvalCroisee(int code_eleve){
 			
 			String sql = "SELECT Count(*) FROM evaluations_croisees WHERE code_eleve = ? AND termine = 0";
 			int rownum = jdbcTemplateObject.queryForInt(sql, new Object[]{code_eleve});
 			
 			if(rownum == 1)
+				return true;
+			else
+				return false;
+
+		}
+		
+//		Verifie que l'on peut afficher le bouton d'autorisation d'évaluation croisee
+		public boolean verifDispoEvalCroiseeTuteur(){
+			
+			String sql = "SELECT Count(*) FROM evaluations_croisees";
+			int rownum = jdbcTemplateObject.queryForInt(sql);
+			
+			if(rownum == 0)
 				return true;
 			else
 				return false;

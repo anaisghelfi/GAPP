@@ -42,7 +42,7 @@ public class DeadlineJDBCTemplate {
 	
 	
 	public List<Deadline> allDeadline(){
-		String sql = "SELECT * FROM deadlines";
+		String sql = "SELECT deadlines.id, deadlines.titre, deadlines.description, deadlines.date_limite, groupes.nom  FROM deadlines INNER JOIN groupes ON deadlines.groupes_id = groupes.id";
 		
 		ArrayList<Deadline> deadlines =  new ArrayList<Deadline>();
 		
@@ -56,7 +56,7 @@ public class DeadlineJDBCTemplate {
 			deadline.setTitre((String)row.get("titre"));
 			deadline.setDescription((String)row.get("description"));
 			deadline.setDate_limite((Date) row.get("date_limite"));
-			deadline.setGroupes_id(Integer.parseInt(String.valueOf(row.get("groupes_id"))));
+			deadline.setNom((String)row.get("nom"));
 			
 			deadlines.add(deadline);
 		}
@@ -66,7 +66,7 @@ public class DeadlineJDBCTemplate {
 	
 	//Voir toutes les séances d'APP de tout les groupes
 	public List<Seances> allSeance(){
-		String sql = "SELECT * FROM seances";
+		String sql = "SELECT seances.id, numero_seance, date_seance, groupes.nom FROM seances INNER JOIN groupes ON seances.groupes_id = groupes.id";
 		
 		ArrayList<Seances> seances =  new ArrayList<Seances>();
 		
@@ -77,9 +77,10 @@ public class DeadlineJDBCTemplate {
 			
 			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
 			seance.setId(Integer.parseInt(String.valueOf(row.get("id"))));
-			seance.setDate_seance((Date)row.get("date_seance"));
 			seance.setNumero_seance(Integer.parseInt(String.valueOf(row.get("numero_seance"))));
-			seance.setGroupes_id(Integer.parseInt(String.valueOf(row.get("groupes_id"))));
+			seance.setDate_seance((Date)row.get("date_seance"));
+			seance.setNom((String)row.get("nom"));
+			//seance.setGroupes_id(Integer.parseInt(String.valueOf(row.get("groupes_id"))));
 			
 			seances.add(seance);
 		}
@@ -93,6 +94,13 @@ public class DeadlineJDBCTemplate {
 		jdbcTemplateObject.update(sql,new Object[]{seance.getNumero_seance(),seance.getDate_seance(),seance.getGroupes_id()});
 		return ;
 	}
+	
+	//Supprimer une seance
+		public void delete_seance(Seances seances){
+			String sql = "DELETE FROM seances WHERE id = ?";
+			jdbcTemplateObject.update(sql,new Object[]{seances.getId()});
+			return;
+		}
 	
 	
 }
