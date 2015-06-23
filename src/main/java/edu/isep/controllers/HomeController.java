@@ -25,7 +25,8 @@ public class HomeController {
 	
 	public HomeController(){
 
-		ApplicationContext context = new ClassPathXmlApplicationContext("Bean.xml");		
+		ApplicationContext context = new ClassPathXmlApplicationContext("Bean.xml");
+		
 	}
 	
 	@RequestMapping(value = "/")
@@ -37,13 +38,6 @@ public class HomeController {
 	@RequestMapping(value = "/connexion",method = RequestMethod.POST)
 	public String connexion(HttpServletRequest request ,HttpSession session, @RequestParam("login") String login,@RequestParam("password") String password){
 		
-		session = request.getSession();
-		 session.setAttribute("login", "vgauch");
-		 session.setAttribute("number", 7335);
-		 session.setAttribute("email", "victorien@gmail.com");
-		 session.setAttribute("nom", "Gauch");
-		 session.setAttribute("prenom", "Victorien");
-		 session.setAttribute("type", "eleve");
 		try {
 			LdapObject newUser = LdapAccess.LDAPget(login,password);
 
@@ -61,7 +55,7 @@ public class HomeController {
 					 session.setAttribute("type", newUser.getType());
 					 
 
-					 return "accueilEleve";
+					 return "redirect:ficheEleve?nom="+newUser.getNomFamille();
 					 
 				case "professeur":
 					System.out.println("prof");
