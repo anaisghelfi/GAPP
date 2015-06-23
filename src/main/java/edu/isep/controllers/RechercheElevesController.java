@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -15,8 +18,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.isep.beans.Eleve;
+import edu.isep.beans.EvalCroisee;
 import edu.isep.beans.Groupe;
 import edu.isep.beans.SousGroupe;
 import edu.isep.beans.Tuteur;
@@ -90,13 +95,20 @@ public class RechercheElevesController {
 		model.addAttribute("sousGroupes", sousGroupes);
 		
 //		Pour savoir si on affiche le bouton pour activer l'evaluation croisée
-		boolean afficheBouton = daoEvalCroisee.verifDispoEvalCroisee(code_eleve);
-		
-		
+		boolean afficheBouton = daoEvalCroisee.verifDispoEvalCroiseeTuteur();
+		model.addAttribute("afficheBouton", afficheBouton);
 
+		
 
 		return "rechercheEleves"; 
 	}
 	
+	@RequestMapping(value="/AutoriseEvalCroisee", method = RequestMethod.POST)
+	public @ResponseBody void Note(HttpServletRequest request, HttpSession session, Model model, EvalCroisee evalcroisee){
+		
+		List<Eleve> eleves = daoEleve.allEleves();
+		daoEvalCroisee.autorisationEvalCroisee(eleves);
+		
+	}
 	
 }
