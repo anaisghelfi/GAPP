@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -44,7 +45,9 @@ public class FicheEleveController {
 	model.addAttribute("eleves", eleves);
 	
 	List<Seances> seances = daoEleve.allSeances();
+	JSONArray seancesJS = new JSONArray(seances);
 	model.addAttribute("seances",seances);
+	model.addAttribute("seancesJS",seancesJS);
 	
 	List<Tuteur> tuteurs = daoEleve.tuteurEleve(codeEleve);
 	model.addAttribute("tuteurs",tuteurs);
