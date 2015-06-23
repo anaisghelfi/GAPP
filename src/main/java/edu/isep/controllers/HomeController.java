@@ -50,13 +50,13 @@ public class HomeController {
 //		session.setAttribute("prenom", "Mohamed");
 //		session.setAttribute("type", "professeur");
 		
-//		session = request.getSession();
-//		session.setAttribute("login", login);
-//		session.setAttribute("email","victorien.gauch@isep.fr");
-//		 session.setAttribute("number", 7335);
-//		session.setAttribute("nom", "Gauch");
-//		session.setAttribute("prenom", "Victorien");
-//		session.setAttribute("type", "eleve");
+		session = request.getSession();
+		session.setAttribute("login", login);
+		session.setAttribute("email","victorien.gauch@isep.fr");
+		 session.setAttribute("number", 7335);
+		session.setAttribute("nom", "Gauch");
+		session.setAttribute("prenom", "Victorien");
+		session.setAttribute("type", "eleve");
 		
 		if(login.equals("admin") && password.equals("admin")){
 			session = request.getSession();

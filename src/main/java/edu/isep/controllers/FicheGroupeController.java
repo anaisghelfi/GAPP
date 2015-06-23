@@ -71,9 +71,11 @@ public class FicheGroupeController {
 	@RequestMapping(value = "/ficheGroupe-{numgroupe}", method = RequestMethod.GET)
 	public String getEleves(HttpSession session,HttpServletRequest request,@PathVariable String numgroupe,Model model) 
 	{
-		int tuteurType = daoMain.tuteurType((String) session.getAttribute("email"));
-		System.out.println(tuteurType);
-		model.addAttribute("typeTuteur",tuteurType);
+		if(session.getAttribute("type") == "professeur"){
+			int tuteurType = daoMain.tuteurType((String) session.getAttribute("email"));
+			System.out.println(tuteurType);
+			model.addAttribute("typeTuteur",tuteurType);
+		}
 
 		String groupeno = (String)numgroupe;
 //		Pour récupérer tous les �l�ves d'un groupe
