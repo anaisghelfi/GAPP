@@ -73,7 +73,16 @@ public class RechercheElevesController {
 		List<Eleve> eleves = daoEleve.elevesParNom(eleve.getNom());
 		model.addAttribute("eleves", eleves);
 		
+//		Pour récupérer tous les groupes
+		List<Groupe> groupes = daoGroupe.allGroupes();
+		model.addAttribute("groupes", groupes);
 		
+//		Pour récupérer tous les sous groupes
+		List<SousGroupe> sousGroupes = daoSousGroupe.allSousGroupes();
+		for( SousGroupe sg : sousGroupes){
+			sg.setGroupe(daoGroupe.getGroupe(sg.getGroupes_id()));
+		}
+		model.addAttribute("sousGroupes", sousGroupes);
 
 		return "rechercheEleves";
 	}		
