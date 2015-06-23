@@ -98,6 +98,8 @@ public class FicheGroupeController {
 		model.addAttribute("notecompetences",notecompParGroupe);
 		model.addAttribute("notecompetencesgroupe",notecompGroupe);
 		
+		//récupérer les absences
+		
 		return "ficheGroupe";
 	}
 	
