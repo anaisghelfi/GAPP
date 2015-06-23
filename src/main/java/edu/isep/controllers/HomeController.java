@@ -55,7 +55,7 @@ public class HomeController {
 					 session.setAttribute("type", newUser.getType());
 					 
 
-					 return "redirect:ficheEleve?nom="+newUser.getNomFamille();
+					 return "redirect:ficheEleve?codeEleve="+newUser.getNumber();
 					 
 				case "professeur":
 					return "redirect:rechercheEleves";
