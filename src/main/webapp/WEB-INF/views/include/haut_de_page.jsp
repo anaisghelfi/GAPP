@@ -45,23 +45,36 @@
                         GAPP
                     </div>
                 </li>
+                 <c:if test="${sessionScope.type} == 'professeur'">
                 <li>
-                    <a href="#"> <i class="fa fa-table"></i><span class="nav-label">Grille de compétences</span> </a>
+                    <a href="addfamille"> <i class="fa fa-table"></i><span class="nav-label">Grille de compétences</span> </a>
                 </li>
+                </c:if>
+                <c:if test="${sessionScope.type } != 'eleve">
                 <li>
                     <a href="rechercheEleves"> <i class="fa fa-search"></i><span class="nav-label">Rechercher</span></a>
                 </li>
+                </c:if>
+                <c:if test="${sessionScope.type} == 'professeur'">
                 <li>
                     <a href="ajoutDeadline"><i class="fa fa-calendar"></i><span class="nav-label">Ajouter des deadlines</span></a>
                 </li>
+                </c:if>
+                 <c:if test="${sessionScope.type} == 'professeur'">
                 <li>
                     <a href="attribRole"><i class="fa fa-user"></i> <span class="nav-label">Attribuer les rôles </span></a>
                 </li>
                 <li>
                     <a href="attribGroupe"> <i class="fa fa-users"></i><span class="nav-label">Attribuer les groupes</span> </a>
                 </li>
+                 </c:if>
+                  <c:if test="${sessionScope.type} == 'admin'">
                  <li>
                     <a href="exportNote"> <i class="fa fa-calendar"></i><span class="nav-label">Exporter les notes</span> </a>
+                </li>
+                </c:if>
+                   <li>
+                    <a href="evalCroisee"> <i class="fa fa-users"></i><span class="nav-label">Evaluation croisée</span> </a>
                 </li>
 
             </ul>
