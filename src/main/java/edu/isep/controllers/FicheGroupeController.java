@@ -10,14 +10,6 @@ import java.util.Date;
 
 
 
-
-
-
-<<<<<<< HEAD
-
-
-=======
->>>>>>> branch 'master' of https://github.com/anaisghelfi/GAPP.git
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
