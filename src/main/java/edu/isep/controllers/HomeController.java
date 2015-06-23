@@ -43,20 +43,20 @@ public class HomeController {
 	@RequestMapping(value = "/connexion",method = RequestMethod.POST)
 	public String connexion(HttpServletRequest request ,HttpSession session, @RequestParam("login") String login,@RequestParam("password") String password){
 		
-//		session = request.getSession();
-//		session.setAttribute("login", login);
-//		session.setAttribute("email","mohamed.sellami@isep.fr");
-//		session.setAttribute("nom", "Sellami");
-//		session.setAttribute("prenom", "Mohamed");
-//		session.setAttribute("type", "professeur");
-		
 		session = request.getSession();
 		session.setAttribute("login", login);
-		session.setAttribute("email","victorien.gauch@isep.fr");
-		 session.setAttribute("number", 7335);
-		session.setAttribute("nom", "Gauch");
-		session.setAttribute("prenom", "Victorien");
-		session.setAttribute("type", "eleve");
+		session.setAttribute("email","mohamed.sellami@isep.fr");
+		session.setAttribute("nom", "Sellami");
+		session.setAttribute("prenom", "Mohamed");
+		session.setAttribute("type", "professeur");
+		
+//		session = request.getSession();
+//		session.setAttribute("login", login);
+//		session.setAttribute("email","victorien.gauch@isep.fr");
+//		 session.setAttribute("number", 7335);
+//		session.setAttribute("nom", "Gauch");
+//		session.setAttribute("prenom", "Victorien");
+//		session.setAttribute("type", "eleve");
 		
 		if(login.equals("admin") && password.equals("admin")){
 			session = request.getSession();
@@ -64,7 +64,7 @@ public class HomeController {
 			session.setAttribute("email","admin@gapp.fr");
 			session.setAttribute("nom", "Admin");
 			session.setAttribute("prenom", "Admin");
-			session.setAttribute("type", "admin");
+			session.setAttribute("type", "tuteur");
 			
 			return "redirect:rechercheEleves";
 		}else{
