@@ -108,9 +108,11 @@
                                         
                                         <c:forEach var="allcompetences" items="${allcompetences}">
                                         <div name="grille-<c:out value="${allcompetences.id}"/>">
-                                        <h6 style='text-align:center' class="modal-title"><c:out value="${allcompetences.famille}"/> <i style="cursor:pointer"  name="showgrilleEleve-<c:out value="${allcompetences.id}"/>" class="fa fa-user"></i> <i style="cursor:pointer;" name="showgrilleGroupe-<c:out value="${allcompetences.id}"/>" class="fa fa-users"></i></h6>
+                                        <h6 style='text-align:center' class="modal-title"><c:out value="${allcompetences.famille}"/> <i style="cursor:pointer;" style='color:rgb(199, 199, 199)' name="showgrilleGroupe-<c:out value="${allcompetences.id}"/>" class="fa fa-users"></i> <i style="cursor:pointer"  name="showgrilleEleve-<c:out value="${allcompetences.id}"/>" class="fa fa-user"></i> </h6>
 				 						
-				 						<table id="grille-groupe-<c:out value="${allcompetences.id}"/>" class="table table-bordered">
+				 						<div id="grille-groupe-<c:out value="${allcompetences.id}"/>">
+				 						<form method="POST" action ="addGrilleG-<c:out value="${numerogroupe}"/>-<c:out value="${allcompetences.id}"/>">
+				 						<table class="table table-bordered">
 				                                <thead>
 				                                <tr>
 				                                    <th rowspan="2">Compétence</th>
@@ -134,12 +136,107 @@
 													<tr>	
 														
 														<td class='primary'><c:out value="${allsouscompetences.sous_competences}"/></td>
-														<td rowspan="5"><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"/></td>
-														<td rowspan="5"><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"/></td>
-														<td rowspan="5"><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"/></td>
-														<td rowspan="5"><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"/></td>
-														<td rowspan="5"><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"/></td>
-														<td rowspan="5"><textarea style="height:100%;resize:none" name="grouperemarques-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"></textarea></td>
+		
+													
+															<c:forEach begin="1" end="6" var="j">
+									                		
+						<!-- 			                			On met un bouton radio différent pour chaque compétences et niveau (name) -->
+									                			<c:choose>
+						
+																	<c:when test="${j == 1}">
+																		<c:set var="radio_pas_coche" value="true" scope="page" />
+						<!-- 											On regarde toutes les evaluations croisees pour voir si elle a deja été remplit -->
+																		<c:forEach var="notecompetencesgroupe" items="${notecompetencesgroupe}">													
+						<!-- 												On met un radio coché si il a deja été enregistré en base de données	-->												 
+																				<c:if test="${notecompetencesgroupe.competences_id == allcompetences.id && notecompetencesgroupe.groupe == numerogroupe && notecompetencesgroupe.sous_competences_id == allsouscompetences.id && notecompetencesgroupe.niveaux_competences_id == 1}">
+																					<td rowspan="5"><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>" value="1" checked="checked"></td>
+																					<c:set var="radio_pas_coche" value="false" scope="page" />
+																				</c:if>
+																		</c:forEach>
+																		<c:if test="${radio_pas_coche == true}">
+																			<td rowspan="5"><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>" value="1"></td>
+																		</c:if>
+																	</c:when>
+																	
+																	<c:when test="${j == 2}">
+																		<c:set var="radio_pas_coche" value="true" scope="page" />
+						<!-- 											On regarde toutes les evaluations croisees pour voir si elle a deja été remplit -->
+																		<c:forEach var="notecompetencesgroupe" items="${notecompetencesgroupe}">													
+						<!-- 												On met un radio coché si il a deja été enregistré en base de données	-->												 
+																				<c:if test="${notecompetencesgroupe.competences_id == allcompetences.id && notecompetencesgroupe.groupe == numerogroupe && notecompetencesgroupe.sous_competences_id == allsouscompetences.id && notecompetencesgroupe.niveaux_competences_id == 2}">
+																					<td rowspan="5"><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>" value="2" checked="checked"></td>
+																					<c:set var="radio_pas_coche" value="false" scope="page" />
+																				</c:if>
+																		</c:forEach>
+																		<c:if test="${radio_pas_coche == true}">
+																			<td rowspan="5"><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>" value="2"></td>
+																		</c:if>
+																	</c:when>
+																	
+																	<c:when test="${j == 3}">
+																		<c:set var="radio_pas_coche" value="true" scope="page" />
+						<!-- 											On regarde toutes les evaluations croisees pour voir si elle a deja été remplit -->
+																		<c:forEach var="notecompetencesgroupe" items="${notecompetencesgroupe}">													
+						<!-- 												On met un radio coché si il a deja été enregistré en base de données	-->												 
+																				<c:if test="${notecompetencesgroupe.competences_id == allcompetences.id && notecompetencesgroupe.groupe == numerogroupe && notecompetencesgroupe.sous_competences_id == allsouscompetences.id && notecompetencesgroupe.niveaux_competences_id == 3}">
+																					<td rowspan="5"><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>" value="3" checked="checked"></td>
+																					<c:set var="radio_pas_coche" value="false" scope="page" />
+																				</c:if>
+																		</c:forEach>
+																		<c:if test="${radio_pas_coche == true}">
+																			<td rowspan="5"><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>" value="3"></td>
+																		</c:if>
+																	</c:when>
+																	
+																	<c:when test="${j == 4}">
+																		<c:set var="radio_pas_coche" value="true" scope="page" />
+						<!-- 											On regarde toutes les evaluations croisees pour voir si elle a deja été remplit -->
+																		<c:forEach var="notecompetencesgroupe" items="${notecompetencesgroupe}">													
+						<!-- 												On met un radio coché si il a deja été enregistré en base de données	-->												 
+																				<c:if test="${notecompetencesgroupe.competences_id == allcompetences.id && notecompetencesgroupe.groupe == numerogroupe && notecompetencesgroupe.sous_competences_id == allsouscompetences.id && notecompetencesgroupe.niveaux_competences_id == 4}">
+																					<td rowspan="5"><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>" value="4" checked="checked"></td>
+																					<c:set var="radio_pas_coche" value="false" scope="page" />
+																				</c:if>
+																		</c:forEach>
+																		<c:if test="${radio_pas_coche == true}">
+																			<td rowspan="5"><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>" value="4"></td>
+																		</c:if>
+																	</c:when>
+																	
+																	<c:when test="${j == 5}">
+																		<c:set var="radio_pas_coche" value="true" scope="page" />
+						<!-- 											On regarde toutes les evaluations croisees pour voir si elle a deja été remplit -->
+																		<c:forEach var="notecompetencesgroupe" items="${notecompetencesgroupe}">													
+						<!-- 												On met un radio coché si il a deja été enregistré en base de données	-->												 
+																				<c:if test="${notecompetencesgroupe.competences_id == allcompetences.id && notecompetencesgroupe.groupe == numerogroupe && notecompetencesgroupe.sous_competences_id == allsouscompetences.id && notecompetencesgroupe.niveaux_competences_id == 5}">
+																					<td rowspan="5"><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>" value="5" checked="checked"></td>
+																					<c:set var="radio_pas_coche" value="false" scope="page" />
+																				</c:if>
+																		</c:forEach>
+																		<c:if test="${radio_pas_coche == true}">
+																			<td rowspan="5"><input type="radio" name="groupe-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>" value="5"></td>
+																		</c:if>
+																	</c:when>																					
+
+																	
+																	<c:when test="${j == 6}">
+																		<c:set var="radio_pas_coche" value="true" scope="page" />
+						<!-- 											On regarde toutes les evaluations croisees pour voir si elle a deja été remplit -->
+																		<c:forEach var="notecompetencesgroupe" items="${notecompetencesgroupe}">													
+						<!-- 												On met un radio coché si il a deja été enregistré en base de données	-->												 
+																				<c:if test="${notecompetencesgroupe.competences_id == allcompetences.id && notecompetencesgroupe.groupe == numerogroupe && notecompetencesgroupe.sous_competences_id == allsouscompetences.id}">
+																					<td rowspan="5"><textarea style="height:100%;resize:none" value="<c:out value="${notecompetencesgroupe.remarques}"/>" name="grouperemarques-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"></textarea></td>
+																					<c:set var="radio_pas_coche" value="false" scope="page" />
+																				</c:if>
+																		</c:forEach>
+																		<c:if test="${radio_pas_coche == true}">
+																			<td rowspan="5"><textarea style="height:100%;resize:none" name="grouperemarques-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"></textarea></td>
+																		</c:if>
+																	</c:when>																																	
+																</c:choose>
+													
+									             			</c:forEach>													
+													
 													</tr>
 													<tr>	
 														<td>B : <c:out value="${allsouscompetences.getB()}"/></td>
@@ -162,10 +259,12 @@
 				                                </tbody>
 				                         </table>
 				                         <button type="submit" class="btn btn-w-m btn-success">Valider la grille du groupe</button>
+				                         </form>
+				                         </div>
 				                         
 				                       <form method="POST" action ="addGrilleE-<c:out value="${numerogroupe}"/>-<c:out value="${allcompetences.id}"/>">
-				                         
-				 						<table id="grille-eleves-<c:out value="${allcompetences.id}"/>" class="table table-bordered">
+				                         <div style="display:none" id="grille-eleves-<c:out value="${allcompetences.id}"/>">
+				 						<table class="table table-bordered">
 				                                <thead>
 				                                <tr>
 				                                    <th rowspan="2">Compétence</th>
@@ -206,15 +305,115 @@
 															<c:if test="${loop.index == 4}">
 															
 																<td rowspan="2"><i>E : <c:out value="${allsouscompetences.getE()}"/></i></td>
-															</c:if>		
-															<td><input type="radio" value="1" name="eleve-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
-															<td><input type="radio" value="2" name="eleve-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
-															<td><input type="radio" value="3" name="eleve-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
-															<td><input type="radio" value="4" name="eleve-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
-															<td><input type="radio" value="5" name="eleve-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"/></td>
-															<td><c:out value="${alleleves.prenom}"/> <c:out value="${alleleves.nom}"/></td>
-															<td><textarea style="height:100%;resize:none" name="eleveremarques-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"></textarea></td>
+															</c:if>	
 															
+																
+																
+																
+															<c:forEach begin="1" end="7" var="j">
+									                		
+						<!-- 			                			On met un bouton radio différent pour chaque compétences et niveau (name) -->
+									                			<c:choose>
+						
+																	<c:when test="${j == 1}">
+																		<c:set var="radio_pas_coche" value="true" scope="page" />
+						<!-- 											On regarde toutes les evaluations croisees pour voir si elle a deja été remplit -->
+																		<c:forEach var="notecompetences" items="${notecompetences}">													
+						<!-- 												On met un radio coché si il a deja été enregistré en base de données	-->												 
+																				<c:if test="${notecompetences.competences_id == allcompetences.id && notecompetences.eleves_id == alleleves.id && notecompetences.sous_competences_id == allsouscompetences.id && notecompetences.niveaux_competences_id == 1}">
+																					<td><input type="radio" name="eleve-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>" value="1" checked="checked"></td>
+																					<c:set var="radio_pas_coche" value="false" scope="page" />
+																				</c:if>
+																		</c:forEach>
+																		<c:if test="${radio_pas_coche == true}">
+																			<td><input type="radio" name="eleve-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>" value="1"></td>
+																		</c:if>
+																	</c:when>
+																	
+																	<c:when test="${j == 2}">
+																		<c:set var="radio_pas_coche" value="true" scope="page" />
+						<!-- 											On regarde toutes les evaluations croisees pour voir si elle a deja été remplit -->
+																		<c:forEach var="notecompetences" items="${notecompetences}">													
+						<!-- 												On met un radio coché si il a deja été enregistré en base de données	-->												 
+																				<c:if test="${notecompetences.competences_id == allcompetences.id && notecompetences.eleves_id == alleleves.id && notecompetences.sous_competences_id == allsouscompetences.id && notecompetences.niveaux_competences_id == 2}">
+																					<td><input type="radio" name="eleve-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>" value="2" checked="checked"></td>
+																					<c:set var="radio_pas_coche" value="false" scope="page" />
+																				</c:if>
+																		</c:forEach>
+																		<c:if test="${radio_pas_coche == true}">
+																			<td><input type="radio" name="eleve-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>" value="2"></td>
+																		</c:if>
+																	</c:when>
+																	
+																	<c:when test="${j == 3}">
+																		<c:set var="radio_pas_coche" value="true" scope="page" />
+						<!-- 											On regarde toutes les evaluations croisees pour voir si elle a deja été remplit -->
+																		<c:forEach var="notecompetences" items="${notecompetences}">													
+						<!-- 												On met un radio coché si il a deja été enregistré en base de données	-->												 
+																				<c:if test="${notecompetences.competences_id == allcompetences.id && notecompetences.eleves_id == alleleves.id && notecompetences.sous_competences_id == allsouscompetences.id && notecompetences.niveaux_competences_id == 3}">
+																					<td><input type="radio" name="eleve-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>" value="3" checked="checked"></td>
+																					<c:set var="radio_pas_coche" value="false" scope="page" />
+																				</c:if>
+																		</c:forEach>
+																		<c:if test="${radio_pas_coche == true}">
+																			<td><input type="radio" name="eleve-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>" value="3"></td>
+																		</c:if>
+																	</c:when>
+																	
+																	<c:when test="${j == 4}">
+																		<c:set var="radio_pas_coche" value="true" scope="page" />
+						<!-- 											On regarde toutes les evaluations croisees pour voir si elle a deja été remplit -->
+																		<c:forEach var="notecompetences" items="${notecompetences}">													
+						<!-- 												On met un radio coché si il a deja été enregistré en base de données	-->												 
+																				<c:if test="${notecompetences.competences_id == allcompetences.id && notecompetences.eleves_id == alleleves.id && notecompetences.sous_competences_id == allsouscompetences.id && notecompetences.niveaux_competences_id == 4}">
+																					<td><input type="radio" name="eleve-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>" value="4" checked="checked"></td>
+																					<c:set var="radio_pas_coche" value="false" scope="page" />
+																				</c:if>
+																		</c:forEach>
+																		<c:if test="${radio_pas_coche == true}">
+																			<td><input type="radio" name="eleve-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>" value="4"></td>
+																		</c:if>
+																	</c:when>
+																	
+																	<c:when test="${j == 5}">
+																		<c:set var="radio_pas_coche" value="true" scope="page" />
+						<!-- 											On regarde toutes les evaluations croisees pour voir si elle a deja été remplit -->
+																		<c:forEach var="notecompetences" items="${notecompetences}">													
+						<!-- 												On met un radio coché si il a deja été enregistré en base de données	-->												 
+																				<c:if test="${notecompetences.competences_id == allcompetences.id && notecompetences.eleves_id == alleleves.id && notecompetences.sous_competences_id == allsouscompetences.id && notecompetences.niveaux_competences_id == 5}">
+																					<td><input type="radio" name="eleve-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>" value="5" checked="checked"></td>
+																					<c:set var="radio_pas_coche" value="false" scope="page" />
+																				</c:if>
+																		</c:forEach>
+																		<c:if test="${radio_pas_coche == true}">
+																			<td><input type="radio" name="eleve-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>" value="5"></td>
+																		</c:if>
+																	</c:when>																						
+																	
+																	<c:when test="${j == 6}">
+																			<td><c:out value="${alleleves.prenom}"/> <c:out value="${alleleves.nom}"/></td>
+																	</c:when>		
+																	
+																	<c:when test="${j == 7}">
+																		<c:set var="radio_pas_coche" value="true" scope="page" />
+						<!-- 											On regarde toutes les evaluations croisees pour voir si elle a deja été remplit -->
+																		<c:forEach var="notecompetences" items="${notecompetences}">													
+						<!-- 												On met un radio coché si il a deja été enregistré en base de données	-->												 
+																				<c:if test="${notecompetences.competences_id == allcompetences.id && notecompetences.eleves_id == alleleves.id && notecompetences.sous_competences_id == allsouscompetences.id}">
+																					<td><textarea style="height:100%;resize:none" value="<c:out value="${notecompetences.remarques}"/>" name="eleveremarques-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"></textarea></td>
+																					<c:set var="radio_pas_coche" value="false" scope="page" />
+																				</c:if>
+																		</c:forEach>
+																		<c:if test="${radio_pas_coche == true}">
+																			<td><textarea style="height:100%;resize:none" name="eleveremarques-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"></textarea></td>
+																		</c:if>
+																	</c:when>																																	
+																</c:choose>
+													
+									             			</c:forEach>
+																
+															
+							
 															</tr>
 															</c:forEach>
 													
@@ -226,12 +425,12 @@
 				                         </table>	
 				                         
 				                         <button type="submit" class="btn btn-w-m btn-success">Valider la grille des élèves</button>			                         
+				                         </div>
 				                         </form>
 				                         </div>
 				                         </c:forEach>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-white" data-dismiss="modal">Fermer</button>
-                                            <button type="submit" class="btn btn-primary">Sauvegarder</button>
                                         </div>
                                         
                                     </div>
