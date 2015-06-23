@@ -164,7 +164,7 @@ $(document).ready(function() {
   	for(var i = 0; i < json.length; i++){
   		var dateSplit = json[i].date_seance.split("-");
   		 tab.push({
-  			 "title" : json[i].numero_seance,
+  			 "title" : "Séance "+json[i].numero_seance,
   	          "start"  :  new Date(dateSplit[0],dateSplit[1]-1,dateSplit[2]),
   	    });
   	 
