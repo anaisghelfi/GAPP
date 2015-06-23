@@ -406,14 +406,25 @@ $("span[name^='showGrille-']").on('click', function(e) {
 	var name = $(this).attr('name');
 	var idFamille = name.split("-")[1];
 	
-	$("table[name^='grille-']").hide();
-	$("table[name='grille-"+idFamille+"']").fadeIn(200);
+	$("[name^='grille-']").hide();
+	$("[name='grille-"+idFamille+"']").fadeIn(200);
 })
 
 $("[name^='affichersouscomp-']").on('click', function(e) {
 	var idfamille = $(this).attr('name').split('-')[1];
 	var idcomp = $(this).attr('name').split('-')[2];
 	$("[name='souscompgrille-"+idfamille+"-"+idcomp+"']").toggle(200);
+})
+
+//Grille de compétences notation dynamiques
+$("i[name^='showgrilleEleve-']").on('click', function(e) {
+	var idfamille = $(this).attr('name').split('-')[1];
+	$("#-grille-eleves-"+idfamille+"").toggle(200);
+})
+
+$("i[name^='showgrilleGroupe-']").on('click', function(e) {
+	var idfamille = $(this).attr('name').split('-')[1];
+	$("#-grille-groupe-"+idfamille+"").toggle(200);
 })
 
 //---------------------------------------------

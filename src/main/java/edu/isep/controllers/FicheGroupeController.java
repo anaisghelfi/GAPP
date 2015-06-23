@@ -11,6 +11,7 @@ import java.util.Date;
 
 
 
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.context.ApplicationContext;
@@ -68,7 +69,7 @@ public class FicheGroupeController {
 	
 
 	@RequestMapping(value = "/ficheGroupe-{numgroupe}", method = RequestMethod.GET)
-	public String getEleves(@PathVariable String numgroupe,Model model) 
+	public String getEleves(HttpServletRequest request,@PathVariable String numgroupe,Model model) 
 	{
 
 		String groupeno = (String)numgroupe;
@@ -84,6 +85,25 @@ public class FicheGroupeController {
 		
 		List<SousCompetences> allsouscompetences = daoCompetences.allSousCompetences();
 		model.addAttribute("allsouscompetences", allsouscompetences);
+		
+		//pour remplir la grille de compétences si ce n'est pas déjà fait
+		
+		//récupérer les lignes de notes_competences des élèves du groupe actif
+		
+		List<NoteCompetences> notecompParGroupe = daoCompetences.getGrilleParGroupe(groupeno);
+		for(int i=0;i<notecompParGroupe.size();i++) {
+			//("eleve-"+numfamille+"-"+scid+"-"+ideleve);
+			int famillenum = notecompParGroupe.get(i).getCompetences_id();
+			int compnum = notecompParGroupe.get(i).getSous_competences_id();
+			int elevenum = notecompParGroupe.get(i).getEleves_id();
+			int levelnum = notecompParGroupe.get(i).getNiveaux_competences_id();
+			String remarqueseleves = notecompParGroupe.get(i).getRemarques();
+		
+			//insertion des valeurs des inputs dans la grille de compétences
+			request.setAttribute("eleve-"+famillenum+"-"+compnum+"-"+elevenum,levelnum);
+			request.setAttribute("eleveremarques-"+famillenum+"-"+compnum+"-"+elevenum,remarqueseleves);
+			
+		}
 		
 
 		return "ficheGroupe";
@@ -164,7 +184,8 @@ public class FicheGroupeController {
 					notecomp.setNiveaux_competences_id(levelIdInt);
 					notecomp.setRemarques(remarques);
 					notecomp.setSous_competences_id(scid);
-	
+					
+					//vérifier en même temps si la compétence a déjà été notée
 					daoCompetences.ajoutGrilleEleve(notecomp);
 					}
 				
