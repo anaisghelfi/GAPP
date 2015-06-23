@@ -13,8 +13,11 @@ import java.util.Date;
 
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> branch 'master' of https://github.com/anaisghelfi/GAPP.git
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -32,6 +35,7 @@ import edu.isep.beans.Competences;
 import edu.isep.beans.SousCompetences;
 import edu.isep.beans.Eleve;
 import edu.isep.beans.User;
+import edu.isep.beans.NoteCompetencesGroupe;
 import edu.isep.beans.NoteCompetences;
 import edu.isep.beans.Absences;
 import edu.isep.daoImp.MainJDBCTemplate;
@@ -101,21 +105,13 @@ public class FicheGroupeController {
 		//r�cup�rer les lignes de notes_competences des �l�ves du groupe actif
 		
 		List<NoteCompetences> notecompParGroupe = daoCompetences.getGrilleParGroupe(groupeno);
-		for(int i=0;i<notecompParGroupe.size();i++) {
-			//("eleve-"+numfamille+"-"+scid+"-"+ideleve);
-			int famillenum = notecompParGroupe.get(i).getCompetences_id();
-			int compnum = notecompParGroupe.get(i).getSous_competences_id();
-			int elevenum = notecompParGroupe.get(i).getEleves_id();
-			int levelnum = notecompParGroupe.get(i).getNiveaux_competences_id();
-			String remarqueseleves = notecompParGroupe.get(i).getRemarques();
-		
-			//insertion des valeurs des inputs dans la grille de comp�tences
-			request.setAttribute("eleve-"+famillenum+"-"+compnum+"-"+elevenum,levelnum);
-			request.setAttribute("eleveremarques-"+famillenum+"-"+compnum+"-"+elevenum,remarqueseleves);
-			
-		}
+		List<NoteCompetencesGroupe> notecompGroupe = daoCompetences.getGrilleGroupe(groupeno);
 		
 
+		model.addAttribute("notecompetences",notecompParGroupe);
+		model.addAttribute("notecompetencesgroupe",notecompGroupe);
+
+		
 		return "ficheGroupe";
 	}
 	
@@ -200,6 +196,60 @@ public class FicheGroupeController {
 					}
 				
 			}
+		}
+	
+		return "ficheGroupe";
+	}	
+	
+	@RequestMapping(value ="/addGrilleG-{numgroupe}-{numfamille}", method = RequestMethod.POST)
+	public String addGrilleG(HttpServletRequest request,@PathVariable String numgroupe,@PathVariable String numfamille,Model model) 
+	{
+		String groupeno = (String)numgroupe;
+//		Pour récupérer tous les �l�ves d'un groupe
+		List<Eleve> eleves = dao.elevesParGroupe((String)numgroupe);
+		model.addAttribute("numerogroupe", numgroupe);
+		model.addAttribute("alleleves", eleves);
+		
+		Integer famillenumber = Integer.parseInt(numfamille);
+		
+		//r�cup�rer toutes les comp�tences de la famille � remplir
+		List<SousCompetences> scs = daoCompetences.souscompParFamille(famillenumber);
+		
+		//pour toutes les comp�tences de la famille soumise au remplissage
+		for (int i=0;i<scs.size();i++) {
+			int scid = scs.get(i).getId();
+			//pour tous les membres du groupe 
+
+				
+				//r�cup�re la valeur de l'input pour chaque comp�tence/famille/�l�ve du groupe
+				String levelid = request.getParameter("groupe-"+numfamille+"-"+scid);
+				
+				//test si les bonnes variables sont r�cup�r�es
+				System.out.println(scid);
+				System.out.println(numfamille);
+				
+				
+				
+				String remarques = request.getParameter("grouperemarques-"+numfamille+"-"+scid);
+				//ins�re dans la table notes_competences
+				//!!!!!!!!!!!!!! remplace table notes_sous_competences par notes_competences_groupe (INUTILE)
+				
+				//nouvel objet note pour les �l�ves
+				
+				//si la valeur de l'input est undefined on n'ins�re rien dans la BDD
+				if (levelid != null) {
+					NoteCompetencesGroupe notecompgroupe = new NoteCompetencesGroupe();
+					Integer levelIdInt = Integer.parseInt(levelid);
+					notecompgroupe.setCompetences_id(famillenumber);
+					notecompgroupe.setNiveaux_competences_id(levelIdInt);
+					notecompgroupe.setRemarques(remarques);
+					notecompgroupe.setSous_competences_id(scid);
+					notecompgroupe.setGroupe(numgroupe);
+					
+					//v�rifier en m�me temps si la comp�tence a d�j� �t� not�e
+					daoCompetences.ajoutGrilleGroupe(notecompgroupe);
+					}
+				
 		}
 	
 		return "ficheGroupe";
