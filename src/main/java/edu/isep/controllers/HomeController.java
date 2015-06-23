@@ -55,11 +55,11 @@ public class HomeController {
 					 session.setAttribute("type", newUser.getType());
 					 
 
-					 return "redirect:ficheEleve?nom="+newUser.getNomFamille();
+					 return "redirect:ficheEleve?codeEleve="+newUser.getNumber();
 					 
 				case "professeur":
-					System.out.println("prof");
-					break;
+					return "redirect:rechercheEleves";
+						
 			}
 			
 		} catch(Exception e) {
