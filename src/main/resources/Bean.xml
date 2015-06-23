@@ -68,6 +68,9 @@
 <bean id="exportNoteDAO" class="edu.isep.daoImp.ExportNoteJDBCTemplate">
 	<property name="dataSource" ref="dataSource"/>
 </bean>
+<bean id="mainDAO" class="edu.isep.daoImp.MainJDBCTemplate">
+	<property name="dataSource" ref="dataSource"/>
+</bean>
 
 <!-- <bean id="eleveDAO" class="edu.isep.daoImp.RechercherJDBCTemplate"> -->
 <!-- 	<property name="dataSource" ref="dataSource"/> -->
