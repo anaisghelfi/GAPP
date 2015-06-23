@@ -50,11 +50,14 @@ public class EvalCroiseeController {
 	}
 		@RequestMapping(value="/evalCroisee", method = RequestMethod.GET)
 		public String Exemple(HttpServletRequest request, HttpSession session, Model model){
-			
+	
 			session = request.getSession();
 			session.getAttribute("login");
 			int code_eleve = Integer.parseInt(String.valueOf(session.getAttribute("number")));
-//			model.addAttribute("code_eleve", code_eleve);
+			
+//			Verifier que l'éval croisée est dispo (pas dejà faites et autorisés)
+			boolean affichageTableau = daoEvalCroisee.verifDispoEvalCroisee(code_eleve);
+			model.addAttribute("affichageTableau", affichageTableau);
 			
 //			Fonction qui va chercher les élèves du groupe de la personne connecté
 			List<Eleve> eleves = daoEleve.elevesDeMemeGroupe(code_eleve);
@@ -68,12 +71,27 @@ public class EvalCroiseeController {
 			List<EvalCroisee> evalCroisees = daoEvalCroisee.evalCroiseeParGroupe(code_eleve);
 			model.addAttribute("evalCroisees", evalCroisees);
 			
-			
-
 			return "evalCroisee"; 
 		}
 		
-//		Pour traiter l'envoi de l'eval croisee
+//		Pour terminer l'évaluation croisée des compétences (bloquer les notes)
+		@RequestMapping(value="/validerEvalCroisee", method = RequestMethod.POST)
+		public String Expl(HttpServletRequest request, HttpSession session, Model model, EvalCroisee evalcroisee){
+			
+			int code_eleve = Integer.parseInt(String.valueOf(session.getAttribute("number")));
+			
+//			requete pour valider la fin de l'éval croisee
+			daoEvalCroisee.validationEvalCroisee(code_eleve);
+			
+			model.addAttribute("message_validation", true);
+			
+//			On va sur la fiche élève
+			return "evalCroisee";
+		}
+		
+		
+		
+//		Pour traiter l'envoi de l'eval croisee en AJAX
 		@RequestMapping(value="/insererNoteEvalCroisee", method = RequestMethod.POST)
 		public @ResponseBody void Note(HttpServletRequest request, HttpSession session, Model model, EvalCroisee evalcroisee){
 			

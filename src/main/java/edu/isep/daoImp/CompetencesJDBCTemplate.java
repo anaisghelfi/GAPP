@@ -147,11 +147,52 @@ public class CompetencesJDBCTemplate {
 //Remplir grille de compétences 
 
 	public void ajoutGrilleEleve(NoteCompetences notecomp){
-		String sql = "INSERT INTO notes_competences(niveaux_competences_id,eleves_id,competences_id,sous_competences_id,remarques) VALUES(?,?,?,?,?)";
-		jdbcTemplateObject.update(sql,new Object[]{notecomp.getNiveaux_competences_id(),notecomp.getEleves_id(),notecomp.getCompetences_id(),notecomp.getSous_competences_id(),notecomp.getRemarques()});
-		return;
+		//vérifier si la grille est déjà remplie ou non 
+		
+
+		String sql = "SELECT COUNT(*) FROM notes_competences WHERE eleves_id = ? AND competences_id = ? AND sous_competences_id = ?";
+		int number = jdbcTemplateObject.queryForInt(sql, new Object[]{notecomp.getEleves_id(), notecomp.getCompetences_id(), notecomp.getSous_competences_id()});
+		
+		//si vide on insère
+		if(number == 0) {
+			sql = "INSERT INTO notes_competences(niveaux_competences_id,eleves_id,competences_id,sous_competences_id,remarques) VALUES(?,?,?,?,?)";
+			jdbcTemplateObject.update(sql,new Object[]{notecomp.getNiveaux_competences_id(),notecomp.getEleves_id(),notecomp.getCompetences_id(),notecomp.getSous_competences_id(),notecomp.getRemarques()});
+			return;			
+		}
+		//sinon on update
+		else {	
+			sql = "UPDATE notes_competences SET niveaux_competences_id = ?,remarques = ? WHERE eleves_id = ? AND competences_id = ? AND sous_competences_id = ?";
+			jdbcTemplateObject.update(sql,new Object[]{notecomp.getNiveaux_competences_id(),notecomp.getRemarques(), notecomp.getEleves_id(),notecomp.getCompetences_id(),notecomp.getSous_competences_id()});
+			return;	
+		}
 	}	
 	
+//Récupérer les valeurs de la grille de compétences déjà remplie
+	
+	public List<NoteCompetences> getGrilleParGroupe(String groupe_id){
+		String sql = "SELECT * FROM notes_competences N, eleves E WHERE N.eleves_id = E.id AND E.groupe = ?";
+		
+		ArrayList<NoteCompetences> notecomps =  new ArrayList<NoteCompetences>();
+		
+		List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql, new Object[]{groupe_id});
+		
+		for (Map row : rows) {
+			NoteCompetences notecomp =  new NoteCompetences();
+			
+			notecomp.setId(Integer.parseInt(String.valueOf(row.get("id"))));
+			notecomp.setCompetences_id(Integer.parseInt(String.valueOf(row.get("competences_id"))));
+			notecomp.setEleves_id(Integer.parseInt(String.valueOf(row.get("eleves_id"))));
+			notecomp.setNiveaux_competences_id(Integer.parseInt(String.valueOf(row.get("niveaux_competences_id"))));
+			notecomp.setRemarques((String)row.get("remarques"));
+			notecomp.setSous_competences_id(Integer.parseInt(String.valueOf(row.get("sous_competences_id"))));
+			
+
+			
+			notecomps.add(notecomp);
+		}
+
+		return notecomps;
+	}	
 	
 }
 
