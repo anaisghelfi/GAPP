@@ -106,18 +106,17 @@ public class elevesJDBCTemplate {
 		return elevesInt;
 	}
 	
-	public List<Seances> allSeances(){
-		String sql = "SELECT * FROM seances";
+	public List<Seances> allSeances(int codeEleve){
+		String sql = "SELECT seances.date_seance, seances.numero_seance, seances.groupes_id FROM seances JOIN groupes ON seances.groupes_id = groupes.id JOIN eleves ON eleves.groupe LIKE CONCAT('%',groupes.nom,'%') WHERE eleves.code_eleve = ?";
 		
 		ArrayList<Seances> seances =  new ArrayList<Seances>();
 		
-		List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql);
+		List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql,new Object[]{codeEleve});
 		
 		for (Map row : rows) {
 			Seances seance =  new Seances();
 			
 			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
-			seance.setId(Integer.parseInt(String.valueOf(row.get("id"))));
 			seance.setDate_seance((Date)row.get("date_seance"));
 			seance.setNumero_seance(Integer.parseInt(String.valueOf(row.get("numero_seance"))));
 			

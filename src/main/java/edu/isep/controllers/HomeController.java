@@ -53,7 +53,7 @@ public class HomeController {
 		session = request.getSession();
 		session.setAttribute("login", login);
 		session.setAttribute("email","victorien.gauch@isep.fr");
-		 session.setAttribute("number", 7335);
+		session.setAttribute("number", 7335);
 		session.setAttribute("nom", "Gauch");
 		session.setAttribute("prenom", "Victorien");
 		session.setAttribute("type", "eleve");

@@ -52,7 +52,7 @@ public class FicheEleveController {
 	List<Eleve> eleves = daoEleve.elevesParNomInt(codeEleve);
 	model.addAttribute("eleves", eleves);
 	
-	List<Seances> seances = daoEleve.allSeances();
+	List<Seances> seances = daoEleve.allSeances(codeEleve);
 	JSONArray seancesJS = new JSONArray(seances);
 	model.addAttribute("seances",seances);
 	model.addAttribute("seancesJS",seancesJS);
