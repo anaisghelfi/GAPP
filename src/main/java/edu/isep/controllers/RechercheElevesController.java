@@ -90,7 +90,7 @@ public class RechercheElevesController {
 		model.addAttribute("sousGroupes", sousGroupes);
 		
 //		Pour savoir si on affiche le bouton pour activer l'evaluation croisée
-		boolean afficheBouton = daoEvalCroisee.verifDispoEvalCroisee(code_eleve);
+	//	boolean afficheBouton = daoEvalCroisee.verifDispoEvalCroisee(code_eleve);
 		
 		
 
