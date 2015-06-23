@@ -80,7 +80,9 @@
                             <h5>Mes prochains cours</h5>
                         </div>
                         	<div class="ibox-content">
-                            <div id="calendar" class="fc fc-ltr fc-unthemed">
+                            <div id="calendar" class="fc fc-ltr fc-unthemed"></div></br>
+                            
+                            <strong>Prochaines séances :</strong></br></br>
                             <c:forEach var="seance" items="${seances}">
 								<div class="form-group">
 									<strong>Séance numéro :</strong> <c:out value="${seance.numero_seance}"/>
@@ -88,7 +90,7 @@
 								</div>
 							</c:forEach>
                             
-                       	 </div>
+                       	 
                     </div>
                 </div>
                
@@ -152,12 +154,14 @@ $(document).ready(function() {
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
+    
+    
 
     $('#calendar').fullCalendar({
         header: {
             left: 'prev,next today',
             center: 'title',
-            right: 'month,agendaWeek,agendaDay'
+            right: 'month' //,agendaWeek,agendaDay
         },
         editable: false,
         droppable: false, // this allows things to be dropped onto the calendar

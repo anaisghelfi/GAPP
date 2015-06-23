@@ -42,7 +42,7 @@ public class DeadlineJDBCTemplate {
 	
 	
 	public List<Deadline> allDeadline(){
-		String sql = "SELECT * FROM deadlines";
+		String sql = "SELECT deadlines.id, deadlines.titre, deadlines.description, deadlines.date_limite, groupes.nom  FROM deadlines INNER JOIN groupes ON deadlines.groupes_id = groupes.id";
 		
 		ArrayList<Deadline> deadlines =  new ArrayList<Deadline>();
 		
@@ -56,7 +56,7 @@ public class DeadlineJDBCTemplate {
 			deadline.setTitre((String)row.get("titre"));
 			deadline.setDescription((String)row.get("description"));
 			deadline.setDate_limite((Date) row.get("date_limite"));
-			deadline.setGroupes_id(Integer.parseInt(String.valueOf(row.get("groupes_id"))));
+			deadline.setNom((String)row.get("nom"));
 			
 			deadlines.add(deadline);
 		}
