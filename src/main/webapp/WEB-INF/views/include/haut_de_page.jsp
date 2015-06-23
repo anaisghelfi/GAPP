@@ -36,7 +36,7 @@
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold"><c:out value='${sessionScope.prenom} ' /><c:out value='${ sessionScope.nom}'/></strong>
                              </span> <span class="text-muted text-xs block"><c:out value='${sessionScope.type }'/><b class="caret"></b></span> </span> </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="ficheEleve?nom=${sessionScope.nom}">Profil</a></li>
+                            <li><a href="ficheEleve?codeEleve=${sessionScope.number}">Profil</a></li>
                             <li class="divider"></li>
                             <li><a href="deconnexion">Déconnexion</a></li>
                         </ul>
@@ -45,23 +45,36 @@
                         GAPP
                     </div>
                 </li>
+                 <c:if test="${sessionScope.type} == 'professeur'">
                 <li>
-                    <a href="#"> <i class="fa fa-table"></i><span class="nav-label">Grille de compétences</span> </a>
+                    <a href="addfamille"> <i class="fa fa-table"></i><span class="nav-label">Grille de compétences</span> </a>
                 </li>
+                </c:if>
+                <c:if test="${sessionScope.type } != 'eleve">
                 <li>
                     <a href="rechercheEleves"> <i class="fa fa-search"></i><span class="nav-label">Rechercher</span></a>
                 </li>
+                </c:if>
+                <c:if test="${sessionScope.type} == 'professeur'">
                 <li>
                     <a href="ajoutDeadline"><i class="fa fa-calendar"></i><span class="nav-label">Ajouter des deadlines</span></a>
                 </li>
+                </c:if>
+                 <c:if test="${sessionScope.type} == 'professeur'">
                 <li>
                     <a href="attribRole"><i class="fa fa-user"></i> <span class="nav-label">Attribuer les rôles </span></a>
                 </li>
                 <li>
                     <a href="attribGroupe"> <i class="fa fa-users"></i><span class="nav-label">Attribuer les groupes</span> </a>
                 </li>
+                 </c:if>
+                  <c:if test="${sessionScope.type} == 'admin'">
                  <li>
                     <a href="exportNote"> <i class="fa fa-calendar"></i><span class="nav-label">Exporter les notes</span> </a>
+                </li>
+                </c:if>
+                   <li>
+                    <a href="evalCroisee"> <i class="fa fa-users"></i><span class="nav-label">Evaluation croisée</span> </a>
                 </li>
 
             </ul>

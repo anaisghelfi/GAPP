@@ -32,19 +32,20 @@
 								</div>
 					
 								<div class="form-group">
-								  	<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" name="valider"><strong>Valider</strong></button>  	
+								  	<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" name="valider"><strong>Valider</strong></button> </br> 	
 								</div>
 
 							</form>
-						</div>
-						<div>
+							<div>
 							<c:forEach var="eleve" items="${eleves}">
 								<div class="form-group">
 									<strong>Eleve :</strong> <c:out value="${eleve.nom}"/> <c:out value="${eleve.prenom}"/>
-									<a href="http://localhost:8080/gapp/ficheEleve?codeEleve=<c:out value="${eleve.code_eleve}"/>">Voir sa fiche</a>
+									<a href="ficheEleve?codeEleve=<c:out value="${eleve.code_eleve}"/>">Voir sa fiche</a>
 								</div>
 							</c:forEach>														
 	                    </div>
+						</div>
+						
                     </div>
                 </div>
 			

@@ -30,7 +30,7 @@
 								<div class="form-group"><strong>Titre :</strong> <c:out value="${deadline.titre}"/> 
 								<strong>Description :</strong> <c:out value="${deadline.description}"/>
 								<strong>Date limite :</strong> <c:out value="${deadline.date_limite}"/>
-								<strong>Groupe concerné :</strong> <c:out value="${deadline.groupes_id}"/></div> </br>
+								<strong>Groupe concerné :</strong> <c:out value="${deadline.nom}"/></div> </br>
 							</c:forEach>
 							
 	                        </div>
