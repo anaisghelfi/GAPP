@@ -62,7 +62,7 @@
                                <form  method='POST' action="addAbsences-<c:out value="${numerogroupe}"/>"> 
 			                   <c:forEach var="alleleves" items="${alleleves}">
 								<tr>	
-									<td><c:out value="${alleleves.nom}"/></td>
+									<td><a href="ficheEleve?codeEleve=<c:out value='${alleleves.code_eleve}'/>"><c:out value="${alleleves.nom}"/></a></td>
 									<td><c:out value="${alleleves.prenom}"/></td>
 									<td><c:out value="${alleleves.code_eleve}"/></td>
 									<c:if test="${nombreseance2 != 0}">
@@ -483,13 +483,7 @@
 		
 		
 		
-            	<h4>
-					Remarques générales sur le groupe                          	                         
-                </h4> </br>
-                
-                <textarea style="width: 100%; height: 100px"></textarea>
-                
-                <button type="submit" class="btn btn-w-m btn-success btn-xs">Soumettre</button>
+  
              </div>
        </div>
                 
