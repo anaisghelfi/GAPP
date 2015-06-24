@@ -39,7 +39,16 @@
                                     <th>Nom</th>
                                     <th>Prénom</th>
                                     <th>Code élève</th>
-                                    <th colspan="2">Séance du </th>
+                                    <th colspan="2">
+                                    <c:if test="${nombreseance != 0}">
+                                    	<c:forEach var="numeroseance" items="${numeroseance}">
+                                    		Séance <c:out value="${numeroseance.numero_seance}"/>
+                                    	</c:forEach>
+                                    </c:if>
+                                    <c:if test="${nombreseance == 0}">
+                                     	Pas de séances en cours
+                                    </c:if>
+                                   </th>
                                 </tr>
                                 <tr>
                                     <th></th>
@@ -56,8 +65,41 @@
 									<td><c:out value="${alleleves.nom}"/></td>
 									<td><c:out value="${alleleves.prenom}"/></td>
 									<td><c:out value="${alleleves.code_eleve}"/></td>
-									<td><input type="radio" name="absence-<c:out value="${alleleves.id}"/>" value="present"><br></td>
-									<td><input type="radio" name="absence-<c:out value="${alleleves.id}"/>" value="absent"><br></td>
+									<c:if test="${nombreseance2 != 0}">
+									
+									
+									                		
+						<!-- 			                		On met un bouton radio différent pour chaque compétences et niveau (name) -->
+						
+																		<c:set var="radio_pas_coche" value="true" scope="page" />
+						<!-- 											On regarde toutes les evaluations croisees pour voir si elle a deja été remplit -->
+																		<c:forEach var="allabsences" items="${allabsences}">													
+						<!-- 												On met un radio coché si il a deja été enregistré en base de données	-->												 
+																				<c:if test="${allabsences.eleves_id == alleleves.id && allabsences.abscencescol == 'present'}">
+																						<td><input type="radio" name="absence-<c:out value="${alleleves.id}"/>" value="present" checked><br></td>
+																						<td><input type="radio" name="absence-<c:out value="${alleleves.id}"/>" value="absent"><br></td>
+
+																							
+																					<c:set var="radio_pas_coche" value="false" scope="page" />
+																				</c:if>
+																				<c:if test="${allabsences.eleves_id == alleleves.id && allabsences.abscencescol == 'absent'}">
+																				
+																						<td><input type="radio" name="absence-<c:out value="${alleleves.id}"/>" value="present"><br></td>
+																						<td><input type="radio" name="absence-<c:out value="${alleleves.id}"/>" value="absent" checked><br></td>
+
+																						
+																					<c:set var="radio_pas_coche" value="false" scope="page" />
+																				</c:if>			
+																											
+																		</c:forEach>
+																		<c:if test="${radio_pas_coche == true}">
+																			<td><input type="radio" name="absence-<c:out value="${alleleves.id}"/>" value="present"><br></td>
+																			<td><input type="radio" name="absence-<c:out value="${alleleves.id}"/>" value="absent"><br></td>
+																		</c:if>
+									
+									
+
+									</c:if>
 								</tr>
 								</c:forEach> 	                                
 
@@ -65,7 +107,9 @@
                                 </tbody>
                          </table>
                          <div class='col-lg-9'></div>
+                         
                          <div class="col-lg-3"><button type="submit" onclick="return validAbsence()" class="btn btn-w-m btn-success btn-sm">Valider</button>
+                         
                          </form>
                          </div>
                             

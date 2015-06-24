@@ -57,6 +57,7 @@ public class HomeController {
 //		session.setAttribute("nom", "Gauch");
 //		session.setAttribute("prenom", "Victorien");
 //		session.setAttribute("type", "eleve");
+
 		
 		if(login.equals("admin") && password.equals("admin")){
 			session = request.getSession();

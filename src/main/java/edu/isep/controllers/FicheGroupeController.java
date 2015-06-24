@@ -1,6 +1,8 @@
 package edu.isep.controllers;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -11,11 +13,14 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +30,7 @@ import edu.isep.beans.Competences;
 import edu.isep.beans.SousCompetences;
 import edu.isep.beans.Eleve;
 import edu.isep.beans.User;
+import edu.isep.beans.Seances;
 import edu.isep.beans.NoteCompetencesGroupe;
 import edu.isep.beans.NoteCompetences;
 import edu.isep.beans.Absences;
@@ -66,6 +72,11 @@ public class FicheGroupeController {
 		sc = new HashMap<Integer, SousCompetences>();
 	
 	}
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	}
 
 	
 
@@ -105,6 +116,28 @@ public class FicheGroupeController {
 
 		
 		//rï¿½cupï¿½rer les absences
+		//test si la séance pour le groupe est aujourd'hui
+		
+		Calendar calendar = Calendar.getInstance();		
+		java.sql.Date today = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+		
+		String groupenocut = groupeno.substring(0,2);
+		List<Seances> seances = dao.seanceParDate(today, groupenocut);
+		
+		int numberseance = seances.size();
+		model.addAttribute("nombreseance",numberseance);
+		model.addAttribute("nombreseance2",numberseance);
+		model.addAttribute("nombreseance3",numberseance);
+		
+		if(numberseance != 0) {
+			model.addAttribute("numeroseance",seances);
+		}
+		
+		//Get Liste Absences aujourd'hui 
+		List<Absences> absencesToday = daoAbsences.absencesToday(today,groupeno);
+		model.addAttribute("allabsences",absencesToday);
+		
+		
 		
 		return "ficheGroupe";
 	}
@@ -117,8 +150,7 @@ public class FicheGroupeController {
 		List<Eleve> eleves = dao.elevesParGroupe((String)groupeno);
 		model.addAttribute("numerogroupe", groupeno);
 		model.addAttribute("alleleves", eleves);
-		
-		
+
 		
 		for(int i=0;i<eleves.size();i++){
 			int id = eleves.get(i).getId();
@@ -130,11 +162,14 @@ public class FicheGroupeController {
 				absences.setEleves_id(id);
 				absences.setAbscencescol(absent);
 				
+				System.out.println(date);
+				System.out.println(id);
+				
 				daoAbsences.insertAbsence(absences);
 			
 		}
 	
-		return "ficheGroupe";
+		return "redirect:ficheGroupe-{numgroupe}";
 	}	
 	
 	@RequestMapping(value ="/addGrilleE-{numgroupe}-{numfamille}", method = RequestMethod.POST)
