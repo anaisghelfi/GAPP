@@ -117,7 +117,7 @@ public class FicheGroupeController {
 
 		
 		//rï¿½cupï¿½rer les absences
-		//test si la séance pour le groupe est aujourd'hui
+		//test si la sï¿½ance pour le groupe est aujourd'hui
 		
 		Calendar calendar = Calendar.getInstance();		
 		java.sql.Date today = new java.sql.Date(Calendar.getInstance().getTime().getTime());
@@ -173,7 +173,7 @@ public class FicheGroupeController {
 			
 		}
 	
-		return "redirect:ficheGroupe-{numgroupe}";
+		return "redirect:ficheGroupe-"+groupeno;
 	}	
 	
 	@RequestMapping(value ="/addGrilleE-{numgroupe}-{numfamille}", method = RequestMethod.POST)
@@ -231,7 +231,7 @@ public class FicheGroupeController {
 			}
 		}
 	
-		return "ficheGroupe";
+		return "redirect:ficheGroupe-"+groupeno;
 	}	
 	
 	@RequestMapping(value ="/addGrilleG-{numgroupe}-{numfamille}", method = RequestMethod.POST)
@@ -285,7 +285,7 @@ public class FicheGroupeController {
 				
 		}
 	
-		return "ficheGroupe";
+		return "redirect:ficheGroupe-"+groupeno;
 	}		
 	
 

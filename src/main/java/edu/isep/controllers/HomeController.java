@@ -42,14 +42,15 @@ public class HomeController {
 	
 	@RequestMapping(value = "/connexion",method = RequestMethod.POST)
 	public String connexion(HttpServletRequest request ,HttpSession session, @RequestParam("login") String login,@RequestParam("password") String password){
-		
-		session = request.getSession();
-		session.setAttribute("login", login);
-		session.setAttribute("email","mohamed.sellami@isep.fr");
-		session.setAttribute("nom", "Sellami");
-		session.setAttribute("prenom", "Mohamed");
-		session.setAttribute("type", "professeur");
-		
+		if(login.equals("tuteur") && password.equals("tuteur")){
+			session = request.getSession();
+			session.setAttribute("login", login);
+			session.setAttribute("email","mohamed.sellami@isep.fr");
+			session.setAttribute("nom", "Sellami");
+			session.setAttribute("prenom", "Mohamed");
+			session.setAttribute("type", "professeur");
+			return "redirect:rechercheEleves";
+		}
 //		session = request.getSession();
 //		session.setAttribute("login", login);
 //		session.setAttribute("email","victorien.gauch@isep.fr");
@@ -59,7 +60,7 @@ public class HomeController {
 //		session.setAttribute("type", "eleve");
 
 		
-		if(login.equals("admin") && password.equals("admin")){
+		else if(login.equals("admin") && password.equals("admin")){
 			session = request.getSession();
 			session.setAttribute("login", login);
 			session.setAttribute("email","admin@gapp.fr");
