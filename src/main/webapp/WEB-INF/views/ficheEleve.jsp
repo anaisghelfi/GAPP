@@ -96,6 +96,38 @@
                 </div>
                
             </div>
+            
+            
+            <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Voir les deadlines</h5>
+                        </div>
+	                        <div class="ibox-content">
+								<table class="table table-bordered">
+									<tr>
+										<th>Titre</th>
+			       						<th>Description</th>
+			       						<th>Date limite</th>
+			       						<th>Groupe concerné</th>
+									</tr>
+									
+										<c:forEach var="deadline" items="${deadlines}">
+											<div class="form-group">
+											<tr>
+												<td> <c:out value="${deadline.titre}"/> </td>
+												<td><c:out value="${deadline.description}"/></td>
+												<td> <c:out value="${deadline.date_limite}"/></td>
+												<td> <c:out value="${deadline.nom}"/></td>
+											 </tr>
+											 </div> </br>
+										</c:forEach>
+
+								</table>
+							
+	                        </div>
+                    </div>
+                </div>
 
 
         </div>
