@@ -66,7 +66,7 @@ public class HomeController {
 			session.setAttribute("email","admin@gapp.fr");
 			session.setAttribute("nom", "Admin");
 			session.setAttribute("prenom", "Admin");
-			session.setAttribute("type", "tuteur");
+			session.setAttribute("type", "admin");
 			
 			return "redirect:rechercheEleves";
 		}else{

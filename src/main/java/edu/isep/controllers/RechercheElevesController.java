@@ -70,8 +70,14 @@ public class RechercheElevesController {
 	}
 	
 	@RequestMapping(value = "/rechercheEleves", method = RequestMethod.POST)
-	public String getNom(Eleve eleve, Model model)
+	public String getNom(HttpSession session,Eleve eleve, Model model)
 	{
+		if(session.getAttribute("type") == "professeur"){
+			int tuteurType = daoMain.tuteurType((String) session.getAttribute("email"));
+			System.out.println(tuteurType);
+			model.addAttribute("typeTuteur",tuteurType);
+		}
+		
 		e.put(eleve.getId(), eleve);
 		List<Eleve> eleves = daoEleve.elevesParNom(eleve.getNom());
 		model.addAttribute("eleves", eleves);
@@ -105,7 +111,6 @@ public class RechercheElevesController {
 			model.addAttribute("typeTuteur",tuteurType);
 		}
 		
-		
 //		Pour récupérer tous les groupes
 		List<Groupe> groupes = daoGroupe.allGroupes();
 		model.addAttribute("groupes", groupes);
@@ -127,10 +132,11 @@ public class RechercheElevesController {
 	}
 	
 	@RequestMapping(value="/AutoriseEvalCroisee", method = RequestMethod.POST)
-	public @ResponseBody void Note(HttpServletRequest request, HttpSession session, Model model, EvalCroisee evalcroisee){
+	public @ResponseBody String Note(HttpServletRequest request, HttpSession session, Model model, EvalCroisee evalcroisee){
 		
 		List<Eleve> eleves = daoEleve.allEleves();
 		daoEvalCroisee.autorisationEvalCroisee(eleves);
+		return "redirect:rechercheEleves";
 		
 	}
 	
