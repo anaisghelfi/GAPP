@@ -138,9 +138,9 @@
   <script src="<c:url value="/resources/js/fullcalendar.min.js"/>"></script>
 <script>
 	
-	var total = 5;
-	var absence = 1;
-	var presence = 4;
+	var total = '${nbSeances}';
+	var absence = '${nbAbsences}';
+	var presence = total - absence;
 	var presenceP= ((total - absence)/total)*100;
 	var absenceP = 100 - presenceP;
 	

@@ -61,6 +61,12 @@ public class FicheEleveController {
 	
 	List<Seances> seances = daoEleve.allSeances(codeEleve);
 	JSONArray seancesJS = new JSONArray(seances);
+	
+	int nbSeances = daoEleve.countSeances(codeEleve);
+	model.addAttribute("nbSeances",nbSeances);
+	
+	int nbAbsences = daoEleve.countAbsences(codeEleve);
+	model.addAttribute("nbAbsences",nbAbsences);
 
 	model.addAttribute("seances",seances);
 	model.addAttribute("seancesJS",seancesJS);

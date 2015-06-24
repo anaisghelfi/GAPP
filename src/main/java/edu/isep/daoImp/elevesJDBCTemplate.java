@@ -126,9 +126,23 @@ public class elevesJDBCTemplate {
 
 		return seances;
 	}
+	public int countSeances(int codeEleve){
+		String sql = "SELECT COUNT(*) FROM seances JOIN groupes ON seances.groupes_id = groupes.id JOIN eleves ON eleves.groupe LIKE CONCAT('%',groupes.nom,'%') WHERE eleves.code_eleve = ?";
+		
+		int rows = jdbcTemplateObject.queryForInt(sql,new Object[]{codeEleve});
+		
+		return rows;
+	}
+	public int countAbsences(int codeEleve){
+		String sql = "SELECT COUNT(*) FROM absences A, eleves E WHERE A.eleves_id = E.id AND A.absencescol = 'absent' AND E.code_eleve = ?";
+		
+		int rows = jdbcTemplateObject.queryForInt(sql,new Object[]{codeEleve});
+		
+		return rows;
+	}
 
 	
-	//Liste des séances si il y en a aujourd'hui
+	//Liste des sï¿½ances si il y en a aujourd'hui
 	public List<Seances> seanceParDate(Date date, String groupeno){
 		String sql = "select * from seances S, groupes G where S.date_seance = ? AND S.groupes_id = G.id AND G.nom = ? ";
 		
