@@ -26,6 +26,7 @@ import edu.isep.beans.Groupe;
 import edu.isep.beans.SousGroupe;
 import edu.isep.beans.Tuteur;
 import edu.isep.daoImp.EvalCroiseeJDBCTemplate;
+import edu.isep.daoImp.MainJDBCTemplate;
 import edu.isep.daoImp.RechercherJDBCTemplate;
 import edu.isep.daoImp.SousGroupesJDBCTemplate;
 import edu.isep.daoImp.elevesJDBCTemplate;
@@ -38,6 +39,7 @@ public class RechercheElevesController {
 	private groupeJDBCTemplate daoGroupe;
 	private SousGroupesJDBCTemplate daoSousGroupe;
 	private EvalCroiseeJDBCTemplate daoEvalCroisee;
+	private MainJDBCTemplate daoMain;
 	private Map<Integer, Eleve> e;
 	private Map<Integer, Groupe> g;
 	private Map<Integer, SousGroupe> sg;
@@ -54,6 +56,7 @@ public class RechercheElevesController {
 		daoGroupe = (groupeJDBCTemplate) context.getBean("groupeDAO");
 		daoSousGroupe = (SousGroupesJDBCTemplate) context.getBean("sousGroupeDAO");
 		daoEvalCroisee = (EvalCroiseeJDBCTemplate) context.getBean("EvalCroiseeDAO");
+		daoMain = (MainJDBCTemplate) context.getBean("mainDAO");
 		
 		e = new HashMap<Integer, Eleve>();
 		g = new HashMap<Integer, Groupe>();
@@ -94,7 +97,14 @@ public class RechercheElevesController {
 	
 	//Chemin pour la page en GET normal
 	@RequestMapping(value="/rechercheEleves", method = RequestMethod.GET)
-	public String Exemple(Model model){
+	public String Exemple(HttpSession session,Model model){
+		
+		if(session.getAttribute("type") == "professeur"){
+			int tuteurType = daoMain.tuteurType((String) session.getAttribute("email"));
+			System.out.println(tuteurType);
+			model.addAttribute("typeTuteur",tuteurType);
+		}
+		
 		
 //		Pour récupérer tous les groupes
 		List<Groupe> groupes = daoGroupe.allGroupes();

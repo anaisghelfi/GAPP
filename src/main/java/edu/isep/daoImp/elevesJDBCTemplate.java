@@ -106,18 +106,40 @@ public class elevesJDBCTemplate {
 		return elevesInt;
 	}
 	
-	public List<Seances> allSeances(){
-		String sql = "SELECT * FROM seances";
+	public List<Seances> allSeances(int codeEleve){
+		String sql = "SELECT seances.date_seance, seances.numero_seance, seances.groupes_id FROM seances JOIN groupes ON seances.groupes_id = groupes.id JOIN eleves ON eleves.groupe LIKE CONCAT('%',groupes.nom,'%') WHERE eleves.code_eleve = ?";
 		
 		ArrayList<Seances> seances =  new ArrayList<Seances>();
 		
-		List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql);
+		List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql,new Object[]{codeEleve});
 		
 		for (Map row : rows) {
 			Seances seance =  new Seances();
 			
 			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
-			seance.setId(Integer.parseInt(String.valueOf(row.get("id"))));
+			seance.setDate_seance((Date)row.get("date_seance"));
+			seance.setNumero_seance(Integer.parseInt(String.valueOf(row.get("numero_seance"))));
+			
+			
+			seances.add(seance);
+		}
+
+		return seances;
+	}
+
+	
+	//Liste des séances si il y en a aujourd'hui
+	public List<Seances> seanceParDate(Date date, String groupeno){
+		String sql = "select * from seances S, groupes G where S.date_seance = ? AND S.groupes_id = G.id AND G.nom = ? ";
+		
+		ArrayList<Seances> seances =  new ArrayList<Seances>();
+		
+		List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql,new Object[]{date,groupeno});
+		
+		for (Map row : rows) {
+			Seances seance =  new Seances();
+			
+			SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
 			seance.setDate_seance((Date)row.get("date_seance"));
 			seance.setNumero_seance(Integer.parseInt(String.valueOf(row.get("numero_seance"))));
 			
@@ -128,7 +150,6 @@ public class elevesJDBCTemplate {
 		return seances;
 	}
 	
-
 
 //fonction qui retourne le tuteur de l'eleve
 	
@@ -205,6 +226,8 @@ public List<Tuteur> tuteurEleve(int code_eleve){
 		}
 
 		return eleves;
-	}	
+	}
+	
+	
 	
 }

@@ -419,12 +419,18 @@ $("[name^='affichersouscomp-']").on('click', function(e) {
 //Grille de compétences notation dynamiques
 $("i[name^='showgrilleEleve-']").on('click', function(e) {
 	var idfamille = $(this).attr('name').split('-')[1];
-	$("#-grille-eleves-"+idfamille+"").toggle(200);
+	$("#grille-eleves-"+idfamille+"").fadeIn(200);
+	$("#grille-groupe-"+idfamille+"").hide();
+	$(".fa fa-user").css('color', 'rgb(199, 199, 199)');
+	$(".fa fa-users").css('color', '#676a6c');
 })
 
 $("i[name^='showgrilleGroupe-']").on('click', function(e) {
 	var idfamille = $(this).attr('name').split('-')[1];
-	$("#-grille-groupe-"+idfamille+"").toggle(200);
+	$("#grille-eleves-"+idfamille+"").hide();
+	$("#grille-groupe-"+idfamille+"").fadeIn(200);
+	$(".fa fa-users").css('color', 'rgb(199, 199, 199)');
+	$(".fa fa-user").css('color', '#676a6c');	
 })
 
 //---------------------------------------------

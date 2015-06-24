@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -18,6 +19,7 @@ import edu.isep.beans.Eleve;
 import edu.isep.beans.Groupe;
 import edu.isep.beans.SousGroupe;
 import edu.isep.beans.Tuteur;
+import edu.isep.daoImp.MainJDBCTemplate;
 import edu.isep.daoImp.SousGroupesJDBCTemplate;
 import edu.isep.daoImp.TuteurJDBCTemplate;
 import edu.isep.daoImp.elevesJDBCTemplate;
@@ -29,7 +31,9 @@ public class AttribGroupeController {
 	private elevesJDBCTemplate daoEleve;
 	private groupeJDBCTemplate daoGroupe;
 	private SousGroupesJDBCTemplate daoSousGroupe;
+	private MainJDBCTemplate daoMain;
 	private TuteurJDBCTemplate daoTuteur;
+	
 	private Map<Integer, Eleve> e;
 	private Map<Integer, Groupe> g;
 	private Map<Integer, SousGroupe> sg;
@@ -44,6 +48,7 @@ public class AttribGroupeController {
 		daoTuteur = (TuteurJDBCTemplate) context.getBean("tuteurDAO");
 		daoGroupe = (groupeJDBCTemplate) context.getBean("groupeDAO");
 		daoSousGroupe = (SousGroupesJDBCTemplate) context.getBean("sousGroupeDAO");
+		daoMain = (MainJDBCTemplate) context.getBean("mainDAO");
 		
 		e = new HashMap<Integer, Eleve>();
 		g = new HashMap<Integer, Groupe>();
@@ -57,7 +62,11 @@ public class AttribGroupeController {
 	
 //	Chemin pour la page en GET normal
 	@RequestMapping(value="/attribGroupe", method = RequestMethod.GET)
-	public String Exemple(Model model){
+	public String Exemple(HttpSession session,Model model){
+		
+		int tuteurType = daoMain.tuteurType((String) session.getAttribute("email"));
+		System.out.println(tuteurType);
+		model.addAttribute("typeTuteur",tuteurType);
 		
 //		Pour récupérer tous les groupes
 		List<Groupe> groupes = daoGroupe.allGroupes();
