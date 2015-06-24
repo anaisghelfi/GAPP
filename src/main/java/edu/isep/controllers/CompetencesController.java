@@ -85,7 +85,7 @@ public class CompetencesController {
 		model.addAttribute("allsouscompetences", allsouscompetences);
 		
 		
-		return "AccueilRespo";
+		return "redirect:addfamille";
 	}	
 	
 	
@@ -103,7 +103,7 @@ public class CompetencesController {
 		
 		
 		
-		return "AccueilRespo";
+		return "redirect:addfamille";
 	}	
 	
 		
@@ -121,7 +121,7 @@ public class CompetencesController {
 		
 		System.out.println(allsouscompetences);
 		
-		return "AccueilRespo";
+		return "redirect:addfamille";
 	}
 	
 	@RequestMapping(value="/updatefamille",method = RequestMethod.POST)
@@ -134,7 +134,7 @@ public class CompetencesController {
 		List<SousCompetences> allsouscompetences = dao.allSousCompetences();
 		model.addAttribute("allsouscompetences", allsouscompetences);
 		
-		return "AccueilRespo";
+		return "redirect:addfamille";
 	}	
 	
 	@RequestMapping(value="/updatecompetence",method = RequestMethod.POST)
@@ -147,7 +147,7 @@ public class CompetencesController {
 		List<SousCompetences> allsouscompetences = dao.allSousCompetences();
 		model.addAttribute("allsouscompetences", allsouscompetences);
 		
-		return "AccueilRespo";
+		return "redirect:addfamille";
 	}		
 	
 	@RequestMapping(value = "/addcompetence", method = RequestMethod.GET)
@@ -162,7 +162,7 @@ public class CompetencesController {
 		List<SousCompetences> allsouscompetences = dao.allSousCompetences();
 		model.addAttribute("allsouscompetences", allsouscompetences);
 		
-		return "AccueilRespo";
+		return "redirect:addfamille";
 	}
 	
 	@RequestMapping(value="/addcompetence",method = RequestMethod.POST)
@@ -179,7 +179,7 @@ public class CompetencesController {
 		
 		
 		
-		return "AccueilRespo";
+		return "redirect:addfamille";
 	}	
 	
 }

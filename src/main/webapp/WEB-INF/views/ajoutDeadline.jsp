@@ -25,13 +25,26 @@
                             <h5>Voir les deadlines</h5>
                         </div>
 	                        <div class="ibox-content">
-							
-							<c:forEach var="deadline" items="${deadlines}">
-								<div class="form-group"><strong>Titre :</strong> <c:out value="${deadline.titre}"/> 
-								<strong>Description :</strong> <c:out value="${deadline.description}"/>
-								<strong>Date limite :</strong> <c:out value="${deadline.date_limite}"/>
-								<strong>Groupe concerné :</strong> <c:out value="${deadline.nom}"/></div> </br>
-							</c:forEach>
+								<table class="table table-bordered">
+									<tr>
+										<th>Titre</th>
+			       						<th>Description</th>
+			       						<th>Date limite</th>
+			       						<th>Groupe concerné</th>
+									</tr>
+									
+										<c:forEach var="deadline" items="${deadlines}">
+											<div class="form-group">
+											<tr>
+												<td> <c:out value="${deadline.titre}"/> </td>
+												<td><c:out value="${deadline.description}"/></td>
+												<td> <c:out value="${deadline.date_limite}"/></td>
+												<td> <c:out value="${deadline.nom}"/></td>
+											 </tr>
+											 </div> </br>
+										</c:forEach>
+
+								</table>
 							
 	                        </div>
                     </div>
@@ -43,14 +56,24 @@
                             <h5>Voir les prochaines séances d'APP</h5>
                         </div>
 	                        <div class="ibox-content">
+							<table class="table table-bordered">
+								<tr>
+									<th>Séance numéro</th>
+			       					<th>Date</th>
+			       					<th>Groupe concerné</th>
+								</tr>
 							
 							<c:forEach var="seance" items="${seances}">
 								<div class="form-group">
-								<strong>Séance numéro :</strong> <c:out value="${seance.numero_seance}"/> 
-								<strong>Date :</strong> <c:out value="${seance.date_seance}"/>
-								<strong>Groupe concerné :</strong> <c:out value="${seance.nom}"/></div></br>
+									<tr>
+										<td><c:out value="${seance.numero_seance}"/> </td>
+										<td><c:out value="${seance.date_seance}"/></td>
+										<td><c:out value="${seance.nom}"/></td>
+									 </tr>
+								 </div></br>
 							</c:forEach>
 							
+							</table>
 	                        </div>
                     </div>
                 </div>
