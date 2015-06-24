@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Absences {
 	private int id;
-	private Date date;
+	private String date;
 	private int eleves_id;
 	private String abscencescol;
 	public int getId() {
@@ -13,10 +13,10 @@ public class Absences {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	public int getEleves_id() {

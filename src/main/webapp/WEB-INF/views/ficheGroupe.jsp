@@ -269,7 +269,7 @@
 																		<c:forEach var="notecompetencesgroupe" items="${notecompetencesgroupe}">													
 						<!-- 												On met un radio coché si il a deja été enregistré en base de données	-->												 
 																				<c:if test="${notecompetencesgroupe.competences_id == allcompetences.id && notecompetencesgroupe.groupe == numerogroupe && notecompetencesgroupe.sous_competences_id == allsouscompetences.id}">
-																					<td rowspan="5"><textarea style="height:100%;resize:none" value="<c:out value="${notecompetencesgroupe.remarques}"/>" name="grouperemarques-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"></textarea></td>
+																					<td rowspan="5"><textarea style="height:100%;resize:none"  name="grouperemarques-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>"><c:out value="${notecompetencesgroupe.remarques}"/></textarea></td>
 																					<c:set var="radio_pas_coche" value="false" scope="page" />
 																				</c:if>
 																		</c:forEach>
@@ -444,7 +444,7 @@
 																		<c:forEach var="notecompetences" items="${notecompetences}">													
 						<!-- 												On met un radio coché si il a deja été enregistré en base de données	-->												 
 																				<c:if test="${notecompetences.competences_id == allcompetences.id && notecompetences.eleves_id == alleleves.id && notecompetences.sous_competences_id == allsouscompetences.id}">
-																					<td><textarea style="height:100%;resize:none" value="<c:out value="${notecompetences.remarques}"/>" name="eleveremarques-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"></textarea></td>
+																					<td><textarea style="height:100%;resize:none" name="eleveremarques-<c:out value="${allcompetences.id}"/>-<c:out value="${allsouscompetences.id}"/>-<c:out value="${alleleves.id}"/>"><c:out value="${notecompetences.remarques}"/></textarea></td>
 																					<c:set var="radio_pas_coche" value="false" scope="page" />
 																				</c:if>
 																		</c:forEach>

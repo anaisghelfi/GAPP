@@ -1,6 +1,7 @@
 package edu.isep.controllers;
 
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
@@ -158,7 +159,10 @@ public class FicheGroupeController {
 			String absent = request.getParameter("absence-"+id);
 						
 				Date date = new Date();
-				absences.setDate(date);
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				String dat = dateFormat.format(date);
+				
+				absences.setDate(dat);
 				absences.setEleves_id(id);
 				absences.setAbscencescol(absent);
 				
