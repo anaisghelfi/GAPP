@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import edu.isep.beans.Deadline;
 import edu.isep.beans.Eleve;
 import edu.isep.beans.Seances;
 import edu.isep.beans.Tuteur;
+import edu.isep.daoImp.DeadlineJDBCTemplate;
 import edu.isep.daoImp.MainJDBCTemplate;
 import edu.isep.daoImp.elevesJDBCTemplate;
 
@@ -27,6 +29,8 @@ public class FicheEleveController {
 
 	private elevesJDBCTemplate daoEleve;
 	private MainJDBCTemplate daoMain;
+	private DeadlineJDBCTemplate daoDeadline;
+
 
 	public FicheEleveController(){
 	
@@ -35,7 +39,8 @@ public class FicheEleveController {
 		
 		daoEleve = (elevesJDBCTemplate) context.getBean("elevesDAO");
 		daoMain = (MainJDBCTemplate) context.getBean("mainDAO");
-		
+		daoDeadline = (DeadlineJDBCTemplate) context.getBean("deadlineDAO");
+
 			}
 
 
@@ -62,6 +67,9 @@ public class FicheEleveController {
 	
 	List<Tuteur> tuteurs = daoEleve.tuteurEleve(codeEleve);
 	model.addAttribute("tuteurs",tuteurs);
+	
+	List<Deadline> deadlines = daoDeadline.allDeadline();
+	model.addAttribute("deadlines",deadlines);
 	
 		return "ficheEleve";
 	}
