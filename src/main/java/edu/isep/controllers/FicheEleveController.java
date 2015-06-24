@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import edu.isep.beans.Eleve;
 import edu.isep.beans.Seances;
 import edu.isep.beans.Tuteur;
+import edu.isep.daoImp.MainJDBCTemplate;
 import edu.isep.daoImp.elevesJDBCTemplate;
 
 @Controller
 public class FicheEleveController {
 
 	private elevesJDBCTemplate daoEleve;
+	private MainJDBCTemplate daoMain;
 
 	public FicheEleveController(){
 	
@@ -30,6 +32,8 @@ public class FicheEleveController {
 //		Declaration des DAO et variables
 		
 		daoEleve = (elevesJDBCTemplate) context.getBean("elevesDAO");
+		daoMain = (MainJDBCTemplate) context.getBean("mainDAO");
+		
 			}
 
 
@@ -39,15 +43,20 @@ public class FicheEleveController {
 	session = request.getSession();
 	session.getAttribute("login");
 	session.getAttribute("number");
-
+	if(session.getAttribute("type") == "professeur"){
+		int tuteurType = daoMain.tuteurType((String) session.getAttribute("email"));
+		System.out.println(tuteurType);
+		model.addAttribute("typeTuteur",tuteurType);
+	}
 	
 	List<Eleve> eleves = daoEleve.elevesParNomInt(codeEleve);
 	model.addAttribute("eleves", eleves);
 	
-	List<Seances> seances = daoEleve.allSeances();
-//	JSONArray seancesJS = new JSONArray(seances);
+	List<Seances> seances = daoEleve.allSeances(codeEleve);
+	JSONArray seancesJS = new JSONArray(seances);
+
 	model.addAttribute("seances",seances);
-//	model.addAttribute("seancesJS",seancesJS);
+	model.addAttribute("seancesJS",seancesJS);
 	
 	List<Tuteur> tuteurs = daoEleve.tuteurEleve(codeEleve);
 	model.addAttribute("tuteurs",tuteurs);

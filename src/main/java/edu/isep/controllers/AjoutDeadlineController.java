@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -20,6 +22,7 @@ import edu.isep.beans.Deadline;
 import edu.isep.beans.Groupe;
 import edu.isep.beans.Seances;
 import edu.isep.daoImp.DeadlineJDBCTemplate;
+import edu.isep.daoImp.MainJDBCTemplate;
 import edu.isep.daoImp.groupeJDBCTemplate;
 
 
@@ -28,7 +31,8 @@ public class AjoutDeadlineController {
 	
 	private DeadlineJDBCTemplate daoDeadline;
 	private groupeJDBCTemplate daoGroupe;
-
+	private MainJDBCTemplate daoMain;
+	
 	private Map<Integer, Deadline> u;
 	private Map<String,Deadline> d;
 	private Map<Integer,Seances> s;
@@ -42,7 +46,8 @@ public class AjoutDeadlineController {
 
 		daoDeadline = (DeadlineJDBCTemplate) context.getBean("deadlineDAO");
 		daoGroupe = (groupeJDBCTemplate) context.getBean("groupeDAO");
-
+		daoMain = (MainJDBCTemplate) context.getBean("mainDAO");
+		
 		u = new HashMap<Integer, Deadline>();	
 		d = new HashMap<String, Deadline>();
 		s = new HashMap<Integer, Seances>();
@@ -57,7 +62,12 @@ public class AjoutDeadlineController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 	}
 	@RequestMapping(value="/ajoutDeadline",method = RequestMethod.GET)
-	public String Exemple(Model model){
+	public String Exemple(HttpSession session, Model model){
+		
+		int tuteurType = daoMain.tuteurType((String) session.getAttribute("email"));
+		System.out.println(tuteurType);
+		model.addAttribute("typeTuteur",tuteurType);
+		
 		List<Deadline> deadlines = daoDeadline.allDeadline();
 		model.addAttribute("deadlines",deadlines);
 		

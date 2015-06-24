@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,11 +24,13 @@ import edu.isep.beans.SousCompetences;
 import edu.isep.beans.SousGroupe;
 import edu.isep.beans.User;
 import edu.isep.daoImp.CompetencesJDBCTemplate;
+import edu.isep.daoImp.MainJDBCTemplate;
 
 
 @Controller
 public class CompetencesController {
 	private CompetencesJDBCTemplate dao;
+	private MainJDBCTemplate daoMain;
 	private Map<Integer, Competences> c;
 	private Map<Integer, SousCompetences> sc;
 	
@@ -40,6 +44,7 @@ public class CompetencesController {
 		sc = new HashMap<Integer, SousCompetences>();
 		
 		dao = (CompetencesJDBCTemplate) context.getBean("competencesDAO");
+		daoMain = (MainJDBCTemplate) context.getBean("mainDAO");
 		
 		List<Competences> allcompetences = dao.allCompetences();
 		List<SousCompetences> allsouscompetences = dao.allSousCompetences();
@@ -49,8 +54,12 @@ public class CompetencesController {
 	
 
 	@RequestMapping(value = "/addfamille", method = RequestMethod.GET)
-	public String viewfamille(Model model)
+	public String viewfamille(HttpSession session,Model model)
 	{
+		int tuteurType = daoMain.tuteurType((String) session.getAttribute("email"));
+		System.out.println(tuteurType);
+		model.addAttribute("typeTuteur",tuteurType);
+		
 		Competences comp = new Competences();
 		model.addAttribute("comp",comp);
 		List<Competences> allcompetences = dao.allCompetences();

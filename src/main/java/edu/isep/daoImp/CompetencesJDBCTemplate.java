@@ -16,6 +16,7 @@ import edu.isep.beans.Competences;
 import edu.isep.beans.Eleve;
 import edu.isep.beans.Groupe;
 import edu.isep.beans.NoteCompetences;
+import edu.isep.beans.NoteCompetencesGroupe;
 import edu.isep.beans.SousCompetences;
 import edu.isep.daoImp.CompetencesJDBCTemplate;
 
@@ -167,6 +168,27 @@ public class CompetencesJDBCTemplate {
 		}
 	}	
 	
+	public void ajoutGrilleGroupe(NoteCompetencesGroupe notecomp){
+		//vérifier si la grille est déjà remplie ou non 
+		
+
+		String sql = "SELECT COUNT(*) FROM notes_competences_groupe WHERE groupe = ? AND competences_id = ? AND sous_competences_id = ?";
+		int number = jdbcTemplateObject.queryForInt(sql, new Object[]{notecomp.getGroupe(), notecomp.getCompetences_id(), notecomp.getSous_competences_id()});
+		
+		//si vide on insère
+		if(number == 0) {
+			sql = "INSERT INTO notes_competences_groupe(niveaux_competences_id,groupe,competences_id,sous_competences_id,remarques) VALUES(?,?,?,?,?)";
+			jdbcTemplateObject.update(sql,new Object[]{notecomp.getNiveaux_competences_id(),notecomp.getGroupe(),notecomp.getCompetences_id(),notecomp.getSous_competences_id(),notecomp.getRemarques()});
+			return;			
+		}
+		//sinon on update
+		else {	
+			sql = "UPDATE notes_competences_groupe SET niveaux_competences_id = ?,remarques = ? WHERE groupe = ? AND competences_id = ? AND sous_competences_id = ?";
+			jdbcTemplateObject.update(sql,new Object[]{notecomp.getNiveaux_competences_id(),notecomp.getRemarques(), notecomp.getGroupe(),notecomp.getCompetences_id(),notecomp.getSous_competences_id()});
+			return;	
+		}
+	}		
+	
 //Récupérer les valeurs de la grille de compétences déjà remplie
 	
 	public List<NoteCompetences> getGrilleParGroupe(String groupe_id){
@@ -193,6 +215,33 @@ public class CompetencesJDBCTemplate {
 
 		return notecomps;
 	}	
+	
+	//Récupérer les valeurs de la grille de compétences groupe déjà remplie
+	
+		public List<NoteCompetencesGroupe> getGrilleGroupe(String groupe){
+			String sql = "SELECT * FROM notes_competences_groupe WHERE groupe = ?";
+			
+			ArrayList<NoteCompetencesGroupe> notecomps =  new ArrayList<NoteCompetencesGroupe>();
+			
+			List<Map<String,Object>> rows = jdbcTemplateObject.queryForList(sql, new Object[]{groupe});
+			
+			for (Map row : rows) {
+				NoteCompetencesGroupe notecomp =  new NoteCompetencesGroupe();
+				
+				notecomp.setId(Integer.parseInt(String.valueOf(row.get("id"))));
+				notecomp.setCompetences_id(Integer.parseInt(String.valueOf(row.get("competences_id"))));
+				notecomp.setGroupe((String)row.get("groupe"));
+				notecomp.setNiveaux_competences_id(Integer.parseInt(String.valueOf(row.get("niveaux_competences_id"))));
+				notecomp.setRemarques((String)row.get("remarques"));
+				notecomp.setSous_competences_id(Integer.parseInt(String.valueOf(row.get("sous_competences_id"))));
+				
+
+				
+				notecomps.add(notecomp);
+			}
+
+			return notecomps;
+		}		
 	
 }
 

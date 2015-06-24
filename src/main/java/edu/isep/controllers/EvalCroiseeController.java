@@ -23,6 +23,7 @@ import edu.isep.beans.SousGroupe;
 import edu.isep.beans.Tuteur;
 import edu.isep.daoImp.CompetencesJDBCTemplate;
 import edu.isep.daoImp.EvalCroiseeJDBCTemplate;
+import edu.isep.daoImp.MainJDBCTemplate;
 import edu.isep.daoImp.elevesJDBCTemplate;
 
 @Controller
@@ -31,6 +32,7 @@ public class EvalCroiseeController {
 	private elevesJDBCTemplate daoEleve;
 	private CompetencesJDBCTemplate daoCompetences;
 	private EvalCroiseeJDBCTemplate daoEvalCroisee;
+	private MainJDBCTemplate daoMain;
 	
 	private Map<Integer, Eleve> e;
 	private Map<Integer, EvalCroisee> ec;
@@ -42,6 +44,7 @@ public class EvalCroiseeController {
 		daoEleve = (elevesJDBCTemplate) context.getBean("elevesDAO");
 		daoCompetences = (CompetencesJDBCTemplate) context.getBean("competencesDAO");
 		daoEvalCroisee = (EvalCroiseeJDBCTemplate) context.getBean("EvalCroiseeDAO");
+		daoMain = (MainJDBCTemplate) context.getBean("mainDAO");
 		
 		e = new HashMap<Integer, Eleve>();
 		ec = new HashMap<Integer, EvalCroisee>();
@@ -50,7 +53,13 @@ public class EvalCroiseeController {
 	}
 		@RequestMapping(value="/evalCroisee", method = RequestMethod.GET)
 		public String Exemple(HttpServletRequest request, HttpSession session, Model model){
-	
+			
+			if(session.getAttribute("type") == "professeur"){
+				int tuteurType = daoMain.tuteurType((String) session.getAttribute("email"));
+				System.out.println(tuteurType);
+				model.addAttribute("typeTuteur",tuteurType);
+			}
+			
 			session = request.getSession();
 			session.getAttribute("login");
 			int code_eleve = Integer.parseInt(String.valueOf(session.getAttribute("number")));
