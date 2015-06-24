@@ -68,7 +68,7 @@ public class AttribRoleController {
 			}
 		}
 		
-		return "attribRole";
+		return "redirect:attribRole";
 	}
 	
 }

@@ -118,7 +118,7 @@ public class AttribGroupeController {
 //		Pour récupérer tous les élèves
 		List<Eleve> eleves = daoEleve.allEleves();
 		model.addAttribute("eleves", eleves);
-		return "attribGroupe";
+		return "redirect:attribGroupe";
 	}
 	
 //	Chemin pour traiter la suppression d'un groupe
@@ -148,7 +148,7 @@ public class AttribGroupeController {
 		List<Eleve> eleves = daoEleve.allEleves();
 		model.addAttribute("eleves", eleves);
 		
-		return "attribGroupe";
+		return "redirect:attribGroupe";
 	}
 	
 //	Chemin pour traiter l'ajout d'un sous-groupe
@@ -180,7 +180,7 @@ public class AttribGroupeController {
 		List<Eleve> eleves = daoEleve.allEleves();
 		model.addAttribute("eleves", eleves);
 		
-		return "attribGroupe";
+		return "redirect:attribGroupe";
 	}
 	
 //	Chemin pour traiter la suppression d'un sous-groupe
@@ -210,7 +210,7 @@ public class AttribGroupeController {
 		List<Eleve> eleves = daoEleve.allEleves();
 		model.addAttribute("eleves", eleves);
 		
-		return "attribGroupe";
+		return "redirect:attribGroupe";
 	}
 	
 //	A FAIIIIIIIIIRE
@@ -240,7 +240,7 @@ public class AttribGroupeController {
 		List<Eleve> eleves = daoEleve.allEleves();
 		model.addAttribute("eleves", eleves);
 		
-		return "attribGroupe";
+		return "redirect:attribGroupe";
 	}
 	
 //	Attribution d'élèves à un groupe
@@ -266,6 +266,6 @@ public class AttribGroupeController {
 //		Pour récupérer tous les élèves
 		List<Eleve> eleves = daoEleve.allEleves();
 		model.addAttribute("eleves", eleves);
-		return "attribGroupe";
+		return "redirect:attribGroupe";
 	}
 }

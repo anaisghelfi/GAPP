@@ -95,7 +95,7 @@ public class AjoutDeadlineController {
 		List<Groupe> groupes = daoGroupe.allGroupes();
 		model.addAttribute("groupes", groupes);
 		
-		return "ajoutDeadline";
+		return "redirect:ajoutDeadline";
 	}
 	
 	@RequestMapping(value = "/delete_deadline", method = RequestMethod.POST)
@@ -115,7 +115,7 @@ public class AjoutDeadlineController {
 		List<Seances> seances_delete = daoDeadline.allSeance();
 		model.addAttribute("seances", seances_delete);
 		
-		return "ajoutDeadline";
+		return "redirect:ajoutDeadline";
 	}
 	
 	@RequestMapping(value = "/add_seance", method = RequestMethod.POST)
@@ -132,7 +132,7 @@ public class AjoutDeadlineController {
 		List<Groupe> groupes = daoGroupe.allGroupes();
 		model.addAttribute("groupes", groupes);
 		
-		return "ajoutDeadline";
+		return "redirect:ajoutDeadline";
 	}
 	
 	
@@ -153,7 +153,7 @@ public class AjoutDeadlineController {
 		List<Groupe> groupes = daoGroupe.allGroupes();
 		model.addAttribute("groupes", groupes);
 		
-		return "ajoutDeadline";
+		return "redirect:ajoutDeadline";
 	}
 
 }
