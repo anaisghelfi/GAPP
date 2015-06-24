@@ -83,6 +83,10 @@ public class RechercheElevesController {
 			sg.setGroupe(daoGroupe.getGroupe(sg.getGroupes_id()));
 		}
 		model.addAttribute("sousGroupes", sousGroupes);
+		
+//		Pour savoir si on affiche le bouton pour activer l'evaluation croisée
+		boolean afficheBouton = daoEvalCroisee.verifDispoEvalCroiseeTuteur();
+		model.addAttribute("afficheBouton", afficheBouton);
 
 		return "rechercheEleves";
 	}		
